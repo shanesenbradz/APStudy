@@ -1,0 +1,24 @@
+{
+  "id": "./",
+  "name": "A+ Study Lab",
+  "short_name": "A+ Study",
+  "description": "Free CompTIA A+ Core 1 and Core 2 study app with lessons, flashcards and practice quizzes. Works offline.",
+  "lang": "en",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F2F2F6",
+  "theme_color": "#0A62CC",
+  "categories": ["education"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "screenshots/phone-home.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Course modules and progress" },
+    { "src": "screenshots/phone-quiz.png", "sizes": "780x1688", "type": "image/png", "form_factor": "narrow", "label": "Quiz with explanation" },
+    { "src": "screenshots/desktop-learn.png", "sizes": "1280x800", "type": "image/png", "form_factor": "wide", "label": "Lesson notes on desktop" }
+  ]
+}
