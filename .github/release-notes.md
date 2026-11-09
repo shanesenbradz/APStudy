@@ -8,7 +8,11 @@ Needs Android 7.0 or newer. Works offline once installed.
 
 Prefer the web version? Open the app in your browser and use it straight away, no install needed.
 
-## What's new in 3.4.1
+## What's new in 3.4.2
+
+- Fixes "App not installed" when installing the APK on Android 11 and newer.
+
+## What came in 3.4.1
 
 - Built for Android 16. The app now fits around the status bar, navigation bar, camera cutout and keyboard on new phones.
 - The back button uses Android's newer predictive back, and leaves the app in the background instead of closing it.

@@ -30,7 +30,7 @@
 
     invoke-virtual {v1}, Landroid/webkit/WebSettings;->getUserAgentString()Ljava/lang/String;
     move-result-object v2
-    const-string v3, " APStudyApp/3.4.1"
+    const-string v3, " APStudyApp/3.4.2"
     invoke-virtual {v2, v3}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
     move-result-object v2
     invoke-virtual {v1, v2}, Landroid/webkit/WebSettings;->setUserAgentString(Ljava/lang/String;)V

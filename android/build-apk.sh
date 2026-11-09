@@ -33,6 +33,10 @@ java -jar $T/apktool.jar b build/app -o build/unsigned.apk
 java -jar $T/uber-apk-signer.jar -a build/unsigned.apk \
   --ks apstudy-release.jks --ksAlias apstudy --ksPass "$KS_PASS" --ksKeyPass "$KS_PASS" -o build/signed
 mv build/signed/*-signed.apk ../APStudy.apk
+# Android 11+ refuses APKs whose resources.arsc is compressed ("App not installed")
+if unzip -v ../APStudy.apk resources.arsc | grep -q "Defl"; then
+  echo "ERROR: resources.arsc is compressed in APStudy.apk"; exit 1
+fi
 
 # AAB (Play Store)
 mkdir -p build/aab/mod/manifest build/aab/mod/dex
