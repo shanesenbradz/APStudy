@@ -22,7 +22,7 @@ A free study app for the CompTIA A+ Core 1 (220-1201) and Core 2 (220-1202) exam
 - iPhone or iPad (Safari): tap **Share**, then **Add to Home Screen**.
 - Windows or Mac (Chrome or Edge): click the install icon in the address bar, or go to Settings in the app and choose **Install as an app**.
 
-**Android app:** download [`APStudy.apk`](APStudy.apk) on your phone and open it. Android will ask you to allow installs from your browser or file manager the first time. Needs Android 7.0 or newer.
+**Android app:** on your phone, open the [latest release](https://github.com/shanesenbradz/APStudy/releases/latest) and tap **APStudy.apk** to download it, then open it. Or grab it directly: [Download APStudy.apk](https://github.com/shanesenbradz/APStudy/releases/latest/download/APStudy.apk). Android will ask you to allow installs from your browser or file manager the first time. Needs Android 7.0 or newer.
 
 **Download a single file:** save `index.html` and open it in any browser. It works with no internet.
 
