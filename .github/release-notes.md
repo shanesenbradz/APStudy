@@ -8,7 +8,11 @@ Needs Android 7.0 or newer. Works offline once installed.
 
 Prefer the web version? Open the app in your browser and use it straight away, no install needed.
 
-## What's new in 3.4.4
+## What's new in 3.4.5
+
+- Text size slider in Settings, from 85% to 150%. Lessons, questions, answers and buttons all resize, and the app remembers your choice.
+
+## What came in 3.4.4
 
 - Fixes "Could not open that picture (NotReadableError)" for some gallery photos, such as large or forwarded pictures. The app now copies the picked file before reading it.
 
