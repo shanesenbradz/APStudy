@@ -62,7 +62,7 @@ button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 a { color: var(--accent); }
 
-#app { position: relative; min-height: 100%; }
+#app { position: relative; min-height: 100%; overflow-x: clip; }
 .screen {
   min-height: 100vh; padding-bottom: calc(var(--tabh) + 40px + env(safe-area-inset-bottom, 0px));
   background: var(--bg);
@@ -73,7 +73,7 @@ a { color: var(--accent); }
 @keyframes push { from { transform: translateX(40%); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes pop { from { transform: translateX(-25%); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .screen.anim-push, .screen.anim-pop, .screen.anim-fade, .flip-inner { animation: none !important; transition: none !important; } }
+html[data-motion="reduce"] .screen.anim-push, html[data-motion="reduce"] .screen.anim-pop, html[data-motion="reduce"] .screen.anim-fade, html[data-motion="reduce"] .flip-inner { animation: none !important; transition: none !important; }
 
 .wrap {
   max-width: 760px; margin: 0 auto;
@@ -276,8 +276,342 @@ textarea { width: 100%; min-height: 180px; border: 0; border-radius: var(--r); b
 .fs-card { background: var(--card); border-radius: 16px; padding: 22px 20px 20px; width: 100%; max-width: 380px; display: grid; gap: 14px; }
 .fs-card h2 { margin: 0; font-size: 22px; }
 .fs-card p { margin: 0; color: var(--fg2); font-size: 16px; }
-@media (prefers-reduced-motion: reduce) { .fs-scrim { animation: none; } }
+html[data-motion="reduce"] .fs-scrim { animation: none; }
 
+/* =====================================================================
+   SOLID COLOUR SYSTEM
+   --s-* are solid fills that keep white text readable in both themes.
+   --c-* are the same hues tuned for text and icons on the current theme.
+   ===================================================================== */
+:root {
+  --s-learn: #0A62CC; --s-practice: #C2410C; --s-progress: #1D7F38; --s-settings: #55555F;
+  --c-learn: #0A62CC; --c-practice: #C2410C; --c-progress: #1D7F38; --c-settings: #55555F;
+  --spring: cubic-bezier(.2, .9, .25, 1.12);
+  --soft: cubic-bezier(.2, .8, .2, 1);
+}
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    /* real spring curves (stiffness 380 / damping 24, and a softer 300 / 30) */
+    --spring: linear(0, 0.0273, 0.098, 0.1972, 0.3122, 0.4328, 0.5514, 0.6624, 0.7619, 0.8477, 0.9191, 0.976, 1.0192, 1.0502, 1.0704, 1.0817, 1.0858, 1.0844, 1.079, 1.0708, 1.0611, 1.0508, 1.0405, 1.0308, 1.0221, 1.0145, 1.0081, 1.0029, 0.999, 0.9961, 0.9942, 0.9931, 0.9926, 0.9927, 0.9931, 0.9938, 0.9946, 0.9955, 0.9963, 0.9972, 1);
+    --soft: linear(0, 0.0263, 0.0913, 0.1784, 0.2756, 0.3746, 0.47, 0.5583, 0.6376, 0.7072, 0.767, 0.8175, 0.8594, 0.8937, 0.9213, 0.9431, 0.9602, 0.9733, 0.9832, 0.9904, 0.9957, 0.9993, 1.0017, 1.0031, 1.004, 1.0043, 1.0043, 1.0041, 1.0038, 1.0034, 1.0029, 1.0025, 1);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --c-learn: #4A9BFF; --c-practice: #FF8A4C; --c-progress: #43C467; --c-settings: #A1A1AA; }
+}
+:root[data-theme="dark"] { --c-learn: #4A9BFF; --c-practice: #FF8A4C; --c-progress: #43C467; --c-settings: #A1A1AA; }
+
+.tabbar #tab-learn[aria-selected="true"] { color: var(--c-learn); }
+.tabbar #tab-practice[aria-selected="true"] { color: var(--c-practice); }
+.tabbar #tab-progress[aria-selected="true"] { color: var(--c-progress); }
+.tabbar #tab-settings[aria-selected="true"] { color: var(--c-settings); }
+.tabbar .in { position: relative; }
+.tabbar .in > button { position: relative; z-index: 1; -webkit-tap-highlight-color: transparent; }
+.tabbar .in, .tabbar .in > button { -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; user-select: none; }
+.tabbar .in > button:focus:not(:focus-visible) { outline: none; }
+.tabbar .in > button:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; border-radius: 999px; }
+.tabbar .in > button > span:first-child { display: inline-flex; }
+
+.summary.hero { background: var(--hero, var(--s-learn)); color: #FFFFFF; }
+.hero .eyebrow { color: rgba(255, 255, 255, .82); }
+.hero .sub { color: rgba(255, 255, 255, .88); }
+.hero .bar { background: rgba(255, 255, 255, .26); }
+.hero .bar i { background: #FFFFFF !important; }
+.hero .stat { background: rgba(255, 255, 255, .16); }
+.hero .stat span { color: rgba(255, 255, 255, .85); }
+.hero .big { font-size: 48px; letter-spacing: -.02em; }
+.summary.hero.result .big { font-size: 64px; }
+
+.tile svg { width: 20px; height: 20px; display: block; }
+.switch {
+  width: 51px; height: 31px; border-radius: 999px; background: var(--fill); position: relative; flex: none;
+  border: 0; padding: 0; transition: background-color .2s ease; display: inline-block; vertical-align: middle;
+}
+.switch::after {
+  content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%;
+  background: #FFFFFF; box-shadow: 0 2px 6px rgba(0, 0, 0, .22), 0 0 0 .5px rgba(0, 0, 0, .04);
+  transition: translate .5s var(--spring), scale .2s ease;
+}
+.switch[aria-checked="true"] { background: var(--good); }
+.switch[aria-checked="true"]::after { translate: 20px 0; }
+.switch:active::after { scale: 1.18 1; }
+.switch:disabled { opacity: .45; }
+.tb-lens, .seg-thumb, .pocket, .mini-head { display: none; }
+.toast[hidden] { display: none; }
+
+/* =====================================================================
+   LIQUID GLASS
+   html[data-glass] = full | low | off (off = Reduce Transparency).
+   One material, presets per surface (the Notes app's approach):
+   each preset sets --gl-bg, --gl-blur and --gl-sat; JS adds edge
+   refraction on top in the Full tier.
+   --lx / --ly = where the light comes from (default -15 degrees, the
+   angle the Notes lens uses), nudged by device tilt.
+   ===================================================================== */
+:root {
+  --glass-tint: rgba(252, 252, 254, .56);
+  --glass-strong: rgba(246, 246, 249, .80);
+  --glass-solid: #F9F9FB;
+  --rim-a: rgba(255, 255, 255, .95);
+  --rim-b: rgba(255, 255, 255, .55);
+  --rim-c: rgba(0, 0, 0, .07);
+  --glass-shadow: 0 8px 28px rgba(0, 0, 0, .12), 0 1px 3px rgba(0, 0, 0, .07);
+  --lens-rest: rgba(0, 0, 0, .06);
+  --lens-lift: rgba(255, 255, 255, .06);
+  --press: rgba(10, 98, 204, .12);
+  --thumb: #FFFFFF;
+  --lx: .39px; --ly: 1.45px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --glass-tint: rgba(36, 36, 40, .48); --glass-strong: rgba(24, 24, 28, .78); --glass-solid: #1C1C1E;
+    --rim-a: rgba(255, 255, 255, .42); --rim-b: rgba(255, 255, 255, .16); --rim-c: rgba(255, 255, 255, .08);
+    --glass-shadow: 0 10px 30px rgba(0, 0, 0, .5), 0 1px 3px rgba(0, 0, 0, .4);
+    --lens-rest: rgba(255, 255, 255, .11); --lens-lift: rgba(255, 255, 255, .03); --press: rgba(74, 155, 255, .16); --thumb: #636366;
+  }
+}
+:root[data-theme="dark"] {
+  --glass-tint: rgba(36, 36, 40, .48); --glass-strong: rgba(24, 24, 28, .78); --glass-solid: #1C1C1E;
+  --rim-a: rgba(255, 255, 255, .42); --rim-b: rgba(255, 255, 255, .16); --rim-c: rgba(255, 255, 255, .08);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, .5), 0 1px 3px rgba(0, 0, 0, .4);
+  --lens-rest: rgba(255, 255, 255, .11); --lens-lift: rgba(255, 255, 255, .03); --press: rgba(74, 155, 255, .16); --thumb: #636366;
+}
+
+/* presets */
+.g { --gl-bg: var(--glass-tint); --gl-blur: 12px; --gl-sat: 185%; }
+.g[data-preset="navigationBar"] { --gl-bg: var(--glass-strong); --gl-blur: 20px; }
+.g[data-preset="menu"] { --gl-bg: var(--glass-strong); --gl-blur: 18px; }
+.g[data-preset="alert"] { --gl-bg: var(--glass-strong); --gl-blur: 30px; --gl-sat: 170%; }
+.g[data-preset="controls"] { --gl-blur: 6px; }
+
+html[data-glass] .g {
+  background: var(--gl-bg);
+  -webkit-backdrop-filter: blur(var(--gl-blur)) saturate(var(--gl-sat)) brightness(1.04);
+  backdrop-filter: blur(var(--gl-blur)) saturate(var(--gl-sat)) brightness(1.04);
+  box-shadow:
+    inset var(--lx) var(--ly) 1px -1px var(--rim-a),
+    inset calc(var(--lx) * -1) calc(var(--ly) * -1) 1px -1px var(--rim-b),
+    inset 0 0 0 .5px var(--rim-c),
+    var(--glass-shadow);
+}
+html[data-glass="off"] .g { background: var(--glass-solid); -webkit-backdrop-filter: none; backdrop-filter: none; }
+html[data-glass="off"] .g[data-preset="alert"] { background: var(--card); }
+
+/* floating tab bar */
+html[data-glass] { --tabh: 62px; }
+html[data-glass] .screen { padding-bottom: calc(var(--tabh) + 64px + env(safe-area-inset-bottom, 0px)); }
+html[data-glass] .tabbar {
+  background: none; border: 0; pointer-events: none;
+  padding: 0 max(14px, env(safe-area-inset-left, 0px)) calc(env(safe-area-inset-bottom, 0px) + 12px) max(14px, env(safe-area-inset-right, 0px));
+  transition: transform .45s var(--spring);
+}
+html[data-glass] .tabbar .in {
+  max-width: 440px; border-radius: 999px; padding: 4px; touch-action: none; pointer-events: auto;
+  transition: height .45s var(--spring);
+}
+html[data-glass] .tabbar .in > button { border-radius: 999px; font-size: 10.5px; font-weight: 600; gap: 1px; }
+html[data-glass] .tabbar .in svg { width: 24px; height: 24px; transition: width .35s var(--spring), height .35s var(--spring); }
+html[data-glass] .tabbar .in > button > span:last-child { transition: opacity .2s ease, max-height .35s var(--spring), font-size .35s var(--spring); max-height: 16px; }
+html[data-glass].tb-min .tabbar .in { height: 48px; }
+html[data-glass].tb-min .tabbar .in > button > span:last-child { opacity: 0; max-height: 0; font-size: 0; }
+html[data-glass].tb-min .tabbar .in svg { width: 22px; height: 22px; }
+html.kb-open .tabbar { transform: translateY(calc(100% + 24px)); }
+html[data-glass] .tb-lens {
+  display: block; position: absolute; top: 4px; bottom: 4px; left: 0; width: 0; z-index: 2; pointer-events: none;
+  border-radius: 999px; background: var(--lens-rest);
+  transition: transform .5s var(--spring), width .5s var(--spring), scale .45s var(--spring), background-color .2s ease, box-shadow .2s ease;
+}
+html[data-glass] .tb-lens.drag { transition: width .5s var(--spring), scale .45s var(--spring), background-color .2s ease, box-shadow .2s ease; }
+html[data-glass] .tb-lens.lift, html[data-glass] .tb-lens.moving {
+  background: var(--lens-lift);
+  box-shadow: inset var(--lx) var(--ly) 1px -1px var(--rim-a), inset calc(var(--lx) * -1) calc(var(--ly) * -1) 1px -1px var(--rim-a), inset 0 0 0 .5px var(--rim-c), 0 4px 14px rgba(0, 0, 0, .08);
+}
+html[data-glass] .tb-lens.lift { scale: 1.16 1.22; }
+html[data-glass] .tb-lens.no-anim, html[data-glass] .seg-thumb.no-anim { transition: none; }
+
+/* bars, dialog, toast */
+html[data-glass]:not([data-glass="off"]) .nav, html[data-glass]:not([data-glass="off"]) body::before {
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: blur(20px) saturate(185%); backdrop-filter: blur(20px) saturate(185%);
+}
+html[data-glass]:not([data-glass="off"]) .nav { border-bottom-color: transparent; box-shadow: 0 .5px 0 var(--sep); }
+html[data-glass] .fs-card { border-radius: 22px; }
+html[data-glass]:not([data-glass="off"]) .fs-scrim { background: rgba(0, 0, 0, .28); }
+html[data-glass] .toast { color: var(--fg); border-radius: 999px; padding: 11px 20px; z-index: 40; width: max-content; }
+
+/* segmented control thumb */
+html[data-glass] .seg.has-thumb { position: relative; }
+html[data-glass] .seg.has-thumb button { position: relative; z-index: 1; }
+html[data-glass] .seg.has-thumb button[aria-selected="true"] { background: none; box-shadow: none; }
+html[data-glass] .seg-thumb {
+  display: block; position: absolute; top: 2px; bottom: 2px; left: 0; width: 0; z-index: 0; pointer-events: none;
+  border-radius: 7px; background: var(--thumb);
+  box-shadow: inset var(--lx) var(--ly) 1px -1px var(--rim-a), inset calc(var(--lx) * -1) calc(var(--ly) * -1) 1px -1px var(--rim-b), inset 0 0 0 .5px var(--rim-c), 0 1px 4px rgba(0, 0, 0, .12);
+  transition: transform .5s var(--spring), width .5s var(--spring), scale .45s var(--spring), background-color .2s ease;
+}
+html[data-glass] .seg-thumb.moving { background: var(--glass-tint); scale: 1.08 1.14; }
+
+/* glass edges on colour cards, tiles, solid buttons */
+html[data-glass] .tile, html[data-glass] .hero, html[data-glass] .btn:not(.secondary):not(.plain) {
+  box-shadow: inset var(--lx) var(--ly) 1px -1px rgba(255, 255, 255, .6), inset calc(var(--lx) * -1) calc(var(--ly) * -1) 1px -1px rgba(255, 255, 255, .3), inset 0 0 0 .5px rgba(255, 255, 255, .16);
+}
+
+/* press: light under the finger + squeeze */
+html[data-glass] .btn, html[data-glass] .opt { transition: scale .5s var(--spring), border-color .2s ease, background-color .25s ease; }
+html[data-glass] .pressing { background-image: radial-gradient(140px circle at var(--px, 50%) var(--py, 50%), var(--press), transparent 70%); }
+html[data-glass] .btn.pressing:not(.secondary):not(.plain) { background-image: radial-gradient(160px circle at var(--px, 50%) var(--py, 50%), rgba(255, 255, 255, .32), transparent 70%); }
+html[data-glass] .btn.pressing, html[data-glass] .opt.pressing { scale: .965; }
+
+/* progressive blur where content slides under the tab bar (Full only) */
+html[data-glass="full"] .pocket {
+  display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 24; pointer-events: none;
+  height: calc(var(--tabh) + 44px + env(safe-area-inset-bottom, 0px));
+}
+.pocket > i { position: absolute; inset: 0; }
+.pocket > i:nth-child(1) { -webkit-backdrop-filter: blur(1px); backdrop-filter: blur(1px); -webkit-mask-image: linear-gradient(transparent, #000 40%); mask-image: linear-gradient(transparent, #000 40%); }
+.pocket > i:nth-child(2) { -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); -webkit-mask-image: linear-gradient(transparent 30%, #000 70%); mask-image: linear-gradient(transparent 30%, #000 70%); }
+.pocket > i:nth-child(3) { -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); -webkit-mask-image: linear-gradient(transparent 60%, #000); mask-image: linear-gradient(transparent 60%, #000); }
+
+/* app hidden: stop all motion (the Notes app pauses glass when backgrounded) */
+html.paused *, html.paused *::before, html.paused *::after { animation-play-state: paused !important; }
+
+/* =====================================================================
+   MOTION
+   ===================================================================== */
+.screen.anim-push { animation: push .46s var(--soft); }
+.screen.anim-pop { animation: pop .42s var(--soft); }
+.screen.anim-tabr { animation: tabr .42s var(--soft); }
+.screen.anim-tabl { animation: tabl .42s var(--soft); }
+@keyframes push { from { transform: translateX(42%); opacity: .2; } to { transform: none; opacity: 1; } }
+@keyframes pop { from { transform: translateX(-26%); opacity: .3; filter: brightness(.85); } to { transform: none; opacity: 1; filter: none; } }
+@keyframes tabr { from { transform: translateX(44px) scale(.985); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes tabl { from { transform: translateX(-44px) scale(.985); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.mini-head {
+  position: fixed; left: 0; right: 0; top: 0; z-index: 19; pointer-events: none; opacity: 0;
+  padding-top: env(safe-area-inset-top, 0px); background: var(--bar); border-bottom: 1px solid var(--sep);
+  transform: translateY(-6px); transition: opacity .22s ease, transform .4s var(--spring); display: block;
+}
+.mini-head .wrap { min-height: 46px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 17px; }
+.mini-head.on { opacity: 1; transform: none; }
+html[data-glass]:not([data-glass="off"]) .mini-head { background: var(--glass-strong); -webkit-backdrop-filter: blur(20px) saturate(185%); backdrop-filter: blur(20px) saturate(185%); border-bottom-color: transparent; }
+.nav .ntitle { transition: opacity .22s ease, transform .4s var(--spring); }
+.nav.title-hidden .ntitle { opacity: 0; transform: translateY(6px); }
+
+.opt, .mrow, .orow, .calc { transition: border-color .2s ease, background-color .25s ease, scale .5s var(--spring); }
+.opt.sel { animation: pop-in .45s var(--spring); }
+.opt.right, .mrow.right, .orow.right, .calc.right { animation: bounce .6s var(--spring); }
+.opt.wrong, .mrow.wrong, .orow.wrong, .calc.wrong { animation: shake .42s cubic-bezier(.36, .07, .19, .97); }
+.feedback { animation: rise .55s var(--spring) both; }
+.feedback ~ .btns { animation: rise .6s var(--spring) .06s both; }
+.feedback .verdict { display: inline-block; }
+.feedback.good .verdict { animation: bounce .7s var(--spring) .1s; }
+@keyframes pop-in { 0% { scale: 1; } 40% { scale: .97; } 100% { scale: 1; } }
+@keyframes bounce { 0% { scale: 1; } 30% { scale: 1.035; } 100% { scale: 1; } }
+@keyframes shake { 10%, 90% { translate: -2px 0; } 20%, 80% { translate: 4px 0; } 30%, 50%, 70% { translate: -7px 0; } 40%, 60% { translate: 7px 0; } }
+@keyframes rise { from { opacity: 0; translate: 0 14px; scale: .98; } }
+
+.flip-inner { transition: transform .7s var(--spring), scale .4s var(--spring); }
+.flip:active .flip-inner { scale: .985; }
+.row .tile { transition: scale .5s var(--spring); }
+button.row:active .tile, a.row:active .tile { scale: .9; }
+button.row, a.row { transition: background-color .25s ease; }
+.row .chev { transition: translate .4s var(--spring); }
+button.row:active .chev { translate: 3px 0; }
+.bar i, .mini-bar i { transition: width .9s var(--soft); }
+
+/* Reduced motion is decided by the app (Settings > Motion: System, On, Off),
+   which sets html[data-motion="reduce"]. "System" follows the phone. */
+html[data-motion="reduce"] .screen.anim-push, html[data-motion="reduce"] .screen.anim-pop, html[data-motion="reduce"] .screen.anim-tabr, html[data-motion="reduce"] .screen.anim-tabl,
+html[data-motion="reduce"] .opt, html[data-motion="reduce"] .mrow, html[data-motion="reduce"] .orow, html[data-motion="reduce"] .calc, html[data-motion="reduce"] .feedback, html[data-motion="reduce"] .feedback ~ .btns, html[data-motion="reduce"] .feedback .verdict { animation: none !important; }
+html[data-motion="reduce"] .bar i, html[data-motion="reduce"] .mini-bar i, html[data-motion="reduce"] .mini-head, html[data-motion="reduce"] .nav .ntitle, html[data-motion="reduce"] .row .tile, html[data-motion="reduce"] .row .chev, html[data-motion="reduce"] .flip-inner, html[data-motion="reduce"] .switch::after,
+html[data-motion="reduce"] .tb-lens, html[data-motion="reduce"] .seg-thumb, html[data-motion="reduce"] .btn, html[data-motion="reduce"] .opt, html[data-motion="reduce"] .tabbar, html[data-motion="reduce"] .tabbar .in { transition: none !important; }
+
+/* =====================================================================
+   BACKGROUND PHOTO + COLOUR THEMES (v3.3)
+   --acc-* are set from Settings > Colour theme. Unset = original blue.
+   ===================================================================== */
+:root { --accent: var(--acc-l, #0A62CC); --s-learn: var(--acc-s, #0A62CC); --c-learn: var(--acc-l, #0A62CC); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --accent: var(--acc-d, #4A9BFF); --on-accent: var(--acc-on-d, #001A3A); --c-learn: var(--acc-d, #4A9BFF); }
+}
+:root[data-theme="dark"] { --accent: var(--acc-d, #4A9BFF); --on-accent: var(--acc-on-d, #001A3A); --c-learn: var(--acc-d, #4A9BFF); }
+@supports (color: color-mix(in srgb, red, blue)) {
+  :root { --press: color-mix(in srgb, var(--accent) 14%, transparent); }
+  html:root[data-tint] {
+    --bg: color-mix(in srgb, var(--accent) 9%, #F2F2F6); --bar: color-mix(in srgb, var(--accent) 6%, #F9F9FB);
+    --fill: color-mix(in srgb, var(--accent) 12%, #E8E8ED); --glass-solid: color-mix(in srgb, var(--accent) 6%, #F9F9FB);
+  }
+  @media (prefers-color-scheme: dark) {
+    html:root[data-tint]:not([data-theme="light"]) {
+      --bg: color-mix(in srgb, var(--accent) 9%, #000000); --bar: color-mix(in srgb, var(--accent) 8%, #121214);
+      --fill: color-mix(in srgb, var(--accent) 14%, #2C2C2E); --card: color-mix(in srgb, var(--accent) 5%, #1C1C1E);
+      --glass-solid: color-mix(in srgb, var(--accent) 6%, #1C1C1E);
+    }
+  }
+  html:root[data-tint][data-theme="dark"] {
+    --bg: color-mix(in srgb, var(--accent) 9%, #000000); --bar: color-mix(in srgb, var(--accent) 8%, #121214);
+    --fill: color-mix(in srgb, var(--accent) 14%, #2C2C2E); --card: color-mix(in srgb, var(--accent) 5%, #1C1C1E);
+    --glass-solid: color-mix(in srgb, var(--accent) 6%, #1C1C1E);
+  }
+}
+
+/* Photo layer: sits behind everything, always covers the screen at its own aspect ratio */
+.bg-photo {
+  position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; z-index: -1; pointer-events: none; display: none;
+  background-position: center; background-repeat: no-repeat; background-size: cover;
+  opacity: var(--photo-op, .3); filter: blur(var(--photo-blur, 0px)); transform: scale(var(--photo-scale, 1));
+  transition: opacity .35s ease;
+  will-change: transform; contain: strict; backface-visibility: hidden;
+}
+.bg-photo[data-fit="contain"] { background-size: contain; }
+html[data-photo] .bg-photo { display: block; }
+html[data-photo] .screen { background: transparent; }
+html[data-photo] .head, html[data-photo] .group-label, html[data-photo] main > .note, html[data-photo] main > .sub, html[data-photo] .counter, html[data-photo] .kbd, html[data-photo] .hint {
+  text-shadow: 0 0 10px var(--bg), 0 0 3px var(--bg);
+}
+.tile.bg-thumb { background-size: cover; background-position: center; box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .15); }
+
+/* Settings controls */
+.slider-row { padding: 12px 16px 14px; position: relative; }
+.slider-row + .slider-row::before { content: ""; position: absolute; top: 0; right: 0; left: 16px; border-top: 1px solid var(--sep); }
+.slider-row .sl-head { display: flex; justify-content: space-between; gap: 12px; font-size: 17px; margin-bottom: 8px; }
+.slider-row .sl-head .v { color: var(--fg2); font-size: 15px; font-variant-numeric: tabular-nums; }
+.slider-row input[type=range] { width: 100%; accent-color: var(--accent); margin: 0; height: 28px; }
+.swatches {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); gap: 6px;
+  background: var(--card); border-radius: var(--r); padding: 12px 8px;
+}
+.sw {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; border: 0; background: none;
+  padding: 6px 2px; border-radius: 10px; font-size: 12px; color: var(--fg2); min-width: 0; cursor: pointer;
+}
+.sw .dot { width: 40px; height: 40px; border-radius: 50%; box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .18); transition: scale .45s var(--spring), box-shadow .2s ease; }
+.sw .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.sw.on { color: var(--fg); font-weight: 600; }
+.sw.on .dot { box-shadow: 0 0 0 2px var(--card), 0 0 0 4.5px var(--accent); }
+.sw:active .dot { scale: .9; }
+.sw input[type=color] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border: 0; padding: 0; }
+.sw .dot.custom { background: conic-gradient(#F43F5E, #F59E0B, #84CC16, #06B6D4, #6366F1, #D946EF, #F43F5E); }
+html[data-motion="reduce"] .sw .dot, html[data-motion="reduce"] .bg-photo { transition: none !important; }
+
+/* =====================================================================
+   COURSE LIBRARY (v3.4)
+   ===================================================================== */
+.lib-item { display: flex; align-items: center; position: relative; }
+.lib-item + .lib-item::before { content: ""; position: absolute; top: 0; right: 0; left: 62px; border-top: 1px solid var(--sep); }
+.lib-item > .row { flex: 1; min-width: 0; }
+.lib-item .v.on { color: var(--good); font-weight: 600; }
+.lib-del {
+  flex: none; width: 44px; height: 44px; margin-right: 6px; border: 0; border-radius: 10px; background: none;
+  color: var(--bad); display: grid; place-items: center;
+}
+.lib-del:active { background: var(--bad-bg); }
+.lib-del svg { width: 20px; height: 20px; }
+.howto { background: var(--card); border-radius: var(--r); padding: 14px 16px; margin-bottom: 12px; }
+.howto h3 { margin: 0 0 8px; font-size: 15px; font-weight: 600; }
+.howto ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; font-size: 15px; color: var(--fg); max-width: 65ch; }
+.howto p { margin: 10px 0 0; font-size: 13px; color: var(--fg2); max-width: 65ch; }
 </style>
 </head>
 <body>
@@ -1868,6 +2202,213 @@ COURSE.modules.push({
   ]
 });
 
+
+/* ---------- EXTRA QUESTIONS (v3.4) ----------
+   More practice for each concept. addQ(moduleId, conceptId, [questions])
+   adds to the end of that concept, so saved progress on older questions stays put. */
+const addQ = (moduleId, conceptId, list) => {
+  const m = COURSE.modules.find(x => x.id === moduleId);
+  const c = m && m.concepts.find(x => x.id === conceptId);
+  if (c) c.questions.push.apply(c.questions, list);
+};
+
+addQ("mobile", "laptop-hw", [
+  mc("A drink was spilled on a laptop and several keys no longer work. What is the usual fix?", ["Update the keyboard driver", "Replace the keyboard", "Replace the motherboard", "Reinstall the OS"], 1, "Liquid damage to a laptop keyboard usually means replacing it. Plug in a USB keyboard first to confirm the rest of the laptop works."),
+  tf("Some thin laptops have RAM soldered to the motherboard, so it cannot be upgraded.", true, "Soldered RAM saves space. Check the laptop's specs before you buy memory for it.")
+]);
+addQ("mobile", "mobile-display", [
+  mc("Which part usually sits in the laptop lid along with the screen?", ["CPU", "Wi-Fi antennas", "Hard drive", "Battery"], 1, "The lid holds the display, webcam, microphone and Wi-Fi antennas. Antennas sit high for better signal.")
+]);
+addQ("mobile", "mobile-connect", [
+  mc("A wireless headset will not show up on a new phone. Bluetooth is on. What should you check next?", ["The headset is in pairing mode", "The phone's NFC setting", "The Wi-Fi password", "The phone's wallpaper"], 0, "The headset must be discoverable before the phone can find it. Most headsets enter pairing mode by holding the power button."),
+  tf("NFC can connect two devices from across a room, the same as Wi-Fi.", false, "NFC only works at a few centimetres. That short range is why it suits payments.")
+]);
+addQ("mobile", "mobile-mgmt", [
+  mc("Staff use their own phones for work email. If someone leaves, the company wants to remove only work data. What should it use?", ["A full factory reset", "MDM with a separate work profile", "Turn off Bluetooth", "A docking station"], 1, "A work profile keeps company apps and data apart from personal ones, so IT can remove them without touching personal photos and apps.")
+]);
+
+addQ("networking", "ports", [
+  mc("Which port does HTTPS use by default?", ["80", "443", "445", "8080"], 1, "HTTPS uses TCP 443. Plain HTTP uses 80."),
+  match("Match the port to its protocol.", [["20/21", "FTP"], ["23", "Telnet"], ["161/162", "SNMP"], ["3389", "RDP"]], "FTP 20/21, Telnet 23, SNMP 161/162 and RDP 3389 come up often."),
+  mc("Users cannot reach a Windows file share through a firewall. Which port should be allowed?", ["389", "445", "3389", "25"], 1, "Modern Windows file sharing (SMB) uses TCP 445.")
+]);
+addQ("networking", "tcp-udp", [
+  mc("Which TWO use UDP? (Choose two.)", ["DNS lookups", "SSH", "TFTP", "HTTPS"], [0, 2], "Normal DNS queries and TFTP use UDP. SSH and HTTPS need the reliable delivery of TCP.")
+]);
+addQ("networking", "ip-addressing", [
+  calc("How many usable host addresses are in a /28 subnet?", 14, "A /28 leaves 4 host bits. 2^4 = 16. Take away the network and broadcast addresses: 16 − 2 = 14.", { unit: "hosts" }),
+  calc("A /26 mask is 255.255.255.? What is the last number?", 192, "/26 turns on the first two bits of the last octet: 128 + 64 = 192. So the mask is 255.255.255.192."),
+  mc("A PC can reach printers on its own network but no websites. Its IP and mask are correct. What is the most likely problem?", ["Wrong default gateway", "Bad monitor cable", "Wrong screen resolution", "Full hard drive"], 0, "Local traffic does not need the gateway. Anything off the network goes through it, so a wrong gateway breaks only outside access.")
+]);
+addQ("networking", "net-hardware", [
+  mc("Which device sends every signal out of every port and is now obsolete?", ["Hub", "Switch", "Router", "Firewall"], 0, "A hub repeats everything to all ports. Switches replaced hubs because they send frames only where they need to go."),
+  tf("A switch uses IP addresses to decide where to send frames.", false, "Switches forward frames by MAC address. Routers use IP addresses.")
+]);
+addQ("networking", "wireless", [
+  mc("Which band was added by Wi-Fi 6E?", ["900 MHz", "2.4 GHz", "5 GHz", "6 GHz"], 3, "Wi-Fi 6E is Wi-Fi 6 with the 6 GHz band added. Wi-Fi 7 uses it too."),
+  mc("A user at the far end of the house keeps dropping off the 5 GHz network. What is a quick fix?", ["Move them to the 2.4 GHz network", "Switch to WEP", "Turn off DHCP", "Use channel 14"], 0, "2.4 GHz reaches farther and passes through walls better, at a lower speed.")
+]);
+addQ("networking", "net-services", [
+  mc("Which DNS record makes www.example.com an alias of example.com?", ["A", "MX", "CNAME", "TXT"], 2, "A CNAME points one name to another name."),
+  mc("Printers use static IPs in the middle of the DHCP pool. How do you stop DHCP from giving those addresses out?", ["Create a reservation", "Create an exclusion", "Make the lease longer", "Add an MX record"], 1, "An exclusion keeps addresses out of the pool so DHCP never hands them out."),
+  tf("A load balancer spreads incoming requests across several servers.", true, "This keeps any one server from being overloaded and keeps the service up if one fails.")
+]);
+addQ("networking", "cabling", [
+  mc("Which connector goes on a copper Ethernet cable?", ["RJ11", "RJ45", "F-type", "SC"], 1, "RJ45 is the 8-pin Ethernet connector. RJ11 is the smaller phone connector."),
+  mc("You are making a normal straight-through patch cable. How should the ends be wired?", ["T568A on one end, T568B on the other", "The same standard on both ends", "Any order, as long as it clicks in", "RG6 on both ends"], 1, "A straight-through cable uses the same standard on both ends, usually T568B. Mixing A and B makes a crossover."),
+  mc("Which fibre type is cheaper and used for shorter runs inside a building?", ["Single-mode", "Multimode", "RG6", "Cat6a"], 1, "Multimode fibre is cheaper and covers hundreds of metres. Single-mode is for kilometres.")
+]);
+
+addQ("hardware", "connectors", [
+  mc("Which video connector can daisy-chain several monitors from one port?", ["VGA", "HDMI", "DisplayPort", "DVI"], 2, "DisplayPort supports daisy-chaining (MST) on monitors that allow it."),
+  calc("USB 3.2 Gen 2 is rated at how many Gbps?", 10, "USB 3.2 Gen 1 is 5 Gbps, Gen 2 is 10 Gbps and Gen 2x2 is 20 Gbps.", { unit: "Gbps" })
+]);
+addQ("hardware", "ram", [
+  mc("A PC with 8 GB of RAM slows to a crawl when running four virtual machines. What is the best upgrade?", ["A faster CPU fan", "More RAM", "A bigger PSU", "A second network card"], 1, "Each VM needs its own share of memory. More RAM is the fix."),
+  tf("RAM keeps its data when the computer is turned off.", false, "RAM is volatile. It empties when the power goes off. Storage keeps data.")
+]);
+addQ("hardware", "storage", [
+  calc("A RAID 6 array has five 4 TB drives. How much usable space is there in TB?", 12, "RAID 6 uses two drives' worth of space for parity. (5 − 2) × 4 TB = 12 TB.", { unit: "TB" }),
+  mc("Which drive type has no moving parts?", ["HDD", "SSD", "Tape drive", "Optical drive"], 1, "SSDs store data in flash chips. That makes them faster and tougher than spinning drives."),
+  tf("RAID 5 protects you if someone deletes a file by mistake.", false, "RAID copies the deletion to every drive at once. Only a backup brings the file back.")
+]);
+addQ("hardware", "motherboard", [
+  mc("Which slot should a high-end graphics card go in?", ["PCIe x1", "PCIe x4", "PCIe x16", "M.2"], 2, "Graphics cards need the most lanes, so they use the x16 slot."),
+  mc("What goes between a CPU and its heat sink?", ["Thermal paste", "Electrical tape", "A rubber pad", "Nothing at all"], 0, "Thermal paste fills tiny gaps so heat moves from the CPU into the heat sink.")
+]);
+addQ("hardware", "power", [
+  calc("A PSU rail supplies 10 A at 3.3 V. How many watts is that?", 33, "Watts = volts × amps. 3.3 × 10 = 33 W.", { unit: "W" }),
+  mc("A server must keep running if one of its power supplies fails. What should it have?", ["A modular PSU", "Redundant PSUs", "An 80 Plus Bronze PSU", "A bigger case fan"], 1, "Redundant PSUs share the load. If one dies, the other keeps the server running.")
+]);
+addQ("hardware", "printers", [
+  mc("Which printer type prints shipping labels with no ink or toner?", ["Laser", "Inkjet", "Thermal", "Impact"], 2, "Direct thermal printers heat special paper to make the image."),
+  mc("Inkjet prints have thin blank lines across the page. What should you try first?", ["Replace the fuser", "Run the printhead cleaning", "Replace the drum", "Install a new paper tray"], 1, "Blank lines usually mean clogged nozzles. The cleaning cycle clears them. Inkjets have no fuser or drum.")
+]);
+
+addQ("cloud", "hypervisors", [
+  mc("A tech wants to save a VM's exact state before an update so they can undo it. What should they take?", ["A snapshot", "A container", "A VDI session", "A hotspot"], 0, "A snapshot saves the VM at a point in time so you can roll back."),
+  tf("A Type 2 hypervisor runs on top of a normal operating system.", true, "VirtualBox and VMware Workstation are installed like apps on Windows, macOS or Linux.")
+]);
+addQ("cloud", "cloud-models", [
+  mc("Many customers share the same physical servers in a public cloud, but each is kept separate. What is this called?", ["Multitenancy", "Rapid elasticity", "Hybrid cloud", "Measured service"], 0, "Multitenancy means many tenants on shared hardware, kept apart from each other."),
+  mc("A company pays each month only for the storage it actually used. Which cloud trait is this?", ["Measured service", "Resource pooling", "Community cloud", "High availability"], 0, "Measured service means usage is metered and billed.")
+]);
+
+addQ("hw-trouble", "method", [
+  mc("A tech suspects a bad cable but has not tested it yet. Which step are they in?", ["Identify the problem", "Establish a theory of probable cause", "Verify full system functionality", "Document findings"], 1, "A suspicion you have not tested is a theory. Testing it is the next step."),
+  mc("The fix needs a change to a production server. When should the tech follow change management?", ["While establishing a plan of action, before making the change", "After documenting", "Only if the fix fails", "Never for small changes"], 0, "Step 4 is planning the fix. That is where you check vendor guidance and get the change approved.")
+]);
+addQ("hw-trouble", "hw-symptoms", [
+  mc("A PC shows 'No boot device found' at startup. What is the most likely cause?", ["A bad monitor", "The drive is not detected or the boot order is wrong", "Low RAM", "A wrong DNS server"], 1, "Check the drive cables, then the boot order in UEFI, then the drive itself."),
+  tf("S.M.A.R.T. errors are a warning that a drive may fail soon.", true, "Back up the drive and plan a replacement as soon as you see them.")
+]);
+addQ("hw-trouble", "display-storage-trouble", [
+  mc("One pixel stays bright red on every screen, even on a black background. What is it?", ["Burn-in", "A stuck pixel", "A bad backlight", "The wrong resolution"], 1, "A stuck pixel is stuck on one colour. A dead pixel stays black."),
+  mc("A new SATA drive does not show in UEFI or Disk Management. What should you check first?", ["The data and power cables", "The drive letter", "File Explorer options", "The page file size"], 0, "If the firmware cannot see the drive, start with the physical connections.")
+]);
+addQ("hw-trouble", "net-trouble", [
+  mc("Which Windows command lists every router hop on the way to a website?", ["ipconfig", "tracert", "nslookup", "netstat"], 1, "tracert shows each hop and how long it took, which helps find where traffic stops."),
+  mc("Windows warns that another device on the network has the same IP address. What is this?", ["APIPA", "An IP conflict", "Jitter", "Latency"], 1, "Two devices with one address fight over it. Fix the static IP or the DHCP setup.")
+]);
+addQ("hw-trouble", "printer-trouble", [
+  mc("Every page has a faint copy of an earlier image on it. What is this called?", ["Ghosting", "Smudging", "Faded print", "Garbled print"], 0, "Ghosting points to the drum or the cleaning stage."),
+  mc("A laser printer keeps jamming even with the right paper. What part is often worn?", ["Fuser", "Pickup roller", "Toner", "Driver"], 1, "Worn pickup rollers grab paper unevenly and cause jams.")
+]);
+
+addQ("os", "win-editions", [
+  mc("What is the lowest Windows edition that includes Hyper-V?", ["Home", "Pro", "Home in S mode", "None of them"], 1, "Hyper-V comes with Pro, Enterprise and Education. Home does not have it."),
+  mc("A user wants to move to a newer Windows version and keep their files and apps. Which install type?", ["Clean install", "In-place upgrade", "Image deployment", "Format and reinstall"], 1, "An in-place upgrade keeps files, settings and apps. A clean install wipes the drive.")
+]);
+addQ("os", "win-cmd", [
+  mc("Which command shows full IP settings, including DNS servers and the MAC address?", ["ipconfig /all", "ping", "hostname", "whoami"], 0, "Plain ipconfig shows the basics. Add /all for everything."),
+  mc("Which command shows which Group Policy settings were applied to the signed-in user?", ["gpupdate", "gpresult", "sfc", "net use"], 1, "gpresult reports applied policy. gpupdate applies it."),
+  mc("A tech must copy a large folder to a server and keep going if the network drops. Which command?", ["copy", "robocopy", "md", "dir"], 1, "robocopy retries on errors and can resume. That makes it the right tool for big copies.")
+]);
+addQ("os", "win-tools", [
+  mc("A backup script must run every night at 1 AM. Which tool sets that up?", ["Task Scheduler", "Event Viewer", "Device Manager", "Disk Management"], 0, "Task Scheduler runs programs and scripts on a schedule."),
+  mc("Which tool shows live CPU, disk, network and memory use per process in more detail than Task Manager?", ["Resource Monitor", "System Configuration", "Certificate Manager", "Registry Editor"], 0, "Resource Monitor (resmon) breaks down use by process in detail.")
+]);
+addQ("os", "filesystems", [
+  mc("A camera reads memory cards, and every file is under 4 GB. Which format works on almost any device?", ["NTFS", "FAT32", "APFS", "ext4"], 1, "FAT32 is the most widely supported format. Its only big limit is the 4 GB file size."),
+  calc("How many primary partitions can an MBR disk hold?", 4, "MBR allows four primary partitions. GPT allows up to 128 in Windows.")
+]);
+addQ("os", "macos", [
+  mc("Which macOS tool opens with Command + Space to search for files and apps?", ["Finder", "Spotlight", "Mission Control", "Keychain"], 1, "Spotlight is the system-wide search."),
+  mc("A Mac drive is showing errors. Which tool's First Aid feature checks and repairs it?", ["Disk Utility", "Time Machine", "Terminal", "The Dock"], 0, "Disk Utility formats, partitions and repairs drives.")
+]);
+addQ("os", "linux", [
+  mc("Which Linux command changes who owns a file?", ["chmod", "chown", "sudo", "grep"], 1, "chown changes the owner. chmod changes the permissions."),
+  calc("A file has permissions 640. What number are the group's permissions?", 4, "The three digits are owner, group, others. 6 is the owner, 4 is the group (read only) and 0 is everyone else."),
+  mc("Which command shows running processes and keeps updating live?", ["ps", "top", "df", "ls"], 1, "top refreshes every few seconds. ps takes a single snapshot.")
+]);
+
+addQ("security", "auth", [
+  mc("A user signs in once and can open email, the HR portal and file shares without signing in again. What is this?", ["MFA", "SSO", "AAA", "RADIUS"], 1, "Single sign-on uses one login for many apps."),
+  mc("Which part of AAA records what a user did after logging in?", ["Authentication", "Authorization", "Accounting", "Encryption"], 2, "Accounting logs activity. Authentication proves who you are. Authorization decides what you can do.")
+]);
+addQ("security", "malware", [
+  mc("Everything a user types, including passwords, is being sent to an attacker. What malware is this?", ["Keylogger", "Worm", "Cryptominer", "Boot sector virus"], 0, "A keylogger records keystrokes and sends them out."),
+  mc("A tool watches each PC for suspicious behaviour and can cut an infected PC off the network on its own. What is it?", ["EDR", "UPS", "MDM", "KVM"], 0, "EDR (endpoint detection and response) watches endpoints and responds to threats.")
+]);
+addQ("security", "attacks", [
+  mc("Someone stands behind a user and watches them type a door code. What is this?", ["Shoulder surfing", "Tailgating", "Phishing", "Spoofing"], 0, "Shoulder surfing is reading what someone types or sees over their shoulder."),
+  mc("A user gets a text saying a parcel is on hold and to tap a link to pay a fee. What is this?", ["Vishing", "Smishing", "Whaling", "Evil twin"], 1, "Smishing is phishing by SMS text message.")
+]);
+addQ("security", "wireless-sec", [
+  mc("Which encryption does WPA2 use?", ["RC4", "TKIP", "AES", "DES"], 2, "WPA2 uses AES with CCMP. WEP used RC4 and the first WPA used TKIP."),
+  tf("MAC filtering on its own is strong security because MAC addresses cannot be copied.", false, "MAC addresses are easy to spoof. Use strong encryption and authentication instead.")
+]);
+addQ("security", "win-security", [
+  mc("A file is copied from C:\\Data to C:\\Shared. What happens to its NTFS permissions?", ["It keeps its old permissions", "It takes the permissions of C:\\Shared", "All permissions are removed", "It becomes read-only"], 1, "A copy is a new file, so it inherits from the folder it lands in."),
+  mc("Which account type should a user have for everyday work?", ["Standard user", "Administrator", "Guest", "Domain admin"], 0, "Standard accounts limit the damage if malware runs. Use admin rights only when needed.")
+]);
+addQ("security", "data-destruction", [
+  mc("Old SSDs will be reused in new laptops. How should the data be removed?", ["Degauss them", "Use a secure erase tool", "Drill them", "Quick format them"], 1, "Secure erase clears the drive and leaves it usable. Degaussing does nothing to SSDs and drilling destroys them."),
+  mc("Which TWO methods physically destroy a hard drive? (Choose two.)", ["Shredding", "Quick format", "Drilling", "Disk Cleanup"], [0, 2], "Shredding and drilling wreck the drive. Formatting and Disk Cleanup leave data recoverable.")
+]);
+
+addQ("sw-trouble", "win-issues", [
+  mc("Windows signs a user into a temporary profile and their desktop is empty. What is most likely?", ["The user profile is corrupt", "The monitor is failing", "The printer is out of toner", "DNS is wrong"], 0, "A temporary profile means Windows could not load the real one. Rebuild or repair the profile."),
+  mc("A Windows service will not start because another service it needs is stopped. Where do you check this?", ["The Dependencies tab in services.msc", "The DNS cache", "The page file size", "Display settings"], 0, "Each service lists what it depends on. Start those first.")
+]);
+addQ("sw-trouble", "malware-removal", [
+  calc("How many steps are in CompTIA's malware removal process?", 7, "Investigate, quarantine, disable System Restore, remediate, schedule scans and updates, enable System Restore, educate the user."),
+  mc("Anti-malware cannot remove an infection while Windows is running. What should you try?", ["Safe Mode or a pre-boot scan", "Turn off the firewall", "Delete the System32 folder", "Turn System Restore back on"], 0, "Safe Mode and pre-boot scans run before the malware loads, so it cannot protect itself.")
+]);
+addQ("sw-trouble", "mobile-trouble", [
+  mc("A phone's battery drains fast since a new game was installed. Where should you look first?", ["Battery usage by app", "Rotation lock", "NFC settings", "The wallpaper"], 0, "Battery settings show which apps use the most power."),
+  tf("Rooting or jailbreaking a phone makes it more secure.", false, "It removes built-in protections and lets apps do far more than they should.")
+]);
+
+addQ("ops", "docs-change", [
+  mc("Which document lists the steps to set up accounts and equipment for a new hire?", ["New user setup checklist", "End-user termination checklist", "SLA", "Incident report"], 0, "The new user checklist makes sure nothing is missed on someone's first day."),
+  mc("Who approves a planned change to production systems?", ["The help desk", "The change advisory board", "The end user", "The vendor"], 1, "The CAB reviews risk and timing before approving a change.")
+]);
+addQ("ops", "safety", [
+  mc("You are about to replace a RAM stick. What protects it from static?", ["An ESD wrist strap", "Rubber gloves", "A surge suppressor", "A UPS"], 0, "The wrist strap keeps you at the same charge as the PC, so no static jumps to the parts."),
+  tf("Old batteries and toner cartridges can go in the normal office rubbish.", false, "They need proper recycling. Check the SDS and local rules.")
+]);
+addQ("ops", "backup", [
+  mc("Which rotation keeps daily, weekly and monthly backups?", ["3-2-1", "GFS", "RAID 1", "Synthetic full"], 1, "Grandfather (monthly), father (weekly) and son (daily)."),
+  mc("A job builds a new full backup from the last full and later incrementals without reading the source again. What is it?", ["Differential", "Synthetic full", "Incremental", "Snapshot"], 1, "A synthetic full saves time and load on the source system.")
+]);
+addQ("ops", "privacy-incident", [
+  mc("Which regulation protects the personal data of people in the EU?", ["PCI DSS", "GDPR", "EULA", "SLA"], 1, "GDPR covers personal data of people in the European Union."),
+  mc("A software licence that is paid for once and never expires is called what?", ["Subscription", "Perpetual", "Open-source", "DRM"], 1, "A perpetual licence lasts forever. A subscription must be renewed.")
+]);
+addQ("ops", "professionalism", [
+  mc("A customer describes the problem with the wrong technical terms. What should the tech do?", ["Correct them right away", "Listen, then restate the problem in plain words to confirm", "Ignore what they said", "Answer with more jargon"], 1, "Restating it in plain words confirms the real problem without making the customer feel small."),
+  tf("It is fine to browse files on a customer's desktop while you wait for an update to finish.", false, "Respect private material. Only open what the job needs.")
+]);
+addQ("ops", "scripting-remote", [
+  mc("A script has a loop that never ends and the PC slows to a crawl. What risk is this?", ["Using up system resources", "Phishing", "Tailgating", "Burn-in"], 0, "Bad loops can eat CPU and memory until apps or the whole system crash. Test scripts first."),
+  mc("Which tool gives a full graphical desktop session on a Windows PC over TCP 3389?", ["SSH", "RDP", "Telnet", "FTP"], 1, "RDP is Remote Desktop Protocol on port 3389.")
+]);
+addQ("ops", "ai-basics", [
+  mc("An AI tool confidently suggests a command that does not exist. What is this called?", ["Bias", "A hallucination", "Phishing", "Spoofing"], 1, "A hallucination is a confident answer that is wrong or made up."),
+  tf("Company policy decides which AI tools staff are allowed to use for work.", true, "Check the acceptable use or AI policy before using any AI tool with work data.")
+]);
+
 /* ===== END OF COURSE DATA ===== */
 window.COURSE_DATA = COURSE;
 
@@ -1893,6 +2434,12 @@ window.COURSE_DATA = COURSE;
       set(key, val) {
         mem[key] = val;
         if (ok) { try { window.localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+      },
+      /* like set, but says whether it really reached localStorage (big values can hit the quota) */
+      trySet(key, val) {
+        mem[key] = val;
+        if (!ok) return false;
+        try { window.localStorage.setItem(key, JSON.stringify(val)); return true; } catch (e) { try { window.localStorage.removeItem(key); } catch (x) {} return false; }
       },
       del(key) {
         delete mem[key];
@@ -2027,13 +2574,45 @@ window.COURSE_DATA = COURSE;
   const BUILTIN = JSON.parse(JSON.stringify(window.COURSE_DATA));
   let course = BUILTIN;
   let usingCustom = false;
-  (function loadCustom() {
-    const saved = store.get("aps.customCourse");
-    if (saved && validateCourse(saved).length === 0) { course = saved; usingCustom = true; }
+  /* Course library. The built-in course is always first and cannot be removed.
+     aps.library  = [{ id, title, added }]   (list of uploaded courses)
+     aps.lib.<id> = the course JSON
+     aps.activeCourse = "builtin" or an id */
+  let library = [];
+  let activeId = "builtin";
+  const memLib = {};
+  function libGet(id) { return memLib[id] || store.get("aps.lib." + id); }
+  function saveLibList() { store.set("aps.library", library); }
+  function newLibId() { return "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function useCourse(id) {
+    let c = null;
+    if (id !== "builtin") { c = libGet(id); if (!c || validateCourse(c).length) { c = null; id = "builtin"; } }
+    activeId = id;
+    course = c || BUILTIN;
+    usingCustom = id !== "builtin";
+    store.set("aps.activeCourse", id);
+  }
+  (function loadLibrary() {
+    const l = store.get("aps.library");
+    library = Array.isArray(l) ? l.filter(x => x && typeof x.id === "string" && store.get("aps.lib." + x.id)) : [];
+    /* Move an older single imported course into the library */
+    const old = store.get("aps.customCourse");
+    if (old && validateCourse(old).length === 0) {
+      const id = newLibId();
+      store.set("aps.lib." + id, old);
+      library.push({ id: id, title: old.title, added: Date.now() });
+      const op = store.get("aps.progress." + old.title);
+      if (op && old.title !== BUILTIN.title) store.set("aps.progress.lib." + id, op);
+      if (old.title !== BUILTIN.title) store.del("aps.progress." + old.title);
+      store.set("aps.activeCourse", id);
+    }
+    store.del("aps.customCourse");
+    saveLibList();
+    useCourse(store.get("aps.activeCourse") || "builtin");
   })();
   let index = [];
   let progress = { q: {} };
-  function progKey() { return "aps.progress." + course.title; }
+  function progKey() { return activeId === "builtin" ? "aps.progress." + BUILTIN.title : "aps.progress.lib." + activeId; }
   function buildIndex() {
     index = [];
     course.modules.forEach((m, mi) => m.concepts.forEach((c, ci) => c.questions.forEach((q, qi) => {
@@ -2088,14 +2667,43 @@ window.COURSE_DATA = COURSE;
     down: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6 5 5 5-5"/></svg>',
     ext: '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 2H2v10h10V9M8 2h4v4M12 2 6 8"/></svg>'
   };
+  const S_ = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
+  Object.assign(ICONS, {
+    weak: S_ + '<path d="M12 3.5 2.8 19.5h18.4z"/><path d="M12 10v4.5M12 17.4v.1"/></svg>',
+    bolt: S_ + '<path d="M13 2.5 4.5 13.5H12l-1 8 8.5-11H12z"/></svg>',
+    fresh: S_ + '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></svg>',
+    exam: S_ + '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/></svg>',
+    calc: S_ + '<rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></svg>',
+    order: S_ + '<path d="M10 6h10M10 12h10M10 18h10M4 5l1.5-1v4M3.8 14.2a1.6 1.6 0 1 1 2.4 1.4L4 18h2.6"/></svg>',
+    match: S_ + '<path d="M9.5 14.5 14.5 9.5"/><path d="M11 6.5 13 4.5a4 4 0 0 1 6.5 6.5l-2 2M13 17.5l-2 2A4 4 0 0 1 4.5 13l2-2"/></svg>',
+    tf: S_ + '<path d="m4 12.5 3.5 3.5L14 9"/><path d="m15 15 5 5M20 15l-5 5"/></svg>',
+    expand: S_ + '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
+    download: S_ + '<path d="M12 3.5v12M7 11l5 5 5-5M5 20.5h14"/></svg>',
+    copy: S_ + '<rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>',
+    photo: S_ + '<rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-8 8"/></svg>',
+    palette: S_ + '<path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.8-.8 1.8-1.7 0-1.2-1-1.6-1-2.6 0-.9.7-1.6 1.6-1.6H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg>',
+    save: S_ + '<path d="M5 4h11l3 3v13H5z"/><path d="M8 4v5h7V4M8 20v-6h8v6"/></svg>',
+    reset: S_ + '<path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v5h5"/></svg>',
+    book: S_ + '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>',
+    upload: S_ + '<path d="M12 16V4M7 9l5-5 5 5M5 20.5h14"/></svg>',
+    trash: S_ + '<path d="M4 7h16M9 7V4h6v3M6.5 7l1 13h9l1-13M10 11v6M14 11v6"/></svg>',
+    spark: S_ + '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 16l.7 1.8 1.8.7-1.8.7L19 21l-.7-1.8-1.8-.7 1.8-.7z"/></svg>'
+  });
+  function iconTile(color, name) { const t = h("div", { class: "tile", style: "background:" + color, "aria-hidden": "true" }); t.innerHTML = ICONS[name]; return t; }
   function icon(name) { const s = document.createElement("span"); s.style.display = "inline-flex"; s.innerHTML = ICONS[name]; return s; }
   function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   let toastTimer = null;
   function toast(msg) {
     let t = document.querySelector(".toast");
-    if (!t) { t = h("div", { class: "toast", role: "status" }); document.body.appendChild(t); }
+    if (!t) { t = h("div", { class: "toast", role: "status" }); document.body.appendChild(t); if (typeof GL !== "undefined") GL.register(t, "menu", { keep: true }); }
+    const wasHidden = t.hidden || !t.textContent;
     t.textContent = msg; t.hidden = false;
-    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2200);
+    if (typeof GL !== "undefined") GL.apply(t);
+    if (wasHidden && t.animate && !(typeof reduceMotion !== "undefined" && reduceMotion)) {
+      t.animate([{ opacity: 0, transform: "translate(-50%, 18px) scale(.88)" }, { opacity: 1, transform: "translate(-50%, 0) scale(1)" }],
+        { duration: 560, easing: typeof EASE_SPRING !== "undefined" ? EASE_SPRING : "ease-out" });
+    }
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2600);
   }
 
   /* ---------- Theme ---------- */
@@ -2105,6 +2713,502 @@ window.COURSE_DATA = COURSE;
   }
   let theme = store.get("aps.theme") || "system";
   applyTheme(theme);
+
+  /* =====================================================================
+     GLASS SYSTEM
+     Modelled on how the Notes app runs its liquid glass:
+       1. Device class (high, mid, low) picks a tier (full, low, off).
+       2. A crash guard steps the tier down if glass start-up died last time.
+       3. Battery saver and heat drop the tier while the app runs.
+       4. A refresh-rate aware slowness check offers a lighter look.
+       5. One glass material, with a preset per surface.
+       6. Light direction for the rim (-15 degrees), nudged by tilt.
+       7. Named haptic moments, warm-up, pause when hidden.
+     Full tier adds edge refraction and colour split through an SVG
+     filter on backdrop-filter, which only Chromium (Chrome and Android
+     System WebView) runs. Other browsers get Low.
+     ===================================================================== */
+  const APP_VERSION = "3.4";
+  /* Motion: "system" follows the phone's reduce-motion setting (Android's
+     Remove animations, animation scale off, Samsung's Reduce animations).
+     "on" (the default) keeps animations even then; "off" turns them off. */
+  const motionMQ = (function () { try { return matchMedia("(prefers-reduced-motion: reduce)"); } catch (e) { return null; } })();
+  let motionPref = store.get("aps.motion") || "on";
+  let reduceMotion = false;
+  function applyMotion() {
+    const sys = !!(motionMQ && motionMQ.matches);
+    reduceMotion = motionPref === "off" || (motionPref === "system" && sys);
+    document.documentElement.setAttribute("data-motion", reduceMotion ? "reduce" : "full");
+    return sys;
+  }
+  applyMotion();
+  try { motionMQ && motionMQ.addEventListener("change", () => { applyMotion(); if (typeof tab !== "undefined" && tab === "settings" && stack.length === 1) refresh(); }); } catch (e) {}
+  const cssVar = n => { try { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); } catch (e) { return ""; } };
+  const easeOk = e => { try { if (!e || !document.documentElement.animate) return false; document.documentElement.animate([{ opacity: 1 }, { opacity: 1 }], { duration: 1, easing: e }).cancel(); return true; } catch (x) { return false; } };
+  const EASE_SPRING = easeOk(cssVar("--spring")) ? cssVar("--spring") : "cubic-bezier(.2,.9,.25,1.12)";
+  const EASE_SOFT = easeOk(cssVar("--soft")) ? cssVar("--soft") : "cubic-bezier(.2,.8,.2,1)";
+  const canRefract = (function () {
+    try {
+      const ua = navigator.userAgent;
+      return /Chrome\/\d+/.test(ua) && !/Firefox|FxiOS|CriOS/.test(ua) && !!(window.CSS && CSS.supports("backdrop-filter", "blur(1px)"));
+    } catch (e) { return false; }
+  })();
+  const prefersLessTransparency = (function () { try { return matchMedia("(prefers-reduced-transparency: reduce)").matches; } catch (e) { return false; } })();
+
+  let glassStyle = store.get("aps.style") || "glass";       // glass | classic
+  let glassRender = store.get("aps.render") || "auto";      // auto | full | low
+  let reduceT = store.get("aps.reduceT");
+  if (reduceT === null || reduceT === undefined) reduceT = prefersLessTransparency;
+  let hapticsOn = store.get("aps.haptics") !== false;
+  const TIERS = ["full", "low", "off"];
+  const dev = { powerSave: false, batteryLow: false, thermal: -1, native: false };
+  let stepDown = 0, crashedLastRun = false, lastReason = "";
+
+  /* 1. Device class from what a web page can see */
+  function deviceClass() {
+    const mem = navigator.deviceMemory || 4, cores = navigator.hardwareConcurrency || 4;
+    if (mem >= 6 && cores >= 8) return "high";
+    if (mem >= 4 && cores >= 6) return "mid";
+    return "low";
+  }
+  /* The tier actually used, and why */
+  function glassMode() {
+    if (glassStyle !== "glass") { lastReason = "Classic style"; return null; }
+    if (reduceT) { lastReason = "Reduce Transparency is on"; return "off"; }
+    if (glassRender !== "auto") {
+      if (glassRender === "full" && !canRefract) { lastReason = "Full needs Chrome or Android System WebView"; return "low"; }
+      lastReason = "Set by you"; return glassRender;
+    }
+    const cls = deviceClass();
+    let i = cls === "low" ? 1 : 0;
+    const why = [cls + " device"];
+    if (stepDown) { i += stepDown; why.push("stepped down after a start-up problem"); }
+    if (dev.thermal >= 4) { i += 2; why.push("phone is very hot"); }
+    else if (dev.thermal >= 2 || dev.powerSave || dev.batteryLow) { i += 1; why.push(dev.thermal >= 2 ? "phone is warm" : dev.powerSave ? "battery saver is on" : "battery is low"); }
+    if (slowLowered) { i = Math.max(i, 1); why.push("slow frames seen"); }
+    let t = TIERS[Math.min(i, 2)];
+    if (t === "full" && !canRefract) { t = "low"; why.push("no edge refraction in this browser"); }
+    lastReason = why.join(", ");
+    return t;
+  }
+  let slowLowered = store.get("aps.slowLowered") === APP_VERSION;
+
+  /* 5. One material, presets per surface. Numbers feed the refraction filter. */
+  const PRESETS = {
+    tabBar:        { blur: 2.5, refract: 16, bevel: 22, disp: 0.12, sat: 1.8 },
+    navigationBar: { blur: 3, refract: 8, bevel: 12, disp: 0.08, sat: 1.8 },
+    menu:          { blur: 3, refract: 10, bevel: 16, disp: 0.10, sat: 1.8 },
+    alert:         { blur: 6, refract: 12, bevel: 20, disp: 0.08, sat: 1.6 },
+    controls:      { blur: 0.6, refract: 7, bevel: 10, disp: 0.12, sat: 1.4, zoom: 1.06 },
+    lens:          { blur: 0, refract: 10, bevel: 14, disp: 0.18, sat: 1.3, zoom: 1.12 }
+  };
+
+  const GL = (function () {
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("aria-hidden", "true"); svg.setAttribute("width", "0"); svg.setAttribute("height", "0");
+    svg.style.cssText = "position:absolute;width:0;height:0;overflow:hidden;pointer-events:none";
+    const defs = document.createElementNS(NS, "defs");
+    svg.appendChild(defs);
+    document.body.appendChild(svg);
+    const cache = new Map(), items = new Map();
+    let seq = 0;
+    /* signed distance to a rounded box, plus the outward normal */
+    function sdBox(px, py, hw, hh, r) {
+      const qx = Math.abs(px) - (hw - r), qy = Math.abs(py) - (hh - r);
+      const sx = px < 0 ? -1 : 1, sy = py < 0 ? -1 : 1;
+      if (qx > 0 && qy > 0) { const l = Math.hypot(qx, qy); return [l - r, qx / l * sx, qy / l * sy]; }
+      return qx > qy ? [qx - r, sx, 0] : [qy - r, 0, sy];
+    }
+    /* displacement map: red = x shift, green = y shift. Bends the backdrop
+       inward near the rim (a thick slab with a round profile); lenses also zoom. */
+    function makeMap(w, h, r, o) {
+      const c = document.createElement("canvas");
+      c.width = w; c.height = h;
+      const ctx = c.getContext("2d"), img = ctx.createImageData(w, h);
+      const n = w * h, dx = new Float32Array(n), dy = new Float32Array(n);
+      const hw = w / 2, hh = h / 2, zk = o.zoom ? 1 - 1 / o.zoom : 0;
+      let max = 0.5;
+      for (let y = 0, i = 0; y < h; y++) {
+        for (let x = 0; x < w; x++, i++) {
+          const px = x + 0.5 - hw, py = y + 0.5 - hh, s = sdBox(px, py, hw, hh, r);
+          if (s[0] >= 0) continue;
+          const t = Math.min(1, -s[0] / o.bevel), m = 1 - Math.sqrt(1 - (1 - t) * (1 - t));
+          const ox = -s[1] * m * o.refract - px * zk, oy = -s[2] * m * o.refract - py * zk;
+          dx[i] = ox; dy[i] = oy;
+          const a = Math.max(Math.abs(ox), Math.abs(oy));
+          if (a > max) max = a;
+        }
+      }
+      const scale = max * 2;
+      for (let i = 0, j = 0; i < n; i++, j += 4) {
+        img.data[j] = Math.round(255 * (dx[i] / scale + 0.5));
+        img.data[j + 1] = Math.round(255 * (dy[i] / scale + 0.5));
+        img.data[j + 2] = 128; img.data[j + 3] = 255;
+      }
+      ctx.putImageData(img, 0, 0);
+      return { url: c.toDataURL("image/png"), scale: scale };
+    }
+    function filterFor(w, h, r, o) {
+      w = Math.max(4, Math.round(w)); h = Math.max(4, Math.round(h));
+      r = Math.max(0, Math.min(Math.round(r), Math.floor(Math.min(w, h) / 2)));
+      const under = o.under ? String(o.under()).trim() : "";
+      const key = [w, h, r, o.blur, o.refract, o.bevel, o.zoom || 0, o.disp, o.sat, under].join("_");
+      const hit = cache.get(key);
+      if (hit) { hit.t = Date.now(); return hit.id; }
+      const map = makeMap(w, h, r, o), id = "lg" + (++seq), d = o.disp || 0, sc = map.scale;
+      const chan = (k, s, res) =>
+        '<feDisplacementMap in="b" in2="m" scale="' + (sc * s).toFixed(2) + '" xChannelSelector="R" yChannelSelector="G" result="d' + res + '"/>' +
+        '<feColorMatrix in="d' + res + '" type="matrix" values="' + k + '" result="' + res + '"/>';
+      const markup =
+        '<filter xmlns="' + NS + '" id="' + id + '" x="0" y="0" width="' + w + '" height="' + h + '" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">' +
+        (under ? '<feFlood flood-color="' + under + '" result="u"/><feComposite in="SourceGraphic" in2="u" operator="over" result="src"/>' : "") +
+        '<feGaussianBlur in="' + (under ? "src" : "SourceGraphic") + '" stdDeviation="' + o.blur + '" result="b"/>' +
+        '<feImage href="' + map.url + '" x="0" y="0" width="' + w + '" height="' + h + '" preserveAspectRatio="none" result="m"/>' +
+        chan("1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0", 1 + d, "r") +
+        chan("0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0", 1, "g") +
+        chan("0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0", 1 - d, "c") +
+        '<feBlend in="r" in2="g" mode="screen" result="rg"/><feBlend in="rg" in2="c" mode="screen" result="rgb"/>' +
+        '<feColorMatrix in="rgb" type="saturate" values="' + o.sat + '"/></filter>';
+      const tmp = document.createElementNS(NS, "svg");
+      tmp.innerHTML = markup;
+      const node = tmp.firstElementChild;
+      defs.appendChild(node);
+      cache.set(key, { id: id, node: node, t: Date.now() });
+      if (cache.size > 30) {
+        Array.from(cache.entries()).sort((a, b) => a[1].t - b[1].t).slice(0, cache.size - 30)
+          .forEach(([k, v]) => { v.node.remove(); cache.delete(k); });
+      }
+      return id;
+    }
+    const ro = window.ResizeObserver ? new ResizeObserver(es => es.forEach(e => apply(e.target))) : null;
+    function clear(el) { el.style.removeProperty("backdrop-filter"); el.style.removeProperty("-webkit-backdrop-filter"); }
+    function apply(el) {
+      const o = items.get(el);
+      if (!o) return;
+      if (document.documentElement.getAttribute("data-glass") !== "full" || (o.when && !o.when(el))) { clear(el); return; }
+      const w = el.offsetWidth, h = el.offsetHeight;
+      if (!w || !h) return;
+      const r = parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0;
+      try { el.style.setProperty("backdrop-filter", "url(#" + filterFor(w, h, r, o) + ")"); } catch (e) { clear(el); }
+    }
+    function register(el, preset, extra) {
+      items.forEach((o, x) => { if (!x.isConnected && !o.keep) { items.delete(x); if (ro) ro.unobserve(x); } });
+      el.classList.add("g");
+      if (preset !== "lens") el.setAttribute("data-preset", preset);
+      items.set(el, Object.assign({}, PRESETS[preset], extra || {}));
+      if (ro) ro.observe(el);
+      apply(el);
+    }
+    function sync() { items.forEach((o, el) => apply(el)); }
+    /* 7. Warm-up: build the filters for the usual sizes before they are needed */
+    function warm(list) {
+      if (document.documentElement.getAttribute("data-glass") !== "full") return;
+      const run = () => list.forEach(([w, h, r, p]) => { try { filterFor(w, h, r, PRESETS[p]); } catch (e) {} });
+      if (window.requestIdleCallback) requestIdleCallback(run, { timeout: 1500 }); else setTimeout(run, 300);
+    }
+    return { register: register, apply: apply, sync: sync, warm: warm, count: () => cache.size };
+  })();
+
+  /* 6. Light direction: -15 degrees from straight up, the angle the Notes lens
+     uses. Tilting an Android phone nudges it, so the rim light moves. */
+  let lightDeg = -15;
+  function setLight(deg) {
+    lightDeg = deg;
+    const t = deg * Math.PI / 180, r = document.documentElement.style;
+    r.setProperty("--lx", (-Math.sin(t) * 1.5).toFixed(2) + "px");
+    r.setProperty("--ly", (Math.cos(t) * 1.5).toFixed(2) + "px");
+  }
+  setLight(-15);
+  let tiltRaf = 0, tiltOn = false;
+  function onTilt(e) {
+    if (tiltRaf || e.gamma === null || e.gamma === undefined) return;
+    tiltRaf = requestAnimationFrame(() => {
+      tiltRaf = 0;
+      const d = -15 + Math.max(-30, Math.min(30, e.gamma)) * 0.8;
+      if (Math.abs(d - lightDeg) > 1) setLight(d);
+    });
+  }
+  function tiltWatch(on) {
+    const ok = on && !reduceMotion && window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== "function";
+    if (ok && !tiltOn) { window.addEventListener("deviceorientation", onTilt, { passive: true }); tiltOn = true; }
+    else if (!ok && tiltOn) { window.removeEventListener("deviceorientation", onTilt); tiltOn = false; setLight(-15); }
+  }
+
+  /* Named haptic moments, as in the Notes app. An APK wrapper can supply
+     window.ApsNative.haptic(name) for real Android haptic effects;
+     otherwise short vibrations stand in. */
+  const HAPTIC = { SEGMENT_TICK: [6], SEGMENT_FREQUENT_TICK: [5], DRAG_START: [10], GESTURE_THRESHOLD_ACTIVATE: [14], TOGGLE_ON: [12], TOGGLE_OFF: [8], CONFIRM: [12, 40, 18], REJECT: [40], LONG_PRESS: [30], VIRTUAL_KEY: [12] };
+  let lastHaptic = { name: "", t: 0 };
+  function haptic(name) {
+    lastHaptic = { name: name, t: Date.now() };
+    if (!hapticsOn) return;
+    try { if (window.ApsNative && typeof window.ApsNative.haptic === "function") { window.ApsNative.haptic(name); return; } } catch (e) {}
+    try { if (navigator.vibrate && navigator.userActivation && navigator.userActivation.hasBeenActive) navigator.vibrate(HAPTIC[name] || [8]); } catch (e) {}
+  }
+
+  let glassApplied = null;
+  function applyGlass(why) {
+    const m = glassMode(), r = document.documentElement;
+    const before = glassApplied;
+    glassApplied = m;
+    if (m) r.setAttribute("data-glass", m); else r.removeAttribute("data-glass");
+    GL.sync();
+    tiltWatch(m === "full" || m === "low");
+    requestAnimationFrame(() => { if (typeof placeLens === "function") placeLens(false); placeAllThumbs(); });
+    if (why && before && m && before !== m && TIERS.indexOf(m) > TIERS.indexOf(before)) toast("Glass lowered: " + why + ".");
+    return m;
+  }
+
+  /* 2. Crash guard. A "pending" flag is written before the first glass frame
+     and cleared once glass has drawn (or the page closes normally). If it is
+     still set on the next launch, glass start-up died: step down one tier.
+     The step-down resets when the app version changes. */
+  const GUARD = "aps.glassStart", STEP = "aps.stepDown";
+  (function guardBoot() {
+    let sd = store.get(STEP);
+    if (!sd || sd.v !== APP_VERSION) sd = { v: APP_VERSION, n: 0 };
+    const g = store.get(GUARD);
+    if (g && g.pending && g.v === APP_VERSION && g.tier && g.tier !== "off") {
+      sd.n = Math.min(2, sd.n + 1);
+      crashedLastRun = true;
+    }
+    store.set(STEP, sd);
+    stepDown = sd.n;
+  })();
+  function guardStart() {
+    const m = glassMode();
+    if (!m || m === "off") { store.set(GUARD, { pending: false, v: APP_VERSION }); return; }
+    store.set(GUARD, { pending: true, v: APP_VERSION, tier: m });
+    requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(() => store.set(GUARD, { pending: false, v: APP_VERSION }), 1200)));
+  }
+  window.addEventListener("pagehide", () => store.set(GUARD, { pending: false, v: APP_VERSION }));
+
+  /* 3. Battery saver and heat. Web pages only see the battery level, so the
+     APK wrapper can report Android's real state with:
+       window.apsDeviceState({ powerSave: true, thermal: 2 })
+     thermal = PowerManager thermal status (2 = MODERATE, 4 = SEVERE). */
+  window.apsDeviceState = function (s) {
+    if (!s || typeof s !== "object") return;
+    dev.native = true;
+    if ("powerSave" in s) dev.powerSave = !!s.powerSave;
+    if ("thermal" in s) dev.thermal = Number(s.thermal) || 0;
+    applyGlass(dev.thermal >= 2 ? "the phone is warm" : dev.powerSave ? "battery saver is on" : "");
+  };
+  try {
+    if (navigator.getBattery) navigator.getBattery().then(b => {
+      const upd = () => {
+        const low = !b.charging && b.level <= 0.2;
+        if (low !== dev.batteryLow) { dev.batteryLow = low; applyGlass(low ? "battery is low" : ""); }
+      };
+      b.addEventListener("levelchange", upd); b.addEventListener("chargingchange", upd); upd();
+    }).catch(() => {});
+  } catch (e) {}
+
+  /* 4. Slowness check. Learns the screen's refresh rate, then counts frames
+     that miss their deadline in windows of 600. Over 30% missed in 3 windows
+     in a row = ask once per app version to switch to a lighter look. */
+  const slow = { budget: 1000 / 60, hz: 60, n: 0, missed: 0, strikes: 0, samples: [], last: 0, on: false };
+  function watchSlow() {
+    if (slow.on || store.get("aps.slowAsked") === APP_VERSION || !window.requestAnimationFrame) return;
+    slow.on = true;
+    const tick = t => {
+      if (!slow.on) return;
+      const m = document.documentElement.getAttribute("data-glass");
+      if (document.hidden || !m || m === "off" || document.querySelector(".fs-scrim")) { slow.last = 0; requestAnimationFrame(tick); return; }
+      if (slow.last) {
+        const dt = t - slow.last;
+        if (slow.samples.length < 40) {
+          slow.samples.push(dt);
+          if (slow.samples.length === 40) {
+            const s = slow.samples.slice().sort((a, b) => a - b), med = s[20];
+            slow.hz = med < 9.5 ? 120 : med < 13 ? 90 : 60;
+            slow.budget = 1000 / slow.hz;
+          }
+        } else if (dt < 1000) {
+          slow.n++;
+          if (dt > slow.budget * 1.5) slow.missed++;
+          if (slow.n >= 600) {
+            slow.strikes = slow.missed / slow.n > 0.3 ? slow.strikes + 1 : 0;
+            slow.n = 0; slow.missed = 0;
+            if (slow.strikes >= 3) { slow.on = false; askSlow(); return; }
+          }
+        }
+      }
+      slow.last = t;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  function askSlow() {
+    store.set("aps.slowAsked", APP_VERSION);
+    dialog({
+      title: "Glass is running slowly on this phone",
+      text: "Switch to a lighter glass so scrolling and animations stay smooth? You can change it back in Settings.",
+      yes: "Switch", no: "Keep Glass",
+      onYes: () => {
+        slowLowered = true; store.set("aps.slowLowered", APP_VERSION);
+        if (glassRender === "full") { glassRender = "low"; store.set("aps.render", "low"); }
+        else if (glassMode() === "low") { reduceT = true; store.set("aps.reduceT", true); }
+        applyGlass();
+        if (tab === "settings" && stack.length === 1) refresh();
+      }
+    });
+  }
+
+  /* A glass alert dialog (the "alert" preset), used by the prompts */
+  function dialog(o) {
+    const prevKey = keyHandler;
+    const close = () => { scrim.remove(); keyHandler = prevKey; };
+    const yes = h("button", { class: "btn", id: o.yesId || "dlg-yes", onclick: () => { close(); haptic("CONFIRM"); o.onYes && o.onYes(); } }, o.yes);
+    const no = h("button", { class: "btn plain", id: o.noId || "dlg-no", onclick: () => { close(); o.onNo && o.onNo(); } }, o.no);
+    const card = h("div", { class: "fs-card" },
+      h("h2", { id: "dlg-title", text: o.title }),
+      h("p", { text: o.text }),
+      h("div", { class: "btns two", style: "margin-top:0" }, no, yes));
+    const scrim = h("div", { class: "fs-scrim", role: "dialog", "aria-modal": "true", "aria-labelledby": "dlg-title" }, card);
+    document.body.appendChild(scrim);
+    GL.register(card, "alert");
+    if (!reduceMotion && card.animate) card.animate([{ transform: "scale(1.08)", opacity: 0 }, { transform: "none", opacity: 1 }], { duration: 480, easing: EASE_SPRING });
+    keyHandler = e => { if (e.key === "Enter") { e.preventDefault(); close(); o.onYes && o.onYes(); } else if (e.key === "Escape") { e.preventDefault(); close(); o.onNo && o.onNo(); } };
+    try { yes.focus({ preventScroll: true }); } catch (e) {}
+    return { close: close, card: card };
+  }
+
+  /* Pause when the app is hidden (the Notes app stops glass rendering) */
+  document.addEventListener("visibilitychange", () => {
+    document.documentElement.classList.toggle("paused", document.hidden);
+    if (document.hidden) store.set(GUARD, { pending: false, v: APP_VERSION });
+    tiltWatch(!document.hidden && (glassApplied === "full" || glassApplied === "low"));
+  });
+
+  /* Keyboard: move the floating tab bar out of the way while typing */
+  if (window.visualViewport) {
+    const kb = () => {
+      const a = document.activeElement;
+      const typing = a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName);
+      document.documentElement.classList.toggle("kb-open", !!typing && (window.innerHeight - visualViewport.height) > 150);
+    };
+    visualViewport.addEventListener("resize", kb);
+    document.addEventListener("focusout", () => setTimeout(kb, 50));
+  }
+
+  /* Lift, stretch and settle: the glass droplet moving between options */
+  function lensPulse(el, stretch) {
+    if (reduceMotion || !document.documentElement.hasAttribute("data-glass")) return;
+    el.classList.add("moving");
+    GL.apply(el);
+    if (el.animate) el.animate([{ scale: "1 1" }, { scale: (stretch || "1.22 1.1"), offset: 0.3 }, { scale: "1 1" }], { duration: 520, easing: "ease-out" });
+    clearTimeout(el.__pulseT);
+    el.__pulseT = setTimeout(() => { el.classList.remove("moving"); GL.apply(el); }, 440);
+  }
+
+  /* Segmented controls get a sliding thumb and a tick */
+  const thumbs = new Set();
+  function enhanceSeg(seg) {
+    if (seg.__thumb) return;
+    const th = document.createElement("span");
+    th.className = "seg-thumb"; th.setAttribute("aria-hidden", "true");
+    seg.insertBefore(th, seg.firstChild);
+    seg.__thumb = th;
+    seg.classList.add("has-thumb");
+    let first = true;
+    const place = anim => {
+      const b = seg.querySelector('button[aria-selected="true"]');
+      if (!b || !b.offsetWidth) { th.style.opacity = "0"; return; }
+      th.style.opacity = "1";
+      if (!anim) th.classList.add("no-anim");
+      th.style.width = b.offsetWidth + "px";
+      th.style.transform = "translateX(" + b.offsetLeft + "px)";
+      if (!anim) { void th.offsetWidth; th.classList.remove("no-anim"); }
+      else { lensPulse(th, "1.14 1.16"); haptic("SEGMENT_TICK"); }
+    };
+    seg.__place = place;
+    if (window.MutationObserver) new MutationObserver(() => { if (first) return; place(true); }).observe(seg, { subtree: true, attributes: true, attributeFilter: ["aria-selected"] });
+    thumbs.add(seg);
+    GL.register(th, "controls", { when: el => el.classList.contains("moving") });
+    th.classList.remove("g"); th.removeAttribute("data-preset");
+    requestAnimationFrame(() => { place(false); first = false; });
+  }
+  function placeAllThumbs() { thumbs.forEach(s => { if (!s.isConnected) thumbs.delete(s); else s.__place(false); }); }
+  if (window.MutationObserver) {
+    new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => {
+      if (n.nodeType !== 1) return;
+      if (n.classList.contains("seg")) enhanceSeg(n);
+      if (n.querySelectorAll) n.querySelectorAll(".seg").forEach(enhanceSeg);
+    }))).observe(document.body, { childList: true, subtree: true });
+  }
+
+  /* Press light and squeeze */
+  const PRESSABLE = ".btn, button.row, a.row, .opt";
+  document.addEventListener("pointerdown", e => {
+    if (!document.documentElement.hasAttribute("data-glass")) return;
+    const el = e.target.closest && e.target.closest(PRESSABLE);
+    if (!el || el.disabled) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--px", (e.clientX - r.left) + "px");
+    el.style.setProperty("--py", (e.clientY - r.top) + "px");
+    el.classList.add("pressing");
+    const t0 = Date.now();
+    const up = () => {
+      window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", up);
+      setTimeout(() => el.classList.remove("pressing"), Math.max(0, 140 - (Date.now() - t0)));
+    };
+    window.addEventListener("pointerup", up); window.addEventListener("pointercancel", up);
+  }, { passive: true });
+
+  /* ---------- Motion helpers ---------- */
+  function enter(scr, kind) {
+    if (!scr || reduceMotion || !scr.animate) return;
+    const main = scr.querySelector("main.wrap");
+    if (!main) return;
+    if (kind !== "pop") {
+      const vh = window.innerHeight;
+      let n = 0;
+      const start = kind === "push" ? 70 : kind === "next" ? 0 : 30;
+      Array.from(main.children).forEach(c => {
+        const r = c.getBoundingClientRect();
+        if (r.top > vh + 40 || r.bottom < -40) return;
+        c.animate([{ opacity: 0, transform: "translateY(" + (kind === "next" ? 22 : 16) + "px) scale(.985)" }, { opacity: 1, transform: "none" }],
+          { duration: 620, delay: start + Math.min(n, 9) * 34, easing: EASE_SPRING, fill: "backwards" });
+        n++;
+      });
+    }
+    if (kind === "pop") return;
+    countUp(main);
+    fillBars(main, kind === "push" ? 160 : 90);
+  }
+  function countUp(root) {
+    root.querySelectorAll(".big, .stat b").forEach(el => {
+      const m = /^(\d+)(%|\/(\d+))?$/.exec(el.textContent.trim());
+      if (!m || !+m[1]) return;
+      const to = +m[1], tail = m[2] || "", t0 = performance.now() + 120, dur = 900;
+      el.style.fontVariantNumeric = "tabular-nums";
+      el.textContent = "0" + tail;
+      const step = t => {
+        const k = Math.min(1, Math.max(0, (t - t0) / dur));
+        el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))) + tail;
+        if (k < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+  function fillBars(root, delay) {
+    const bars = Array.from(root.querySelectorAll(".bar i, .mini-bar i")).filter(i => parseFloat(i.style.width) > 0);
+    if (!bars.length) return;
+    const targets = bars.map(i => i.style.width);
+    bars.forEach(i => { i.style.transition = "none"; i.style.width = "0%"; });
+    void root.offsetWidth;
+    setTimeout(() => bars.forEach((i, k) => {
+      i.style.transition = ""; i.style.transitionDelay = Math.min(k, 12) * 40 + "ms"; i.style.width = targets[k];
+    }), delay);
+  }
+  function slidePanel(panel, dir) {
+    if (reduceMotion || !panel.animate || !dir) return;
+    Array.from(panel.children).slice(0, 8).forEach((c, i) => c.animate(
+      [{ opacity: 0, transform: "translateX(" + (dir * 34) + "px)" }, { opacity: 1, transform: "none" }],
+      { duration: 520, delay: i * 30, easing: EASE_SPRING, fill: "backwards" }));
+  }
 
   /* ---------- Navigation: one stack per tab ---------- */
   const app = document.getElementById("app");
@@ -2120,11 +3224,132 @@ window.COURSE_DATA = COURSE;
   tabbar.appendChild(tabIn);
   document.body.appendChild(tabbar);
 
+  /* ---------- Tab bar glass and lens ----------
+     The lens sits on the selected tab. Press and drag along the bar and it
+     lifts, magnifies the icons under it, ticks as it crosses each tab, and
+     springs onto the tab you let go on. */
+  const lens = h("span", { class: "tb-lens", "aria-hidden": "true" });
+  tabIn.insertBefore(lens, tabIn.firstChild);
+  document.body.appendChild(h("div", { class: "pocket", "aria-hidden": "true" }, h("i"), h("i"), h("i")));
+  GL.register(tabIn, "tabBar", { keep: true });
+  GL.register(lens, "lens", { keep: true, under: () => getComputedStyle(document.documentElement).getPropertyValue("--card"), when: el => el.classList.contains("lift") || el.classList.contains("moving") });
+  lens.classList.remove("g");
+  const tabButtons = () => Array.from(tabIn.querySelectorAll("button[role=tab]"));
+  let lensDrag = null;
+  function placeLens(anim, btn) {
+    const b = btn || tabIn.querySelector('button[aria-selected="true"]');
+    if (!b || !b.offsetWidth) return;
+    if (!anim) lens.classList.add("no-anim");
+    lens.style.width = b.offsetWidth + "px";
+    lens.style.transform = "translateX(" + b.offsetLeft + "px)";
+    if (!anim) { void lens.offsetWidth; lens.classList.remove("no-anim"); }
+  }
+  function nearestTab(x) {
+    let best = null, bd = Infinity;
+    tabButtons().forEach(b => { const r = b.getBoundingClientRect(); const d = Math.abs(x - (r.left + r.width / 2)); if (d < bd) { bd = d; best = b; } });
+    return best;
+  }
+  if (window.MutationObserver) {
+    new MutationObserver(ms => {
+      ms.forEach(m => {
+        const b = m.target;
+        if (b.getAttribute("aria-selected") !== "true" || reduceMotion) return;
+        const ic = b.querySelector("span");
+        if (ic && ic.animate) ic.animate([{ transform: "scale(1)" }, { transform: "scale(.78)", offset: 0.25 }, { transform: "scale(1.14)", offset: 0.6 }, { transform: "scale(1)" }], { duration: 560, easing: "ease-out" });
+      });
+      if (lensDrag) return;
+      placeLens(true); lensPulse(lens);
+    }).observe(tabIn, { subtree: true, attributes: true, attributeFilter: ["aria-selected"] });
+  }
+  tabIn.addEventListener("pointerdown", e => {
+    if (!document.documentElement.hasAttribute("data-glass") || e.button > 0) return;
+    const b = e.target.closest("button[role=tab]");
+    if (!b) return;
+    lensDrag = { x0: e.clientX, moved: false, pr: tabIn.getBoundingClientRect(), w: b.offsetWidth, over: b };
+    if (!reduceMotion) { lens.classList.add("lift"); GL.apply(lens); }
+    const move = ev => {
+      if (!lensDrag) return;
+      if (!lensDrag.moved && Math.abs(ev.clientX - lensDrag.x0) > 6) { lensDrag.moved = true; haptic("DRAG_START"); }
+      if (!lensDrag.moved) return;
+      lens.classList.add("drag");
+      const x = Math.max(4, Math.min(lensDrag.pr.width - 4 - lensDrag.w, ev.clientX - lensDrag.pr.left - lensDrag.w / 2));
+      lens.style.transform = "translateX(" + x + "px)";
+      const over = nearestTab(ev.clientX);
+      if (over && over !== lensDrag.over) { lensDrag.over = over; haptic("SEGMENT_FREQUENT_TICK"); }
+    };
+    const end = ev => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", end);
+      window.removeEventListener("pointercancel", end);
+      const d = lensDrag; lensDrag = null;
+      lens.classList.remove("lift", "drag");
+      GL.apply(lens);
+      if (!d) return;
+      if (ev.type === "pointerup" && d.moved) {
+        const t = nearestTab(ev.clientX);
+        const stop = ce => { ce.stopPropagation(); ce.preventDefault(); };
+        tabIn.addEventListener("click", stop, { capture: true, once: true });
+        setTimeout(() => tabIn.removeEventListener("click", stop, { capture: true }), 400);
+        if (t) {
+          const id = t.id.slice(4);
+          if (id !== tab) switchTab(id); else { placeLens(true); lensPulse(lens); }
+        }
+      } else if (ev.type === "pointercancel") placeLens(true);
+      else lensPulse(lens);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", end);
+    window.addEventListener("pointercancel", end);
+  });
+  window.addEventListener("resize", () => { placeLens(false); placeAllThumbs(); });
+
+  /* ---------- Large title -> compact title; tab bar shrinks on scroll ---------- */
+  let lastScrollY = window.scrollY, scrollAcc = 0, scrollRaf = 0, tbMin = false;
+  function setMin(v) {
+    if (v === tbMin) return;
+    tbMin = v;
+    document.documentElement.classList.toggle("tb-min", v);
+    if (!document.documentElement.hasAttribute("data-glass")) return;
+    const until = performance.now() + 520;
+    const track = () => { placeLens(false); if (performance.now() < until) requestAnimationFrame(track); };
+    requestAnimationFrame(track);
+  }
+  function onScroll(force) {
+    const scr = app.firstElementChild;
+    if (!scr) return;
+    const large = scr.querySelector(".large");
+    if (large) {
+      const nav = scr.querySelector(".nav"), mini = scr.querySelector(".mini-head");
+      const barEl = nav || mini;
+      const past = barEl ? large.getBoundingClientRect().bottom < barEl.getBoundingClientRect().bottom + 4 : false;
+      if (nav) nav.classList.toggle("title-hidden", !past);
+      if (mini) {
+        if (past && !mini.firstChild.textContent) mini.firstChild.textContent = large.textContent;
+        mini.classList.toggle("on", past);
+      }
+    }
+    const y = window.scrollY, dy = y - lastScrollY;
+    lastScrollY = y;
+    if (force === true) { scrollAcc = 0; return; }
+    if (y < 60) { scrollAcc = 0; setMin(false); return; }
+    scrollAcc = (dy > 0) === (scrollAcc > 0) ? scrollAcc + dy : dy;
+    if (scrollAcc > 28) setMin(true);
+    else if (scrollAcc < -18) setMin(false);
+  }
+  window.addEventListener("scroll", () => {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(() => { scrollRaf = 0; onScroll(); });
+  }, { passive: true });
+
   function switchTab(id) {
+    const from = TABS.findIndex(t => t[0] === tab), to = TABS.findIndex(t => t[0] === id);
+    const first = !app.firstElementChild;
+    if (!first && id !== tab) haptic("SEGMENT_TICK");
     tab = id;
-    tabIn.querySelectorAll("button").forEach(b => b.setAttribute("aria-selected", String(b.id === "tab-" + id)));
+    tabIn.querySelectorAll("button[role=tab]").forEach(b => b.setAttribute("aria-selected", String(b.id === "tab-" + id)));
     stack = [{ render: ROOTS[id], title: TABS.find(t => t[0] === id)[1] }];
-    show("fade");
+    setMin(false);
+    show(first ? "tabr" : to >= from ? "tabr" : "tabl");
   }
   function push(render, title) { stack.push({ render: render, title: title }); show("push"); }
   function pop() { if (stack.length > 1) { stack.pop(); show("pop"); } }
@@ -2143,8 +3368,15 @@ window.COURSE_DATA = COURSE;
     const body = h("main", { class: "wrap" });
     top.render(body);
     scr.appendChild(body);
+    if (body.querySelector(".large")) {
+      const nav = scr.querySelector(".nav");
+      if (nav) nav.classList.add("title-hidden");
+      else scr.insertBefore(h("div", { class: "mini-head", "aria-hidden": "true" }, h("div", { class: "wrap" })), scr.firstChild);
+    }
     app.replaceChildren(scr);
     if (anim) window.scrollTo(0, 0);
+    onScroll(true);
+    if (anim) enter(scr, anim);
   }
   document.addEventListener("fullscreenchange", () => { if (tab === "settings" && stack.length === 1) refresh(); });
   document.addEventListener("keydown", e => {
@@ -2202,7 +3434,7 @@ window.COURSE_DATA = COURSE;
     header(body, null, course.title, course.subtitle);
     const all = index;
     const p = pct(all);
-    body.appendChild(h("div", { class: "summary" },
+    body.appendChild(h("div", { class: "summary hero", style: "--hero:var(--s-learn)" },
       h("div", { class: "row2" },
         h("div", null, h("div", { class: "eyebrow", text: "Overall mastery" }), h("div", { class: "big", text: p + "%" })),
         h("div", { class: "sub", style: "margin:0", text: all.filter(x => isMastered(x.key)).length + " of " + all.length + " questions answered right" })),
@@ -2219,7 +3451,7 @@ window.COURSE_DATA = COURSE;
     const items = itemsFor(x => x.m === m);
     header(body, m.exam || ("Module " + (mi + 1)), m.title, null);
     const p = pct(items);
-    body.appendChild(h("div", { class: "summary" },
+    body.appendChild(h("div", { class: "summary hero", style: "--hero:" + moduleColor(m) },
       h("div", { class: "row2" },
         h("div", null, h("div", { class: "eyebrow", text: "Module mastery" }), h("div", { class: "big", text: p + "%" })),
         h("div", { class: "sub", style: "margin:0", text: m.concepts.length + " concepts · " + items.length + " questions" })),
@@ -2247,7 +3479,11 @@ window.COURSE_DATA = COURSE;
     const seg = h("div", { class: "seg", role: "tablist", "aria-label": "Study mode" });
     const panel = h("div");
     const modes = [["learn", "Learn"], ["cards", "Flashcards"], ["quiz", "Quiz"]];
+    let shown = null;
     function setMode(md) {
+      const order = ["learn", "cards", "quiz"];
+      const dir = shown ? Math.sign(order.indexOf(md) - order.indexOf(shown)) : 0;
+      shown = md;
       mode = md;
       seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.m === md)));
       panel.replaceChildren();
@@ -2255,6 +3491,7 @@ window.COURSE_DATA = COURSE;
       if (md === "learn") learnPanel(panel, m, c);
       else if (md === "cards") cardsPanel(panel, m, c);
       else quizPanel(panel, m, c);
+      if (dir) { slidePanel(panel, dir); fillBars(panel, 120); countUp(panel); }
       stack[stack.length - 1].render = b => renderConcept(b, m, mi, c, ci, md);
     }
     modes.forEach(([id, label]) => { const b = h("button", { role: "tab", id: "mode-" + id, onclick: () => setMode(id) }, label); b.dataset.m = id; seg.appendChild(b); });
@@ -2288,7 +3525,7 @@ window.COURSE_DATA = COURSE;
     const inner = h("div", { class: "flip-inner" },
       h("div", { class: "face front" }, h("div", { class: "lbl", text: "Question" }), front),
       h("div", { class: "face back" }, h("div", { class: "lbl", text: "Answer" }), back));
-    const flip = h("div", { class: "flip", role: "button", tabindex: "0", "aria-label": "Flip card", onclick: () => { on = !on; draw(); } }, inner);
+    const flip = h("div", { class: "flip", role: "button", tabindex: "0", "aria-label": "Flip card", onclick: () => { on = !on; haptic("VIRTUAL_KEY"); draw(); } }, inner);
     const counter = h("div", { class: "counter" });
     const prev = h("button", { class: "btn plain", onclick: () => go(-1) }, "Previous");
     const next = h("button", { class: "btn", onclick: () => go(1) }, "Next");
@@ -2317,7 +3554,7 @@ window.COURSE_DATA = COURSE;
     items.forEach(x => { types[x.q.type] = (types[x.q.type] || 0) + 1; });
     const names = { mc: "multiple choice", tf: "true or false", match: "matching", order: "ordering", calc: "calculation" };
     const done = items.filter(x => isMastered(x.key)).length;
-    p.appendChild(h("div", { class: "summary" },
+    p.appendChild(h("div", { class: "summary hero", style: "--hero:" + moduleColor(m) },
       h("div", { class: "row2" },
         h("div", null, h("div", { class: "eyebrow", text: "Concept mastery" }), h("div", { class: "big", text: pct(items) + "%" })),
         h("div", { class: "sub", style: "margin:0", text: done + " of " + items.length + " right" })),
@@ -2332,26 +3569,27 @@ window.COURSE_DATA = COURSE;
     const weak = index.filter(x => isWeak(x.key));
     const unseen = index.filter(x => !stat(x.key));
     const list = h("div", { class: "group", style: "margin-top:16px" });
-    list.appendChild(row({ title: "Weak spots", desc: weak.length ? "Questions you missed or get wrong often" : "Nothing yet. Missed questions will show up here.", value: String(weak.length), onclick: weak.length ? () => startQuiz(shuffle(weak).slice(0, 15), "Weak spots", null) : null, cls: weak.length ? "" : "" }));
-    list.appendChild(row({ title: "Quick 10", desc: "Ten random questions from every module", onclick: () => startQuiz(shuffle(index).slice(0, 10), "Quick 10", null) }));
-    list.appendChild(row({ title: "New questions", desc: "Only questions you have not tried", value: String(unseen.length), onclick: unseen.length ? () => startQuiz(shuffle(unseen).slice(0, 20), "New questions", null) : null }));
+    list.appendChild(row({ tile: iconTile("#B91C1C", "weak"), title: "Weak spots", desc: weak.length ? "Questions you missed or get wrong often" : "Nothing yet. Missed questions will show up here.", value: String(weak.length), onclick: weak.length ? () => startQuiz(shuffle(weak).slice(0, 15), "Weak spots", null) : null, cls: weak.length ? "" : "" }));
+    list.appendChild(row({ tile: iconTile("#C2410C", "bolt"), title: "Quick 10", desc: "Ten random questions from every module", onclick: () => startQuiz(shuffle(index).slice(0, 10), "Quick 10", null) }));
+    list.appendChild(row({ tile: iconTile("#0F766E", "fresh"), title: "New questions", desc: "Only questions you have not tried", value: String(unseen.length), onclick: unseen.length ? () => startQuiz(shuffle(unseen).slice(0, 20), "New questions", null) : null }));
     body.appendChild(list);
     const groups = [];
     course.modules.forEach(m => { const g = groupName(m); if (groups.indexOf(g) < 0) groups.push(g); });
     if (groups.length > 0) {
       body.appendChild(h("div", { class: "group-label", text: "Exam style" }));
       const g2 = h("div", { class: "group" });
-      groups.forEach(g => {
+      const gcol = ["#0A62CC", "#6D28D9", "#0F766E", "#A16207"];
+      groups.forEach((g, gi) => {
         const its = index.filter(x => groupName(x.m) === g);
-        g2.appendChild(row({ title: g + " mixed", desc: Math.min(30, its.length) + " random questions from " + g, onclick: () => startQuiz(shuffle(its).slice(0, 30), g + " mixed", null) }));
+        g2.appendChild(row({ tile: iconTile(gcol[gi % gcol.length], "exam"), title: g + " mixed", desc: Math.min(30, its.length) + " random questions from " + g, onclick: () => startQuiz(shuffle(its).slice(0, 30), g + " mixed", null) }));
       });
       body.appendChild(g2);
     }
     body.appendChild(h("div", { class: "group-label", text: "By question type" }));
     const g3 = h("div", { class: "group" });
-    [["calc", "Calculations"], ["order", "Put in order"], ["match", "Matching"], ["tf", "True or false"]].forEach(([t, label]) => {
+    [["calc", "Calculations", "#A16207"], ["order", "Put in order", "#475569"], ["match", "Matching", "#BE185D"], ["tf", "True or false", "#15803D"]].forEach(([t, label, col]) => {
       const its = index.filter(x => x.q.type === t);
-      if (its.length) g3.appendChild(row({ title: label, value: String(its.length), onclick: () => startQuiz(shuffle(its).slice(0, 15), label, null) }));
+      if (its.length) g3.appendChild(row({ tile: iconTile(col, t), title: label, value: String(its.length), onclick: () => startQuiz(shuffle(its).slice(0, 15), label, null) }));
     });
     body.appendChild(g3);
   }
@@ -2363,7 +3601,7 @@ window.COURSE_DATA = COURSE;
     let a = 0, c = 0;
     tried.forEach(x => { const s = stat(x.key); a += s.a; c += s.c; });
     const p = pct(index);
-    body.appendChild(h("div", { class: "summary" },
+    body.appendChild(h("div", { class: "summary hero", style: "--hero:var(--s-progress)" },
       h("div", { class: "row2" }, h("div", null, h("div", { class: "eyebrow", text: "Overall" }), h("div", { class: "big", text: p + "%" }))),
       bar(p),
       h("div", { class: "stats" },
@@ -2384,6 +3622,8 @@ window.COURSE_DATA = COURSE;
   }
 
   /* ---------- SETTINGS tab ---------- */
+  /* The Android APK adds "APStudyApp/" to its user agent */
+  const IN_APK = /APStudyApp\//.test(navigator.userAgent);
   const inFrame = (function () { try { return window.self !== window.top; } catch (e) { return true; } })();
   function renderSettings(body) {
     header(body, null, "Settings", null);
@@ -2393,16 +3633,75 @@ window.COURSE_DATA = COURSE;
       seg.appendChild(h("button", { role: "tab", id: "theme-" + id, "aria-selected": String(theme === id), onclick: () => { theme = id; store.set("aps.theme", id); applyTheme(id); refresh(); } }, label));
     });
     body.appendChild(seg);
+
+    /* Style, rendering tier, transparency, haptics */
+    const segOf = (label, opts, cur, pick) => {
+      const sg = h("div", { class: "seg", role: "tablist", "aria-label": label, style: "margin-top:0" });
+      opts.forEach(([id, text, off]) => sg.appendChild(h("button", {
+        role: "tab", id: "opt-" + label.toLowerCase() + "-" + id, "data-v": id, "aria-selected": String(cur === id), disabled: !!off,
+        onclick: () => { sg.querySelectorAll("button").forEach(b => b.setAttribute("aria-selected", String(b.getAttribute("data-v") === id))); pick(id); }
+      }, text)));
+      return sg;
+    };
+    const switchRow = (title, desc, on, flip, id) => {
+      const sw = h("button", { class: "switch", role: "switch", id: id, "aria-checked": String(on), "aria-label": title,
+        onclick: () => { const v = sw.getAttribute("aria-checked") !== "true"; sw.setAttribute("aria-checked", String(v)); haptic(v ? "TOGGLE_ON" : "TOGGLE_OFF"); flip(v); } });
+      return row({ title: title, desc: desc, extra: null, value: undefined, tile: null, cls: "switch-row" }).appendChild(sw).parentNode;
+    };
+    renderLook(body, segOf, switchRow);
+    body.appendChild(h("div", { class: "group-label", text: "Style" }));
+    body.appendChild(segOf("Style", [["glass", "Glass"], ["classic", "Classic"]], glassStyle, id => {
+      glassStyle = id; store.set("aps.style", id); applyGlass();
+      setTimeout(refresh, reduceMotion ? 0 : 380);
+    }));
+    if (glassStyle === "glass") {
+      const statusText = () => { const m = glassMode(); return "Now: " + ({ full: "Full", low: "Low", off: "Solid" }[m] || "Classic") + " (" + lastReason + ")."; };
+      body.appendChild(h("div", { class: "group-label", text: "Rendering" }));
+      const note = h("p", { class: "note", id: "glass-status", style: "margin:7px 16px 0;font-size:13px;color:var(--fg2)" });
+      const setNote = () => {
+        note.textContent = (canRefract
+          ? "Full bends light at the glass edges and splits colour slightly. Low keeps the frosted blur only. Auto picks for this phone and lowers it on battery saver, heat or slow frames. "
+          : "Full needs Chrome or Android System WebView, so this browser uses Low. ") + statusText();
+      };
+      body.appendChild(segOf("Rendering", [["auto", "Auto"], ["full", "Full", !canRefract], ["low", "Low"]], glassRender, id => {
+        glassRender = id; store.set("aps.render", id);
+        if (id !== "auto") { slowLowered = false; store.del("aps.slowLowered"); }
+        applyGlass(); setNote();
+      }));
+      setNote();
+      body.appendChild(note);
+      body.appendChild(h("div", { class: "group", style: "margin-top:16px" },
+        switchRow("Reduce transparency", "Solid bars and menus instead of glass", reduceT, v => { reduceT = v; store.set("aps.reduceT", v); applyGlass(); setNote(); }, "sw-reduce"),
+        switchRow("Haptics", "Small vibrations on taps, ticks and answers", hapticsOn, v => { hapticsOn = v; store.set("aps.haptics", v); }, "sw-haptics")));
+    } else {
+      body.appendChild(h("div", { class: "group", style: "margin-top:16px" },
+        switchRow("Haptics", "Small vibrations on taps, ticks and answers", hapticsOn, v => { hapticsOn = v; store.set("aps.haptics", v); }, "sw-haptics")));
+    }
+
+    body.appendChild(h("div", { class: "group-label", text: "Motion" }));
+    const sysReduce = !!(motionMQ && motionMQ.matches);
+    const motionNote = h("p", { class: "note", id: "motion-status", style: "margin:7px 16px 0;font-size:13px;color:var(--fg2)" });
+    const setMotionNote = () => {
+      motionNote.textContent = (motionPref === "on" ? "Animations are on. " : motionPref === "off" ? "Animations are off. " : "")
+        + (sysReduce
+          ? "Your phone is set to reduce motion (Remove animations or animation scale off). System follows that and turns animations off."
+          : "System follows your phone's animation setting.");
+    };
+    body.appendChild(segOf("Motion", [["system", "System"], ["on", "On"], ["off", "Off"]], motionPref, id => {
+      motionPref = id; store.set("aps.motion", id); applyMotion(); setMotionNote(); tiltWatch(!reduceMotion && (glassApplied === "full" || glassApplied === "low"));
+    }));
+    setMotionNote();
+    body.appendChild(motionNote);
+
     const appRows = [];
-    if (fsSupported && !isInstalledApp()) appRows.push(row({ cls: "action", title: isFull() ? "Exit full screen" : "Enter full screen", noChev: true, onclick: () => { if (isFull()) exitFull(); else enterFull(); } }));
-    if (installEvent) appRows.push(row({ cls: "action", title: "Install as an app", desc: "Adds it to your home screen or desktop. Works offline.", noChev: true, onclick: installApp }));
+    if (fsSupported && !isInstalledApp()) appRows.push(row({ cls: "action", tile: iconTile("#475569", "expand"), title: isFull() ? "Exit full screen" : "Enter full screen", desc: isMobile ? (store.get("aps.fsAuto") === false ? "Full screen by default is off" : "Opens full screen by default on this phone") : null, noChev: true, onclick: () => { if (isFull()) { store.set("aps.fsAuto", false); exitFull(); } else { store.set("aps.fsAuto", true); enterFull(); } } }));
+    if (installEvent) appRows.push(row({ cls: "action", tile: iconTile("#0A62CC", "download"), title: "Install as an app", desc: "Adds it to your home screen or desktop. Works offline.", noChev: true, onclick: installApp }));
     else if (isIOS && !isInstalledApp() && location.protocol.indexOf("http") === 0) appRows.push(row({ title: "Install on iPhone or iPad", desc: "In Safari, tap Share, then Add to Home Screen." }));
     if (appRows.length) body.appendChild(h("div", { class: "group", style: "margin-top:12px" }, appRows));
 
-    body.appendChild(h("div", { class: "group-label", text: "Course data" }));
-    const status = h("div", { class: "group" },
-      row({ title: course.title, desc: (usingCustom ? "Imported course" : "Built-in course") + " · " + course.modules.length + " modules · " + index.length + " questions" }));
-    body.appendChild(status);
+    body.appendChild(h("div", { class: "group-label", text: "Course library" }));
+    body.appendChild(renderLibrary());
+    body.appendChild(h("p", { class: "note", style: "margin:7px 16px 0;font-size:13px;color:var(--fg2)", text: "Tap a course to switch to it. Each course keeps its own progress. Every course you load below is added here." }));
     const box = h("textarea", { id: "course-json", spellcheck: "false", "aria-label": "Course JSON", placeholder: "Paste a course as JSON here, then tap Load course." });
     const errBox = h("div", { "aria-live": "polite" });
     const file = h("input", { type: "file", accept: ".json,application/json", id: "course-file", hidden: true });
@@ -2413,21 +3712,29 @@ window.COURSE_DATA = COURSE;
       rd.onerror = () => toast("Could not read that file.");
       rd.readAsText(f);
     });
-    body.appendChild(h("div", { class: "group-label", text: "Import a course" }));
+    body.appendChild(h("div", { class: "group-label", text: "Add your own course" }));
+    body.appendChild(h("div", { class: "howto", id: "import-howto" },
+      h("h3", { text: "Turn your own notes into a course" }),
+      h("ol", null,
+        h("li", { text: "Tap Copy AI prompt below. It copies a ready prompt with the course template inside it." }),
+        h("li", { text: "Open any AI chat you use, paste the prompt, and attach your PDF or notes." }),
+        h("li", { text: "Copy the JSON it sends back. Paste it in the box below, or save it as a .json file and tap Open JSON file." }),
+        h("li", { text: "Tap Load course. It is added to your library and you can switch back any time." })),
+      h("p", { text: "If the app lists problems, paste them back into the same AI chat and ask it to fix them. A long PDF works better split into a few smaller courses." })));
     body.appendChild(box);
     body.appendChild(errBox);
     body.appendChild(h("div", { class: "btns" },
       h("button", { class: "btn", id: "load-course", onclick: () => importCourse(box.value, errBox) }, "Load course"),
       h("div", { class: "btns two", style: "margin-top:0" },
-        h("button", { class: "btn secondary", onclick: () => { box.value = JSON.stringify(TEMPLATE, null, 2); errBox.replaceChildren(); toast("Starter template is in the box"); } }, "Starter template"),
+        h("button", { class: "btn secondary", id: "copy-prompt", onclick: () => copyPrompt(box) }, "Copy AI prompt"),
         h("button", { class: "btn secondary", onclick: () => file.click() }, "Open JSON file")),
+      h("button", { class: "btn plain", onclick: () => { box.value = JSON.stringify(TEMPLATE, null, 2); errBox.replaceChildren(); toast("Starter template is in the box"); } }, "Show the template only"),
       file));
 
     body.appendChild(h("div", { class: "group-label", text: "Export" }));
     const ex = h("div", { class: "group" });
-    ex.appendChild(row({ cls: "action", title: "Copy current course as JSON", noChev: true, onclick: () => copyCourse(box) }));
-    if (!inFrame) ex.appendChild(row({ cls: "action", title: "Save current course as a file", noChev: true, onclick: saveCourseFile }));
-    if (usingCustom) ex.appendChild(row({ cls: "action", title: "Switch back to the built-in course", noChev: true, onclick: () => { store.del("aps.customCourse"); course = BUILTIN; usingCustom = false; buildIndex(); toast("Built-in course restored"); refresh(); } }));
+    ex.appendChild(row({ cls: "action", tile: iconTile("#0F766E", "copy"), title: "Copy current course as JSON", noChev: true, onclick: () => copyCourse(box) }));
+    if (!inFrame && !IN_APK) ex.appendChild(row({ cls: "action", tile: iconTile("#6D28D9", "save"), title: "Save current course as a file", noChev: true, onclick: saveCourseFile }));
     body.appendChild(ex);
 
     body.appendChild(h("div", { class: "group-label", text: "Progress" }));
@@ -2437,7 +3744,7 @@ window.COURSE_DATA = COURSE;
       h("div", { class: "btns two", style: "margin-top:0" },
         h("button", { class: "btn plain", onclick: () => { confirmBox.hidden = true; } }, "Cancel"),
         h("button", { class: "btn", id: "confirm-reset", style: "background:var(--bad);color:#FFFFFF", onclick: () => { progress = { q: {} }; saveProgress(); toast("Progress reset"); refresh(); } }, "Reset")));
-    pg.appendChild(row({ cls: "destructive", title: "Reset progress", noChev: true, onclick: () => { confirmBox.hidden = false; } }));
+    pg.appendChild(row({ cls: "destructive", tile: iconTile("#B91C1C", "reset"), title: "Reset progress", noChev: true, onclick: () => { confirmBox.hidden = false; } }));
     pg.appendChild(confirmBox);
     body.appendChild(pg);
     body.appendChild(h("p", { class: "note", style: "margin:7px 16px 0;font-size:13px;color:var(--fg2)", text: store.ok ? "Progress is saved in this browser only." : "This browser is blocking storage. Progress works now but will be lost when you close the page." }));
@@ -2459,11 +3766,102 @@ window.COURSE_DATA = COURSE;
     try { data = JSON.parse(text); } catch (e) { showErrs("This is not valid JSON.", [String(e.message || e)]); return; }
     const errs = validateCourse(data);
     if (errs.length) { showErrs("The course has " + errs.length + (errs.length >= 40 ? "+" : "") + " problem" + (errs.length === 1 ? "" : "s") + ". Nothing was changed.", errs); return; }
-    course = data; usingCustom = true;
-    store.set("aps.customCourse", data);
+    /* Same title as a course already in the library = an updated version of it */
+    const same = library.find(x => x.title === data.title);
+    const id = same ? same.id : newLibId();
+    memLib[id] = data;
+    const saved = store.trySet("aps.lib." + id, data);
+    if (same) same.added = Date.now(); else library.push({ id: id, title: data.title, added: Date.now() });
+    saveLibList();
+    useCourse(id);
     buildIndex();
-    toast("Course loaded: " + data.title);
+    errBox.replaceChildren();
+    toast(!saved ? "Loaded, but this browser could not store it. It will be gone when you close the app."
+      : (same ? "Updated in your library: " : "Added to your library: ") + data.title);
     refresh();
+  }
+  function libInfo(c) {
+    let q = 0;
+    c.modules.forEach(m => m.concepts.forEach(k => { q += (k.questions || []).length; }));
+    return c.modules.length + (c.modules.length === 1 ? " module · " : " modules · ") + q + (q === 1 ? " question" : " questions");
+  }
+  function switchCourse(id) {
+    if (id === activeId) return;
+    useCourse(id);
+    buildIndex();
+    haptic("CONFIRM");
+    toast("Now studying: " + course.title);
+    refresh();
+  }
+  function removeCourse(entry) {
+    dialog({
+      title: "Remove this course?",
+      text: "\"" + entry.title + "\" and its progress will be removed from this app. The built-in course is not affected.",
+      yes: "Remove", no: "Cancel", yesId: "lib-remove-yes",
+      onYes: () => {
+        library = library.filter(x => x.id !== entry.id);
+        saveLibList();
+        delete memLib[entry.id];
+        store.del("aps.lib." + entry.id);
+        store.del("aps.progress.lib." + entry.id);
+        if (activeId === entry.id) { useCourse("builtin"); buildIndex(); }
+        toast("Course removed");
+        refresh();
+      }
+    });
+  }
+  function renderLibrary() {
+    const g = h("div", { class: "group", id: "course-library" });
+    const item = (id, c, desc, tileEl, canDelete, entry) => {
+      const on = id === activeId;
+      const r = row({ tile: tileEl, title: c.title, desc: desc, value: on ? "In use" : undefined, noChev: true,
+        onclick: on ? null : () => switchCourse(id) });
+      const v = r.querySelector(".v"); if (v) v.classList.add("on");
+      r.setAttribute("aria-label", c.title + (on ? ", in use" : ", tap to switch"));
+      if (!on) r.appendChild(h("div", { class: "chev" }, icon("chev")));
+      const wrap = h("div", { class: "lib-item", "data-id": id }, r);
+      if (canDelete) wrap.appendChild(h("button", { class: "lib-del", "aria-label": "Remove " + c.title, onclick: () => removeCourse(entry) }, icon("trash")));
+      return wrap;
+    };
+    g.appendChild(item("builtin", BUILTIN, "Built in · " + libInfo(BUILTIN), iconTile("#0A62CC", "book"), false));
+    library.forEach(e => {
+      const c = libGet(e.id);
+      if (!c) return;
+      let when = "";
+      try { when = new Date(e.added).toLocaleDateString(undefined, { day: "numeric", month: "short" }); } catch (x) {}
+      g.appendChild(item(e.id, c, "Uploaded" + (when ? " " + when : "") + " · " + libInfo(c), iconTile("#6D28D9", "upload"), true, e));
+    });
+    return g;
+  }
+  function aiPrompt() {
+    return [
+      "I am attaching a PDF (or notes) that I want to study. Turn it into a study course for the A+ Study Lab app.",
+      "",
+      "Rules:",
+      "1. Reply with ONLY valid JSON. No text before or after it, and no code fences.",
+      "2. Use exactly the same structure and field names as the template below.",
+      "3. Use only facts from my PDF. Do not make anything up.",
+      "4. Split the content into modules, and each module into concepts. Aim for 3 to 6 concepts per module.",
+      "5. Every id must be unique, lowercase, with dashes instead of spaces.",
+      "6. For each concept, write the learn notes in short plain sentences, 3 to 6 flashcards, and 4 to 8 questions.",
+      "7. Mix the question types: mc, tf, match, order, calc. Only use calc when there is a real number to work out.",
+      "8. For mc, answer is the option number starting at 0. For a choose-two question, answer is a list like [0, 2].",
+      "9. For tf, answer is true or false with no quotes.",
+      "10. Every question needs an explain field saying why the answer is right.",
+      "11. color must be a 6-digit hex colour like #0F766E. Use a different colour for each module.",
+      "12. If you do not need a table in a concept, set table to null.",
+      "",
+      "Template:",
+      JSON.stringify(TEMPLATE, null, 2)
+    ].join("\n");
+  }
+  function copyPrompt(box) {
+    const txt = aiPrompt();
+    const fallback = () => { box.value = txt; box.focus(); box.select(); toast("Clipboard blocked. The prompt is selected in the box, copy it from there."); };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(() => toast("Prompt copied. Paste it into your AI chat with your PDF."), fallback);
+      else fallback();
+    } catch (e) { fallback(); }
   }
   function copyCourse(box) {
     const txt = JSON.stringify(course, null, 2);
@@ -2510,6 +3908,7 @@ window.COURSE_DATA = COURSE;
     let done = false;
     function finish(correct, answerText, extraNode) {
       if (done) return; done = true;
+      haptic(correct ? "CONFIRM" : "REJECT");
       record(ref.key, correct);
       if (!item.retry && !(ref.key in round.first)) round.first[ref.key] = correct;
       if (!correct && !item.retry) round.queue.push({ ref: ref, retry: true });
@@ -2524,9 +3923,9 @@ window.COURSE_DATA = COURSE;
       fb.appendChild(h("div", { class: "kbd", text: "Press Enter to continue" }));
       keyHandler = e => { if (e.key === "Enter") { e.preventDefault(); next(); } else if (e.key === "Escape") pop(); };
       try { cont.focus({ preventScroll: true }); } catch (e) {}
-      fb.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "nearest" });
+      fb.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
     }
-    function next() { round.pos += 1; stack[stack.length - 1].render = b => renderQuiz(b, round); show(null); window.scrollTo(0, 0); }
+    function next() { round.pos += 1; stack[stack.length - 1].render = b => renderQuiz(b, round); show("next"); }
     void answeredFirst;
     if (q.type === "mc") mcUI(area, q, finish);
     else if (q.type === "tf") tfUI(area, q, finish);
@@ -2688,8 +4087,12 @@ window.COURSE_DATA = COURSE;
     const p = total ? Math.round(100 * right / total) : 0;
     const missed = round.queue.filter(x => !x.retry && round.first[x.ref.key] === false).map(x => x.ref);
     header(body, round.title, "Round complete", null);
-    body.appendChild(h("div", { class: "result-num", id: "result-score", text: right + "/" + total }));
-    body.appendChild(h("p", { class: "sub", text: p + "% right on the first try." + (missed.length ? " Missed questions are now in Weak spots." : " No misses this round.") }));
+    const rcol = p >= 80 ? "#1D7F38" : p >= 50 ? "#A16207" : "#B91C1C";
+    body.appendChild(h("div", { class: "summary hero result", style: "--hero:" + rcol },
+      h("div", { class: "eyebrow", text: "First try score" }),
+      h("div", { class: "big", id: "result-score", text: right + "/" + total }),
+      bar(p),
+      h("p", { class: "sub", style: "margin:0", text: p + "% right on the first try." + (missed.length ? " Missed questions are now in Weak spots." : " No misses this round.") })));
     if (missed.length) {
       body.appendChild(h("div", { class: "group-label", text: "Missed on first try" }));
       body.appendChild(h("div", { class: "group missed" }, missed.map(r => row({ title: r.q.q, desc: r.m.title + " · " + r.c.title }))));
@@ -2726,30 +4129,492 @@ window.COURSE_DATA = COURSE;
     try { const r = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen(); if (r && r.catch) r.catch(() => {}); } catch (e) {}
   }
   function isInstalledApp() {
-    try { return matchMedia("(display-mode: standalone)").matches || matchMedia("(display-mode: fullscreen)").matches || window.navigator.standalone === true; } catch (e) { return false; }
+    if (IN_APK) return true;
+    /* display-mode: fullscreen also matches while a page is simply in full screen, so ignore it then */
+    try { return matchMedia("(display-mode: standalone)").matches || (matchMedia("(display-mode: fullscreen)").matches && !isFull()) || window.navigator.standalone === true; } catch (e) { return false; }
   }
+  const isMobile = (function () {
+    try { if (navigator.userAgentData && typeof navigator.userAgentData.mobile === "boolean" && navigator.userAgentData.mobile) return true; } catch (e) {}
+    try { return /Android|iPhone|iPod|Mobile/i.test(navigator.userAgent) && matchMedia("(pointer: coarse)").matches; } catch (e) { return false; }
+  })();
+  function autoFullOn() { return isMobile && fsSupported && !isInstalledApp() && store.get("aps.fsAuto") !== false; }
+  function enterFullQuiet() {
+    try {
+      const r = fsEl.requestFullscreen ? fsEl.requestFullscreen({ navigationUI: "hide" }) : fsEl.webkitRequestFullscreen();
+      if (r && r.catch) r.catch(() => {});
+    } catch (e) {}
+  }
+  /* Phones: full screen by default. Browsers only allow it inside a tap, so
+     the first tap anywhere enters it, and the next tap after leaving it
+     enters it again. Settings > Exit full screen turns this off. */
+  document.addEventListener("click", () => { if (autoFullOn() && !isFull()) enterFullQuiet(); }, true);
   function fullscreenPrompt() {
+    if (isMobile) return;
     if (!fsSupported || isFull() || isInstalledApp()) return;
-    const prevKey = keyHandler;
-    const close = () => { sheet.remove(); keyHandler = prevKey; };
-    const yes = h("button", { class: "btn", id: "fs-yes", onclick: () => { close(); enterFull(); } }, "Full screen");
-    const no = h("button", { class: "btn plain", id: "fs-no", onclick: close }, "Not now");
-    const sheet = h("div", { class: "fs-scrim", role: "dialog", "aria-modal": "true", "aria-labelledby": "fs-title" },
-      h("div", { class: "fs-card" },
-        h("h2", { id: "fs-title", text: "Use full screen?" }),
-        h("p", { text: "Full screen hides the browser bars so the lessons and quizzes fill the page. Press Esc to leave it." }),
-        h("div", { class: "btns two", style: "margin-top:0" }, no, yes)));
-    document.body.appendChild(sheet);
-    keyHandler = e => { if (e.key === "Enter") { e.preventDefault(); close(); enterFull(); } else if (e.key === "Escape") { e.preventDefault(); close(); } };
-    try { yes.focus({ preventScroll: true }); } catch (e) {}
+    dialog({ title: "Use full screen?", text: "Full screen hides the browser bars so the lessons and quizzes fill the page. Press Esc to leave it.",
+      yes: "Full screen", no: "Not now", yesId: "fs-yes", noId: "fs-no", onYes: enterFull });
   }
+
+  /* =====================================================================
+     BACKGROUND PHOTO AND COLOUR THEME
+     The photo is shrunk on the phone (longest side 1920 px, JPEG) so it
+     fits in storage, then drawn behind the app with background-size:
+     cover, so it fills any screen shape without stretching.
+     ===================================================================== */
+  const ACCENTS = [
+    { id: "blue",      name: "Ocean",     l: "#0A62CC", d: "#4A9BFF", on: "#001A3A" },
+    { id: "bubblegum", name: "Bubblegum", l: "#C2185B", d: "#FF7AB6", on: "#3A0020" },
+    { id: "sky",       name: "Sky",       l: "#0369A1", d: "#7DD3FC", on: "#022338" },
+    { id: "lavender",  name: "Lavender",  l: "#6D28D9", d: "#B39DFF", on: "#1E0B4B" },
+    { id: "mint",      name: "Mint",      l: "#0F766E", d: "#4FE0C4", on: "#022C27" },
+    { id: "sunset",    name: "Sunset",    l: "#C2410C", d: "#FF9A5C", on: "#3A1200" },
+    { id: "cherry",    name: "Cherry",    l: "#B91C1C", d: "#FF7A7A", on: "#3A0A0A" },
+    { id: "gold",      name: "Gold",      l: "#946200", d: "#FACC15", on: "#2E2000" },
+    { id: "graphite",  name: "Graphite",  l: "#3F3F46", d: "#D4D4D8", on: "#18181B" }
+  ];
+  const hexRgb = x => { const n = parseInt(String(x).replace("#", ""), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; };
+  const rgbHex = c => "#" + c.map(v => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, "0")).join("").toUpperCase();
+  const lum = c => { const f = v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }; return .2126 * f(c[0]) + .7152 * f(c[1]) + .0722 * f(c[2]); };
+  const contrast = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+  const mixRgb = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
+  /* Turns any picked colour into a light-mode accent (readable on white) and
+     a dark-mode accent (readable on the dark cards). */
+  function accentFrom(hex) {
+    const base = hexRgb(/^#[0-9a-f]{6}$/i.test(hex || "") ? hex : "#0A62CC");
+    const toHsl = c => { const r = c[0] / 255, g = c[1] / 255, b = c[2] / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), L = (mx + mn) / 2, dl = mx - mn;
+      if (!dl) return [0, 0, L];
+      const S = dl / (1 - Math.abs(2 * L - 1)), H = (mx === r ? ((g - b) / dl) % 6 : mx === g ? (b - r) / dl + 2 : (r - g) / dl + 4) * 60;
+      return [(H + 360) % 360, S, L]; };
+    const fromHsl = (H, S, L) => { const C = (1 - Math.abs(2 * L - 1)) * S, X = C * (1 - Math.abs((H / 60) % 2 - 1)), m = L - C / 2;
+      const t = H < 60 ? [C, X, 0] : H < 120 ? [X, C, 0] : H < 180 ? [0, C, X] : H < 240 ? [0, X, C] : H < 300 ? [X, 0, C] : [C, 0, X];
+      return t.map(v => (v + m) * 255); };
+    const hsl = toHsl(base), S = Math.min(1, hsl[1] < .15 ? hsl[1] : Math.max(hsl[1], .55));
+    let L = hsl[2], l = fromHsl(hsl[0], S, L), i = 0;
+    while (contrast(l, [255, 255, 255]) < 4.6 && i++ < 60) { L -= .015; l = fromHsl(hsl[0], S, Math.max(0, L)); }
+    L = hsl[2]; let d = fromHsl(hsl[0], S, L); i = 0;
+    while (contrast(d, [28, 28, 30]) < 5 && i++ < 60) { L += .015; d = fromHsl(hsl[0], S, Math.min(1, L)); }
+    return { l: rgbHex(l), d: rgbHex(d), on: rgbHex(mixRgb(d, [0, 0, 0], .82)) };
+  }
+  let accent = store.get("aps.accent") || { id: "blue" };
+  let tintOn = store.get("aps.tint") !== false;
+  function accentVals(a) {
+    if (!a || !a.id || a.id === "blue") return null;
+    if (a.id === "custom") return accentFrom(a.hex);
+    return ACCENTS.find(x => x.id === a.id) || null;
+  }
+  function applyAccent() {
+    const r = document.documentElement, v = accentVals(accent);
+    if (!v) {
+      ["--acc-l", "--acc-d", "--acc-on-d", "--acc-s"].forEach(k => r.style.removeProperty(k));
+      r.removeAttribute("data-tint");
+      return;
+    }
+    r.style.setProperty("--acc-l", v.l); r.style.setProperty("--acc-d", v.d);
+    r.style.setProperty("--acc-on-d", v.on); r.style.setProperty("--acc-s", v.l);
+    if (tintOn) r.setAttribute("data-tint", ""); else r.removeAttribute("data-tint");
+  }
+  function setAccent(a, rerender) {
+    accent = a; store.set("aps.accent", a); applyAccent();
+    if (rerender !== false) { haptic("SEGMENT_TICK"); if (tab === "settings" && stack.length === 1) refresh(); }
+  }
+
+  const photoEl = h("div", { class: "bg-photo", "aria-hidden": "true" });
+  document.body.insertBefore(photoEl, document.body.firstChild);
+  /* v3.4 photo pipeline
+     - Any picture type: JPG/JPEG/JFIF, PNG, GIF, WebP, AVIF, BMP, TIFF, ICO, SVG,
+       and HEIC/HEIF from iPhones and newer Androids. Files are checked by
+       extension, MIME type and the first bytes, because Android often gives
+       HEIC files no type at all.
+     - HEIC and TIFF open natively where the browser can (Safari). Elsewhere a
+       converter loads from the internet, only when one of those is picked.
+     - The photo is saved as a Blob in IndexedDB, not as a big text string in
+       localStorage, so start-up does not stall reading and parsing it.
+     - The screen uses a blob: URL, never a data: URL, so restyles stay cheap.
+     - Blur is baked into a smaller copy of the photo once you stop dragging
+       the slider, instead of the browser blurring the full layer every frame. */
+  let bgPhoto = null;          // blob: URL of the sharp photo (thumbnail, colour match)
+  let photoBlob = null;        // the saved, already shrunk photo
+  let shownUrl = null;         // blob: URL currently drawn behind the app
+  let bakedBlur = -1, bakeTimer = 0, bakeSeq = 0;
+  let bgOpts = Object.assign({ op: 30, blur: 0, fit: "cover" }, store.get("aps.bg") || {});
+
+  const PHOTO_ACCEPT = "image/*,.jpg,.jpeg,.jpe,.jfif,.pjpeg,.pjp,.png,.apng,.gif,.webp,.avif,.heic,.heif,.hif,.bmp,.dib,.tif,.tiff,.ico,.svg";
+  const PHOTO_EXT = /\.(jpe?g|jpe|jfif|pjpeg|pjp|png|apng|gif|webp|avif|heic|heif|hif|bmp|dib|tiff?|ico|svg)$/i;
+
+  /* Tiny IndexedDB key-value store, with localStorage as the fallback */
+  const idb = (function () {
+    let dbp = null;
+    function open() {
+      if (dbp) return dbp;
+      dbp = new Promise((res, rej) => {
+        try {
+          const rq = indexedDB.open("aps-db", 1);
+          rq.onupgradeneeded = () => rq.result.createObjectStore("kv");
+          rq.onsuccess = () => res(rq.result);
+          rq.onerror = () => rej(rq.error);
+        } catch (e) { rej(e); }
+      });
+      dbp.catch(() => { dbp = null; });
+      return dbp;
+    }
+    function run(mode, fn) {
+      return open().then(db => new Promise((res, rej) => {
+        const tx = db.transaction("kv", mode), st = tx.objectStore("kv"), rq = fn(st);
+        tx.oncomplete = () => res(rq && rq.result); tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error);
+      }));
+    }
+    return {
+      get: k => run("readonly", s => s.get(k)),
+      set: (k, v) => run("readwrite", s => s.put(v, k)),
+      del: k => run("readwrite", s => s.delete(k))
+    };
+  })();
+
+  function dataUrlToBlob(u) {
+    const i = u.indexOf(","), meta = u.slice(5, i), bin = atob(u.slice(i + 1));
+    const a = new Uint8Array(bin.length);
+    for (let k = 0; k < bin.length; k++) a[k] = bin.charCodeAt(k);
+    return new Blob([a], { type: meta.split(";")[0] || "image/jpeg" });
+  }
+  function blobToDataUrl(b) {
+    return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result)); r.onerror = () => rej(r.error); r.readAsDataURL(b); });
+  }
+  function setShown(url) {
+    if (shownUrl && shownUrl !== url && shownUrl !== bgPhoto) URL.revokeObjectURL(shownUrl);
+    shownUrl = url;
+    photoEl.style.backgroundImage = url ? 'url("' + url + '")' : "";
+  }
+  function usePhotoBlob(b) {
+    if (bgPhoto) URL.revokeObjectURL(bgPhoto);
+    if (shownUrl && shownUrl !== bgPhoto) URL.revokeObjectURL(shownUrl);
+    shownUrl = null;
+    photoBlob = b;
+    bgPhoto = b ? URL.createObjectURL(b) : null;
+    bakedBlur = -1;
+  }
+
+  function applyPhoto(newImage) {
+    const r = document.documentElement;
+    if (!bgPhoto) { r.removeAttribute("data-photo"); setShown(null); return; }
+    if (newImage || !shownUrl) { setShown(bgPhoto); bakedBlur = 0; }
+    r.style.setProperty("--photo-op", String(bgOpts.op / 100));
+    photoEl.setAttribute("data-fit", bgOpts.fit === "contain" ? "contain" : "cover");
+    r.setAttribute("data-photo", "");
+    const want = bgOpts.blur || 0;
+    if (want === bakedBlur) { liveBlur(0); return; }
+    /* while the slider moves: quick CSS blur preview, then bake it */
+    liveBlur(want);
+    clearTimeout(bakeTimer);
+    bakeTimer = setTimeout(bakeBlur, 280);
+  }
+  function liveBlur(px) {
+    const r = document.documentElement.style;
+    r.setProperty("--photo-blur", px + "px");
+    r.setProperty("--photo-scale", String(px ? 1 + px * 0.012 : 1));
+  }
+  const canvasBlurOk = (function () {
+    try { const x = document.createElement("canvas").getContext("2d"); x.filter = "blur(2px)"; return x.filter === "blur(2px)"; } catch (e) { return false; }
+  })();
+  function bakeBlur() {
+    const want = bgOpts.blur || 0, seq = ++bakeSeq;
+    if (!photoBlob) return;
+    if (!want) { setShown(bgPhoto); bakedBlur = 0; liveBlur(0); return; }
+    if (!canvasBlurOk) return; /* keep the CSS blur on browsers without canvas filters */
+    decodeImage(photoBlob).then(src => {
+      if (seq !== bakeSeq) { src.done(); return; }
+      /* a blurred photo loses detail anyway, so a smaller copy looks the same and is lighter */
+      const long = 1024, k = Math.min(1, long / Math.max(src.w, src.h));
+      const w = Math.max(1, Math.round(src.w * k)), hh = Math.max(1, Math.round(src.h * k));
+      const screenLong = Math.max(window.innerWidth, window.innerHeight) || 900;
+      const px = Math.max(0.5, want * Math.max(w, hh) / screenLong);
+      const c = document.createElement("canvas"); c.width = w; c.height = hh;
+      const x = c.getContext("2d");
+      const m = Math.ceil(px * 2.5); /* draw a little oversized so the edges do not go soft and pale */
+      x.filter = "blur(" + px.toFixed(2) + "px)";
+      x.drawImage(src.img, -m, -m, w + m * 2, hh + m * 2);
+      src.done();
+      c.toBlob(b => {
+        if (!b || seq !== bakeSeq) return;
+        setShown(URL.createObjectURL(b));
+        bakedBlur = want;
+        liveBlur(0);
+      }, "image/jpeg", 0.85);
+    }).catch(() => {});
+  }
+
+  /* Opens almost any picture into something a canvas can draw */
+  function decodeImage(blob) {
+    const viaImg = () => new Promise((res, rej) => {
+      const u = URL.createObjectURL(blob), img = new Image();
+      img.decoding = "async";
+      img.onload = () => {
+        let w = img.naturalWidth, hh = img.naturalHeight;
+        if (!w || !hh) { w = 1600; hh = 1600; } /* SVG with no size set */
+        res({ img: img, w: w, h: hh, done: () => URL.revokeObjectURL(u) });
+      };
+      img.onerror = () => { URL.revokeObjectURL(u); rej(new Error("decode")); };
+      img.src = u;
+    });
+    if (window.createImageBitmap && !/svg/i.test(blob.type || "")) {
+      return createImageBitmap(blob, { imageOrientation: "from-image" })
+        .then(bm => ({ img: bm, w: bm.width, h: bm.height, done: () => { try { bm.close(); } catch (e) {} } }))
+        .catch(viaImg);
+    }
+    return viaImg();
+  }
+  /* HEIC and HEIF start with an "ftyp" box naming the brand */
+  function sniffHeic(f) {
+    return f.slice(0, 16).arrayBuffer().then(buf => {
+      const s = String.fromCharCode.apply(null, new Uint8Array(buf));
+      return s.slice(4, 8) === "ftyp" && /^(heic|heix|hevc|hevx|heim|heis|mif1|msf1)/.test(s.slice(8, 12));
+    }).catch(() => false);
+  }
+  let heicLoader = null;
+  function loadHeicConverter() {
+    if (window.heic2any) return Promise.resolve(window.heic2any);
+    if (heicLoader) return heicLoader;
+    heicLoader = new Promise((res, rej) => {
+      const s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js";
+      s.async = true;
+      s.onload = () => window.heic2any ? res(window.heic2any) : rej(new Error("missing"));
+      s.onerror = () => { heicLoader = null; s.remove(); rej(new Error("offline")); };
+      document.head.appendChild(s);
+    });
+    return heicLoader;
+  }
+  function heicToJpeg(f) {
+    return loadHeicConverter().then(conv => conv({ blob: f, toType: "image/jpeg", quality: 0.9 }))
+      .then(out => Array.isArray(out) ? out[0] : out);
+  }
+
+  /* TIFF opens natively only in Safari. Elsewhere a small decoder loads once, only when a TIFF is picked. */
+  function sniffTiff(f) {
+    return f.slice(0, 4).arrayBuffer().then(buf => {
+      const a = new Uint8Array(buf);
+      return (a[0] === 0x49 && a[1] === 0x49 && a[2] === 0x2A && a[3] === 0) || (a[0] === 0x4D && a[1] === 0x4D && a[2] === 0 && a[3] === 0x2A);
+    }).catch(() => false);
+  }
+  let tiffLoader = null;
+  function tiffToPng(f) {
+    if (!tiffLoader) tiffLoader = new Promise((res, rej) => {
+      if (window.UTIF) { res(window.UTIF); return; }
+      const s = document.createElement("script");
+      s.src = "https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.js";
+      s.async = true;
+      s.onload = () => window.UTIF ? res(window.UTIF) : rej(new Error("missing"));
+      s.onerror = () => { tiffLoader = null; s.remove(); rej(new Error("offline")); };
+      document.head.appendChild(s);
+    });
+    return Promise.all([tiffLoader, f.arrayBuffer()]).then(([U, buf]) => {
+      const ifds = U.decode(buf), pg = ifds[0];
+      U.decodeImage(buf, pg, ifds);
+      const rgba = U.toRGBA8(pg), w = pg.width, hh = pg.height;
+      const c = document.createElement("canvas"); c.width = w; c.height = hh;
+      c.getContext("2d").putImageData(new ImageData(new Uint8ClampedArray(rgba.buffer, rgba.byteOffset, w * hh * 4), w, hh), 0, 0);
+      return new Promise((res, rej) => c.toBlob(b => b ? res(b) : rej(new Error("encode")), "image/png"));
+    });
+  }
+
+  /* Shrinks to fit phone screens (longest side 1920 px). WebP where the
+     browser can make it (about half the size of JPEG), JPEG otherwise. */
+  function shrinkImage(blob) {
+    return decodeImage(blob).then(src => new Promise((res, rej) => {
+      try {
+        const encode = (max, q, type) => new Promise(done => {
+          const k = Math.min(1, max / Math.max(src.w, src.h)), w = Math.max(1, Math.round(src.w * k)), hh = Math.max(1, Math.round(src.h * k));
+          const c = document.createElement("canvas"); c.width = w; c.height = hh;
+          const x = c.getContext("2d"); x.fillStyle = "#FFFFFF"; x.fillRect(0, 0, w, hh);
+          x.imageSmoothingQuality = "high";
+          x.drawImage(src.img, 0, 0, w, hh);
+          c.toBlob(b => done(b), type, q);
+        });
+        const tries = [[1920, 0.82], [1440, 0.74], [1080, 0.68]];
+        const go = (i, type) => encode(tries[i][0], tries[i][1], type).then(b => {
+          if (!b) { if (type !== "image/jpeg") return go(i, "image/jpeg"); throw new Error("encode"); }
+          if (type === "image/webp" && b.type !== "image/webp") return go(i, "image/jpeg");
+          if (b.size > 1100000 && i < tries.length - 1) return go(i + 1, type);
+          return b;
+        });
+        go(0, "image/webp").then(b => { src.done(); res(b); }, e => { src.done(); rej(e); });
+      } catch (e) { src.done(); rej(e); }
+    }));
+  }
+  function savePhoto(b) {
+    return idb.set("bgPhoto", b).then(() => { store.del("aps.bgPhoto"); return true; })
+      .catch(() => blobToDataUrl(b).then(u => store.trySet("aps.bgPhoto", u)).catch(() => false));
+  }
+  let photoBusy = false;
+  function setPhotoFromFile(f) {
+    if (photoBusy) return;
+    const name = f.name || "", typeOk = !f.type || /^image\//i.test(f.type) || /octet-stream|heic|heif/i.test(f.type);
+    if (!typeOk && !PHOTO_EXT.test(name)) { toast("That file is not a picture."); return; }
+    photoBusy = true;
+    toast("Preparing your photo…");
+    const nameHeic = /\.(heic|heif|hif)$/i.test(name) || /hei[cf]/i.test(f.type || "");
+    const nameTiff = /\.tiff?$/i.test(name) || /tiff/i.test(f.type || "");
+    Promise.all([nameHeic ? true : sniffHeic(f), nameTiff ? true : sniffTiff(f)]).then(([isHeic, isTiff]) =>
+      shrinkImage(f).catch(err => {
+        if (isHeic) {
+          toast("Converting HEIC photo…");
+          return heicToJpeg(f).then(shrinkImage, () => { throw new Error("heic"); });
+        }
+        if (isTiff) {
+          toast("Converting TIFF photo…");
+          return tiffToPng(f).then(shrinkImage, () => { throw new Error("tiff"); });
+        }
+        throw err;
+      })
+    ).then(b => {
+      usePhotoBlob(b);
+      applyPhoto(true); haptic("CONFIRM");
+      return savePhoto(b);
+    }).then(saved => {
+      toast(saved ? "Background photo set" : "Photo set for now. This browser could not save it, so it will be gone next time.");
+      if (tab === "settings" && stack.length === 1) refresh();
+    }).catch(e => {
+      const m = e && e.message;
+      toast(m === "heic" || m === "tiff"
+        ? "Could not convert that " + m.toUpperCase() + " photo. Connect to the internet once and try again, or pick a JPG or PNG."
+        : "Could not open that picture. Try a JPG, PNG or WebP.");
+    }).then(() => { photoBusy = false; });
+  }
+  function removePhoto() {
+    usePhotoBlob(null);
+    store.del("aps.bgPhoto"); idb.del("bgPhoto").catch(() => {});
+    applyPhoto(); toast("Background photo removed");
+    if (tab === "settings" && stack.length === 1) refresh();
+  }
+  /* Start-up: read the photo without blocking. Older versions kept it in
+     localStorage as text, so move that into IndexedDB once. */
+  function loadPhoto() {
+    const done = b => {
+      if (!b || !(b instanceof Blob) || !b.size) return;
+      usePhotoBlob(b); applyPhoto(true);
+      if (tab === "settings" && stack.length === 1) refresh();
+    };
+    let old = null;
+    try { old = store.get("aps.bgPhoto"); } catch (e) {}
+    if (typeof old === "string" && old.indexOf("data:image/") === 0) {
+      let b = null;
+      try { b = dataUrlToBlob(old); } catch (e) {}
+      if (!b) return;
+      done(b);
+      idb.set("bgPhoto", b).then(() => store.del("aps.bgPhoto")).catch(() => {});
+      return;
+    }
+    idb.get("bgPhoto").then(done).catch(() => {});
+  }
+  /* Finds the strongest colour in the photo: hues are bucketed and weighted
+     by how vivid they are, so a cherry blossom gives pink, not grey sky. */
+  function photoColour(src) {
+    return new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const N = 48, c = document.createElement("canvas"); c.width = N; c.height = N;
+          const x = c.getContext("2d"); x.drawImage(img, 0, 0, N, N);
+          const d = x.getImageData(0, 0, N, N).data, B = 24, acc = [];
+          for (let i = 0; i < B; i++) acc.push({ w: 0, r: 0, g: 0, b: 0 });
+          for (let i = 0; i < d.length; i += 4) {
+            const r = d[i] / 255, g = d[i + 1] / 255, b = d[i + 2] / 255;
+            const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, dl = mx - mn;
+            if (dl < .08 || l < .12 || l > .93) continue;
+            const s = dl / (1 - Math.abs(2 * l - 1));
+            if (s < .2) continue;
+            let hue = mx === r ? ((g - b) / dl) % 6 : mx === g ? (b - r) / dl + 2 : (r - g) / dl + 4;
+            hue = (hue * 60 + 360) % 360;
+            const k = Math.floor(hue / (360 / B)) % B, w = s * (1 - Math.abs(l - .55));
+            acc[k].w += w; acc[k].r += d[i] * w; acc[k].g += d[i + 1] * w; acc[k].b += d[i + 2] * w;
+          }
+          let best = null;
+          acc.forEach((a, i) => { const near = a.w + .5 * (acc[(i + 1) % B].w + acc[(i + B - 1) % B].w); if (a.w && (!best || near > best.near)) best = { a: a, near: near }; });
+          resolve(best ? rgbHex([best.a.r / best.a.w, best.a.g / best.a.w, best.a.b / best.a.w]) : null);
+        } catch (e) { resolve(null); }
+      };
+      img.onerror = () => resolve(null);
+      img.src = src;
+    });
+  }
+
+  /* Settings section for the photo and the colour theme */
+  function renderLook(body, segOf, switchRow) {
+    body.appendChild(h("div", { class: "group-label", text: "Background photo" }));
+    const fileIn = h("input", { type: "file", accept: PHOTO_ACCEPT, id: "bg-file", hidden: true });
+    fileIn.addEventListener("change", () => { const f = fileIn.files && fileIn.files[0]; fileIn.value = ""; if (f) setPhotoFromFile(f); });
+    let thumb;
+    if (bgPhoto) { thumb = h("div", { class: "tile bg-thumb", "aria-hidden": "true" }); thumb.style.backgroundImage = 'url("' + bgPhoto + '")'; }
+    else thumb = iconTile("#C2185B", "photo");
+    const g = h("div", { class: "group" },
+      row({ cls: "action", tile: thumb, title: bgPhoto ? "Change photo" : "Choose a photo", desc: bgPhoto ? "Fits your screen automatically" : "JPG, PNG, HEIC, WebP and more. Shows faintly behind the app", noChev: true, onclick: () => fileIn.click() }),
+      bgPhoto ? row({ cls: "destructive", title: "Remove photo", noChev: true, onclick: removePhoto }) : null,
+      fileIn);
+    body.appendChild(g);
+    if (bgPhoto) {
+      const slider = (label, id, min, max, val, fmt, set) => {
+        const out = h("span", { class: "v", text: fmt(val) });
+        const inp = h("input", { type: "range", id: id, min: String(min), max: String(max), step: "1", value: String(val), "aria-label": label });
+        inp.addEventListener("input", () => { const v = +inp.value; out.textContent = fmt(v); set(v); applyPhoto(); });
+        inp.addEventListener("change", () => store.set("aps.bg", bgOpts));
+        return h("div", { class: "slider-row" }, h("div", { class: "sl-head" }, h("span", { text: label }), out), inp);
+      };
+      body.appendChild(h("div", { class: "group", style: "margin-top:12px" },
+        slider("Visibility", "bg-op", 5, 85, bgOpts.op, v => v + "%", v => { bgOpts.op = v; }),
+        slider("Blur", "bg-blur", 0, 20, bgOpts.blur, v => v ? v + " px" : "Off", v => { bgOpts.blur = v; })));
+      body.appendChild(h("div", { class: "group-label", text: "Photo fit" }));
+      body.appendChild(segOf("Fit", [["cover", "Fill screen"], ["contain", "Whole photo"]], bgOpts.fit === "contain" ? "contain" : "cover", id => {
+        bgOpts.fit = id; store.set("aps.bg", bgOpts); applyPhoto();
+      }));
+      body.appendChild(h("p", { class: "note", style: "margin:7px 16px 0;font-size:13px;color:var(--fg2)", text: "Fill screen crops the edges so the photo covers any screen shape. Whole photo shows all of it with plain space around it." }));
+    }
+
+    body.appendChild(h("div", { class: "group-label", text: "Colour theme" }));
+    const sw = h("div", { class: "swatches", role: "radiogroup", "aria-label": "Colour theme" });
+    const cur = (accent && accent.id) || "blue";
+    ACCENTS.forEach(a => sw.appendChild(h("button", { class: "sw" + (cur === a.id ? " on" : ""), role: "radio", "aria-checked": String(cur === a.id), id: "accent-" + a.id, onclick: () => setAccent({ id: a.id }) },
+      h("span", { class: "dot", style: "background:linear-gradient(135deg," + a.l + " 50%," + a.d + " 50%)" }), h("span", { class: "nm", text: a.name }))));
+    const cv = cur === "custom" ? accentFrom(accent.hex) : null;
+    const picker = h("input", { type: "color", id: "accent-custom", value: (cur === "custom" && accent.hex) || "#E879A9", "aria-label": "Pick your own colour" });
+    const cdot = h("span", { class: "dot" + (cv ? "" : " custom"), style: cv ? "background:linear-gradient(135deg," + cv.l + " 50%," + cv.d + " 50%)" : null });
+    picker.addEventListener("input", () => { setAccent({ id: "custom", hex: picker.value }, false); const v = accentFrom(picker.value); cdot.className = "dot"; cdot.style.background = "linear-gradient(135deg," + v.l + " 50%," + v.d + " 50%)"; });
+    picker.addEventListener("change", () => setAccent({ id: "custom", hex: picker.value }));
+    sw.appendChild(h("label", { class: "sw" + (cur === "custom" ? " on" : "") }, cdot, h("span", { class: "nm", text: "Custom" }), picker));
+    body.appendChild(sw);
+    body.appendChild(h("div", { class: "group", style: "margin-top:12px" },
+      bgPhoto ? row({ cls: "action", tile: iconTile("#6D28D9", "palette"), title: "Match my photo", desc: "Uses the strongest colour in your photo", noChev: true,
+        onclick: () => photoColour(bgPhoto).then(hex => { if (!hex) { toast("Could not find a strong colour in that photo."); return; } setAccent({ id: "custom", hex: hex }); toast("Theme matched to your photo"); }) }) : null,
+      switchRow("Tint backgrounds", "Blend the theme colour into the app background", tintOn, v => { tintOn = v; store.set("aps.tint", v); applyAccent(); }, "sw-tint")));
+  }
+  applyAccent();
+  loadPhoto();
 
   /* ---------- Boot ---------- */
   const ROOTS = { learn: renderLearn, practice: renderPractice, progress: renderProgress, settings: renderSettings };
   buildIndex();
+  applyGlass();
+  guardStart();
   switchTab("learn");
+  GL.warm([[240, 44, 22, "menu"], [300, 44, 22, "menu"], [380, 230, 22, "alert"]]);
+  watchSlow();
+  if (crashedLastRun && glassRender === "auto" && glassStyle === "glass") toast("Glass had trouble starting last time, so a lighter look is on.");
   fullscreenPrompt();
-  window.__apsTest = { index: () => index, validate: validateCourse, store: store };
+  /* Android back button (called by the APK). Closes a dialog, goes back a
+     screen, or returns to Learn. Returns false when there is nothing left,
+     so the APK lets Android leave the app. */
+  window.apsBack = function () {
+    const scrim = document.querySelector(".fs-scrim");
+    if (scrim) { const no = scrim.querySelector(".btn.plain"); if (no) no.click(); else scrim.remove(); return true; }
+    if (stack.length > 1) { pop(); return true; }
+    if (tab !== "learn") { switchTab("learn"); return true; }
+    return false;
+  };
+  window.__apsTest = {
+    index: () => index, validate: validateCourse, store: store, library: () => ({ active: activeId, list: library.slice() }), prompt: aiPrompt,
+    mobile: () => isMobile, fullscreen: () => isFull(), motion: () => ({ pref: motionPref, reduce: reduceMotion }),
+    glass: () => ({ mode: glassMode(), reason: lastReason, cls: deviceClass(), stepDown: stepDown, crashed: crashedLastRun, canRefract: canRefract, filters: GL.count(), light: lightDeg, dev: Object.assign({}, dev), slow: { hz: slow.hz, budget: slow.budget, strikes: slow.strikes, on: slow.on } }),
+    lastHaptic: () => lastHaptic, tab: () => tab, depth: () => stack.length,
+    simulateSlow: () => { slow.on = false; askSlow(); }
+  };
 })();
 
 </script>
