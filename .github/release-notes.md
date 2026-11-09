@@ -8,7 +8,13 @@ Needs Android 7.0 or newer. Works offline once installed.
 
 Prefer the web version? Open the app in your browser and use it straight away, no install needed.
 
-## What's new in 3.4
+## What's new in 3.4.1
+
+- Built for Android 16. The app now fits around the status bar, navigation bar, camera cutout and keyboard on new phones.
+- The back button uses Android's newer predictive back, and leaves the app in the background instead of closing it.
+- Ready for the Google Play Store.
+
+## What came in 3.4
 
 - **Course library.** Switch between the built-in A+ course and courses you add yourself. Each one keeps its own progress.
 - **Make your own course from a PDF.** Settings has a Copy AI prompt button. Paste it into any AI chat with your notes, then load the result.

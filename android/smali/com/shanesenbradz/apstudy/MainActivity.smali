@@ -12,7 +12,7 @@
 .end method
 
 .method protected onCreate(Landroid/os/Bundle;)V
-    .locals 4
+    .locals 5
     invoke-super {p0, p1}, Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V
 
     new-instance v0, Landroid/webkit/WebView;
@@ -30,7 +30,7 @@
 
     invoke-virtual {v1}, Landroid/webkit/WebSettings;->getUserAgentString()Ljava/lang/String;
     move-result-object v2
-    const-string v3, " APStudyApp/3.4"
+    const-string v3, " APStudyApp/3.4.1"
     invoke-virtual {v2, v3}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
     move-result-object v2
     invoke-virtual {v1, v2}, Landroid/webkit/WebSettings;->setUserAgentString(Ljava/lang/String;)V
@@ -46,7 +46,32 @@
     const/4 v1, 0x0
     invoke-virtual {v0, v1}, Landroid/webkit/WebView;->setBackgroundColor(I)V
 
-    invoke-virtual {p0, v0}, Lcom/shanesenbradz/apstudy/MainActivity;->setContentView(Landroid/view/View;)V
+    # The WebView sits in a frame. On Android 15+ (edge-to-edge) the frame is
+    # padded by the system bars, cutout and keyboard so nothing hides under them.
+    new-instance v1, Landroid/widget/FrameLayout;
+    invoke-direct {v1, p0}, Landroid/widget/FrameLayout;-><init>(Landroid/content/Context;)V
+    invoke-virtual {v1, v0}, Landroid/widget/FrameLayout;->addView(Landroid/view/View;)V
+
+    sget v2, Landroid/os/Build$VERSION;->SDK_INT:I
+    const/16 v3, 0x23
+    if-lt v2, v3, :no_pad
+    new-instance v4, Lcom/shanesenbradz/apstudy/MainActivity$Pad;
+    invoke-direct {v4}, Lcom/shanesenbradz/apstudy/MainActivity$Pad;-><init>()V
+    invoke-virtual {v1, v4}, Landroid/widget/FrameLayout;->setOnApplyWindowInsetsListener(Landroid/view/View$OnApplyWindowInsetsListener;)V
+    :no_pad
+
+    invoke-virtual {p0, v1}, Lcom/shanesenbradz/apstudy/MainActivity;->setContentView(Landroid/view/View;)V
+
+    # Android 13+: predictive back. Older versions use onBackPressed below.
+    const/16 v3, 0x21
+    if-lt v2, v3, :no_cb
+    invoke-virtual {p0}, Lcom/shanesenbradz/apstudy/MainActivity;->getOnBackInvokedDispatcher()Landroid/window/OnBackInvokedDispatcher;
+    move-result-object v3
+    new-instance v4, Lcom/shanesenbradz/apstudy/MainActivity$BackCb;
+    invoke-direct {v4, p0}, Lcom/shanesenbradz/apstudy/MainActivity$BackCb;-><init>(Lcom/shanesenbradz/apstudy/MainActivity;)V
+    const/4 v2, 0x0
+    invoke-interface {v3, v2, v4}, Landroid/window/OnBackInvokedDispatcher;->registerOnBackInvokedCallback(ILandroid/window/OnBackInvokedCallback;)V
+    :no_cb
 
     const-string v1, "file:///android_asset/index.html"
     invoke-virtual {v0, v1}, Landroid/webkit/WebView;->loadUrl(Ljava/lang/String;)V
@@ -57,7 +82,8 @@
     .locals 3
     iget-object v0, p0, Lcom/shanesenbradz/apstudy/MainActivity;->web:Landroid/webkit/WebView;
     if-nez v0, :has_web
-    invoke-super {p0}, Landroid/app/Activity;->onBackPressed()V
+    const/4 v1, 0x1
+    invoke-virtual {p0, v1}, Lcom/shanesenbradz/apstudy/MainActivity;->moveTaskToBack(Z)Z
     return-void
 
     :has_web
@@ -65,12 +91,6 @@
     new-instance v2, Lcom/shanesenbradz/apstudy/MainActivity$Back;
     invoke-direct {v2, p0}, Lcom/shanesenbradz/apstudy/MainActivity$Back;-><init>(Lcom/shanesenbradz/apstudy/MainActivity;)V
     invoke-virtual {v0, v1, v2}, Landroid/webkit/WebView;->evaluateJavascript(Ljava/lang/String;Landroid/webkit/ValueCallback;)V
-    return-void
-.end method
-
-.method public goBackSystem()V
-    .locals 0
-    invoke-super {p0}, Landroid/app/Activity;->onBackPressed()V
     return-void
 .end method
 
