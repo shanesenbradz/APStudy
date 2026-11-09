@@ -1,0 +1,5 @@
+*.jks
+*.keystore
+KEYSTORE-PASSWORD.txt
+android/build/
+android/tools/
