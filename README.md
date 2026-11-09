@@ -40,6 +40,10 @@ All course content sits in one block in `index.html`, between `COURSE DATA` and 
 
 Every course you load goes into the **Course library** in Settings. Tap one to switch to it. Each course keeps its own progress, and the built-in A+ course is always there.
 
+## Privacy
+
+No accounts, ads or tracking. Read the [privacy policy](https://shanesenbradz.github.io/APStudy/privacy.html).
+
 ## Disclaimer
 
 This is original practice content written for beginners. It is not affiliated with or endorsed by CompTIA. CompTIA and A+ are trademarks of CompTIA, Inc. Check the official exam objectives before you book your exam.
