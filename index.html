@@ -4355,12 +4355,25 @@ window.COURSE_DATA = COURSE;
       img.onerror = () => { URL.revokeObjectURL(u); rej(new Error("decode")); };
       img.src = u;
     });
+    /* last resort: read the bytes ourselves and load them as a data: URL */
+    const viaData = () => blobToDataUrl(blob).then(u => new Promise((res, rej) => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.naturalWidth, hh = img.naturalHeight;
+        if (!w || !hh) { w = 1600; hh = 1600; }
+        res({ img: img, w: w, h: hh, done: () => {} });
+      };
+      img.onerror = () => rej(new Error("decode"));
+      img.src = u;
+    }));
+    const viaImgThenData = () => viaImg().catch(viaData);
     if (window.createImageBitmap && !/svg/i.test(blob.type || "")) {
       return createImageBitmap(blob, { imageOrientation: "from-image" })
+        .catch(() => createImageBitmap(blob))
         .then(bm => ({ img: bm, w: bm.width, h: bm.height, done: () => { try { bm.close(); } catch (e) {} } }))
-        .catch(viaImg);
+        .catch(viaImgThenData);
     }
-    return viaImg();
+    return viaImgThenData();
   }
   /* HEIC and HEIF start with an "ftyp" box naming the brand */
   function sniffHeic(f) {
@@ -4474,9 +4487,11 @@ window.COURSE_DATA = COURSE;
       if (tab === "settings" && stack.length === 1) refresh();
     }).catch(e => {
       const m = e && e.message;
+      const why = e && e.name && e.name !== "Error" ? " (" + e.name + ")" : (m && m !== "decode" && m !== "encode" ? " (" + String(m).slice(0, 60) + ")" : "");
+      try { console.error("Photo failed", e); } catch (x) {}
       toast(m === "heic" || m === "tiff"
         ? "Could not convert that " + m.toUpperCase() + " photo. Connect to the internet once and try again, or pick a JPG or PNG."
-        : "Could not open that picture. Try a JPG, PNG or WebP.");
+        : "Could not open that picture" + why + ". Try a JPG, PNG or WebP.");
     }).then(() => { photoBusy = false; });
   }
   function removePhoto() {
@@ -4621,7 +4636,7 @@ window.COURSE_DATA = COURSE;
 <script id="pwa-register">
 /* Turns on offline mode when the app is served from a website (GitHub Pages).
    Opening this file straight from your computer still works; this part just skips itself. */
-if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
+if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0 && !/APStudyApp\//.test(navigator.userAgent)) {
   window.addEventListener("load", function () {
     navigator.serviceWorker.register("sw.js").catch(function () {});
   });

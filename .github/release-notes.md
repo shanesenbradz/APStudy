@@ -8,7 +8,14 @@ Needs Android 7.0 or newer. Works offline once installed.
 
 Prefer the web version? Open the app in your browser and use it straight away, no install needed.
 
-## What's new in 3.4.2
+## What's new in 3.4.3
+
+- Fixes "Could not open that picture" when choosing a background photo in the Android app.
+- The Android app now runs the same way it does in Chrome, so saving progress, photos and copying work the same everywhere.
+
+If you installed 3.4.2 earlier today, your progress in that version won't carry over. Sorry about that.
+
+## What came in 3.4.2
 
 - Fixes "App not installed" when installing the APK on Android 11 and newer.
 
