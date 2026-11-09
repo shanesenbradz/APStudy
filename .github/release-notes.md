@@ -8,7 +8,11 @@ Needs Android 7.0 or newer. Works offline once installed.
 
 Prefer the web version? Open the app in your browser and use it straight away, no install needed.
 
-## What's new in 3.4.3
+## What's new in 3.4.4
+
+- Fixes "Could not open that picture (NotReadableError)" for some gallery photos, such as large or forwarded pictures. The app now copies the picked file before reading it.
+
+## What came in 3.4.3
 
 - Fixes "Could not open that picture" when choosing a background photo in the Android app.
 - The Android app now runs the same way it does in Chrome, so saving progress, photos and copying work the same everywhere.

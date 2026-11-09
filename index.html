@@ -4466,7 +4466,14 @@ window.COURSE_DATA = COURSE;
     toast("Preparing your photo…");
     const nameHeic = /\.(heic|heif|hif)$/i.test(name) || /hei[cf]/i.test(f.type || "");
     const nameTiff = /\.tiff?$/i.test(name) || /tiff/i.test(f.type || "");
-    Promise.all([nameHeic ? true : sniffHeic(f), nameTiff ? true : sniffTiff(f)]).then(([isHeic, isTiff]) =>
+    /* Read the file ONCE into memory and work on that copy. Some Android
+       gallery links fail on a second read (NotReadableError). */
+    const readAll = () => f.arrayBuffer ? f.arrayBuffer() : new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => rej(r.error); r.readAsArrayBuffer(f); });
+    readAll().then(buf => {
+      if (!buf || !buf.byteLength) throw new Error("The file was empty");
+      f = new Blob([buf], { type: f.type || "" });
+      return Promise.all([nameHeic ? true : sniffHeic(f), nameTiff ? true : sniffTiff(f)]);
+    }).then(([isHeic, isTiff]) =>
       shrinkImage(f).catch(err => {
         if (isHeic) {
           toast("Converting HEIC photo…");

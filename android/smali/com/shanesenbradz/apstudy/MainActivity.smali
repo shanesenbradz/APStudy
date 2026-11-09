@@ -30,7 +30,7 @@
 
     invoke-virtual {v1}, Landroid/webkit/WebSettings;->getUserAgentString()Ljava/lang/String;
     move-result-object v2
-    const-string v3, " APStudyApp/3.4.3"
+    const-string v3, " APStudyApp/3.4.4"
     invoke-virtual {v2, v3}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
     move-result-object v2
     invoke-virtual {v1, v2}, Landroid/webkit/WebSettings;->setUserAgentString(Ljava/lang/String;)V
@@ -155,7 +155,7 @@
 .end method
 
 .method protected onActivityResult(IILandroid/content/Intent;)V
-    .locals 2
+    .locals 5
     const/4 v0, 0x7
     if-eq p1, v0, :mine
     invoke-super {p0, p1, p2, p3}, Landroid/app/Activity;->onActivityResult(IILandroid/content/Intent;)V
@@ -166,10 +166,114 @@
     if-eqz v0, :done
     invoke-static {p2, p3}, Landroid/webkit/WebChromeClient$FileChooserParams;->parseResult(ILandroid/content/Intent;)[Landroid/net/Uri;
     move-result-object v1
+    if-eqz v1, :deliver
+
+    # Copy each picked file into the app's cache first. Gallery links can
+    # report a size that doesn't match their bytes, and the WebView then
+    # refuses to read them (NotReadableError). A plain copy always matches.
+    array-length v2, v1
+    const/4 v3, 0x0
+    :fix_loop
+    if-ge v3, v2, :deliver
+    aget-object v4, v1, v3
+    invoke-virtual {p0, v4}, Lcom/shanesenbradz/apstudy/MainActivity;->copyToCache(Landroid/net/Uri;)Landroid/net/Uri;
+    move-result-object v4
+    aput-object v4, v1, v3
+    add-int/lit8 v3, v3, 0x1
+    goto :fix_loop
+
+    :deliver
     invoke-interface {v0, v1}, Landroid/webkit/ValueCallback;->onReceiveValue(Ljava/lang/Object;)V
     const/4 v1, 0x0
     iput-object v1, p0, Lcom/shanesenbradz/apstudy/MainActivity;->fileCb:Landroid/webkit/ValueCallback;
 
     :done
     return-void
+.end method
+
+.method public copyToCache(Landroid/net/Uri;)Landroid/net/Uri;
+    .locals 10
+    :try_start_0
+    invoke-virtual {p0}, Lcom/shanesenbradz/apstudy/MainActivity;->getContentResolver()Landroid/content/ContentResolver;
+    move-result-object v0
+
+    # keep the original file name (Telegram's IMG_..._294.PNG stays a .PNG)
+    const-string v1, "picked-file"
+    move-object v2, v0
+    move-object v3, p1
+    const/4 v4, 0x0
+    const/4 v5, 0x0
+    const/4 v6, 0x0
+    const/4 v7, 0x0
+    invoke-virtual/range {v2 .. v7}, Landroid/content/ContentResolver;->query(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;)Landroid/database/Cursor;
+    move-result-object v2
+    if-eqz v2, :no_cursor
+    invoke-interface {v2}, Landroid/database/Cursor;->moveToFirst()Z
+    move-result v3
+    if-eqz v3, :close_cursor
+    const-string v3, "_display_name"
+    invoke-interface {v2, v3}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+    move-result v3
+    if-ltz v3, :close_cursor
+    invoke-interface {v2, v3}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+    move-result-object v3
+    if-eqz v3, :close_cursor
+    move-object v1, v3
+    :close_cursor
+    invoke-interface {v2}, Landroid/database/Cursor;->close()V
+    :no_cursor
+    const/16 v3, 0x2f
+    const/16 v4, 0x5f
+    invoke-virtual {v1, v3, v4}, Ljava/lang/String;->replace(CC)Ljava/lang/String;
+    move-result-object v1
+
+    # cache/picked holds only the latest pick
+    new-instance v2, Ljava/io/File;
+    invoke-virtual {p0}, Lcom/shanesenbradz/apstudy/MainActivity;->getCacheDir()Ljava/io/File;
+    move-result-object v3
+    const-string v4, "picked"
+    invoke-direct {v2, v3, v4}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+    invoke-virtual {v2}, Ljava/io/File;->listFiles()[Ljava/io/File;
+    move-result-object v3
+    if-eqz v3, :cleaned
+    array-length v4, v3
+    const/4 v5, 0x0
+    :del_loop
+    if-ge v5, v4, :cleaned
+    aget-object v6, v3, v5
+    invoke-virtual {v6}, Ljava/io/File;->delete()Z
+    add-int/lit8 v5, v5, 0x1
+    goto :del_loop
+    :cleaned
+    invoke-virtual {v2}, Ljava/io/File;->mkdirs()Z
+
+    new-instance v3, Ljava/io/File;
+    invoke-direct {v3, v2, v1}, Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V
+
+    invoke-virtual {v0, p1}, Landroid/content/ContentResolver;->openInputStream(Landroid/net/Uri;)Ljava/io/InputStream;
+    move-result-object v4
+    if-eqz v4, :fail
+    new-instance v5, Ljava/io/FileOutputStream;
+    invoke-direct {v5, v3}, Ljava/io/FileOutputStream;-><init>(Ljava/io/File;)V
+    const/high16 v6, 0x10000
+    new-array v6, v6, [B
+    :copy_loop
+    invoke-virtual {v4, v6}, Ljava/io/InputStream;->read([B)I
+    move-result v7
+    if-lez v7, :copied
+    const/4 v8, 0x0
+    invoke-virtual {v5, v6, v8, v7}, Ljava/io/FileOutputStream;->write([BII)V
+    goto :copy_loop
+    :copied
+    invoke-virtual {v4}, Ljava/io/InputStream;->close()V
+    invoke-virtual {v5}, Ljava/io/FileOutputStream;->close()V
+    invoke-static {v3}, Landroid/net/Uri;->fromFile(Ljava/io/File;)Landroid/net/Uri;
+    move-result-object v0
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :fail
+    return-object v0
+
+    # anything goes wrong: hand the WebView the original link, as before
+    :fail
+    return-object p1
 .end method
