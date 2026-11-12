@@ -2,13 +2,19 @@
 
 1. Tap **APStudy.apk** under Assets below to download it.
 2. Open the file. If Android asks, allow installs from your browser or file manager.
-3. Tap **Install**, then open **A+ Study Lab**.
+3. Tap **Install**, then open **A+ Study Lab**. Installing over an older version keeps your progress.
 
 Needs Android 7.0 or newer. Works offline once installed.
 
 Prefer the web version? Open the app in your browser and use it straight away, no install needed.
 
-## What's new in 3.4.5
+## What's new in 3.6.0
+
+- Two new built-in courses: **Linux+ (XK0-006)** and **Project+ (PK0-005)**, 322 practice questions each, with lessons and flashcards.
+- Switch between A+, Linux+ and Project+ in Settings, under Course Library. Each course keeps its own progress.
+- Calculation answers can now be negative (the keyboard shows a minus sign when needed), and typing $ or % is fine.
+
+## What came in 3.4.5
 
 - Text size slider in Settings, from 85% to 150%. Lessons, questions, answers and buttons all resize, and the app remembers your choice.
 
