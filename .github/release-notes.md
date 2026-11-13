@@ -10,6 +10,8 @@ Prefer the web version? Open the app in your browser and use it straight away, n
 
 ## What's new in 3.6.0
 
+- **Had an older version (3.4.x) installed?** Uninstall it first, then install this one. The app now has a new signing key, so Android will not install it over the old version. Uninstalling clears your saved progress.
+
 - Two new built-in courses: **Linux+ (XK0-006)** and **Project+ (PK0-005)**, 322 practice questions each, with lessons and flashcards.
 - Switch between A+, Linux+ and Project+ in Settings, under Course Library. Each course keeps its own progress.
 - Calculation answers can now be negative (the keyboard shows a minus sign when needed), and typing $ or % is fine.
