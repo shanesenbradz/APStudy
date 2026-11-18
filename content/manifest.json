@@ -1,0 +1,38 @@
+{
+ "schema": 1,
+ "app": {
+  "name": "3.7.0",
+  "code": 41,
+  "notes": ""
+ },
+ "courses": [
+  {
+   "id": "builtin-linux",
+   "file": "linux-plus-xk0-006.json",
+   "version": 1,
+   "title": "Linux+ Study Lab",
+   "color": "#0F766E"
+  },
+  {
+   "id": "builtin-projectplus",
+   "file": "project-plus-pk0-005.json",
+   "version": 1,
+   "title": "Project+ Study Lab",
+   "color": "#C2410C"
+  },
+  {
+   "id": "builtin-netplus",
+   "file": "network-plus-n10-009.json",
+   "version": 1,
+   "title": "Network+ Study Lab",
+   "color": "#0A62CC"
+  },
+  {
+   "id": "builtin-secplus",
+   "file": "security-plus-sy0-701.json",
+   "version": 1,
+   "title": "Security+ Study Lab",
+   "color": "#B91C1C"
+  }
+ ]
+}

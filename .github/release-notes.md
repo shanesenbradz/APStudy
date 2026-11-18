@@ -8,7 +8,16 @@ Needs Android 7.0 or newer. Works offline once installed.
 
 Prefer the web version? Open the app in your browser and use it straight away, no install needed.
 
-## What's new in 3.6.0
+## What's new in 3.7.0
+
+This version installs straight over 3.6.0 and keeps your progress.
+
+- Two new built-in courses: **Network+ (N10-009)** and **Security+ (SY0-701)**, 322 practice questions each, with lessons and flashcards.
+- **Terminal labs.** Performance-based questions where you type real commands into a simulated command prompt or Linux shell and answer from what you see. Find devices and their MAC addresses with ipconfig, ping and arp -a, sweep a subnet with nmap, chase a DNS fault, read a traceroute, work a Cisco switch, spot ARP poisoning, read an SSH log, check file hashes, catch malware with netstat and check SPF and DMARC records. Find them all under Practice, Labs and simulations.
+- **Put in order questions now work by touch.** Drag a step with your finger, or tap two steps to swap them. The arrow buttons are gone. On a keyboard, press Space to pick a step up and the arrow keys to move it.
+- **Content updates.** Every week or so the app checks GitHub for new and fixed questions and downloads them, so you get fresh content without installing a new version. You can turn this off or check by hand in Settings, under Content updates. It also tells you when a new app version is out.
+
+## What came in 3.6.0
 
 - **Had an older version (3.4.x) installed?** Uninstall it first, then install this one. The app now has a new signing key, so Android will not install it over the old version. Uninstalling clears your saved progress.
 

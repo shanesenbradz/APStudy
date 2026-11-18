@@ -1,0 +1,4698 @@
+{
+ "title": "Project+ Study Lab",
+ "subtitle": "CompTIA Project+ PK0-005 practice bank (322 questions)",
+ "version": 1,
+ "note": "Original practice questions written for beginners. Not affiliated with CompTIA. Check the official PK0-005 objectives before you book.",
+ "modules": [
+  {
+   "id": "pp-concepts",
+   "title": "Project Management Concepts",
+   "exam": "Project+ · Domain 1 (33%)",
+   "color": "#0A62CC",
+   "concepts": [
+    {
+     "id": "pc-basics",
+     "title": "Projects, Programs and Methodologies",
+     "learn": {
+      "idea": "A project is temporary work that makes something unique. How you run it depends on the methodology: plan everything up front, or deliver in small pieces and adjust.",
+      "points": [
+       "A project has a defined start and end. Operations repeat with no end date.",
+       "A program is a group of related projects managed together. A portfolio is every project and program the organisation funds to meet its strategy.",
+       "Waterfall runs phases in order and suits fixed requirements. Agile delivers in short cycles and suits changing requirements.",
+       "Project life cycle: discovery, initiating, planning, executing, monitoring and controlling, closing."
+      ],
+      "memory": "Projects end. Operations repeat. Programs group projects. Portfolios group everything."
+     },
+     "cards": [
+      {
+       "front": "Project vs operations?",
+       "back": "A project is temporary and unique. Operations are ongoing and repetitive."
+      },
+      {
+       "front": "What is a program?",
+       "back": "Related projects managed together to get benefits they could not get alone."
+      },
+      {
+       "front": "What is a portfolio?",
+       "back": "All projects and programs an organisation chooses to fund, aligned to its strategy."
+      },
+      {
+       "front": "When does Waterfall fit?",
+       "back": "Clear, fixed requirements that are unlikely to change."
+      },
+      {
+       "front": "What does Kanban limit?",
+       "back": "Work in progress (WIP), so work flows without overload."
+      },
+      {
+       "front": "What does a PMO do?",
+       "back": "Sets project standards, templates and governance across the organisation."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which statement best describes a project?",
+       "options": [
+        "Temporary work with a defined start and end that creates a unique result",
+        "Ongoing work that keeps the business running day to day",
+        "A group of related programs managed for strategic benefit",
+        "A repeatable process with no planned end date"
+       ],
+       "answer": 0,
+       "explain": "Projects are temporary and produce something unique. Ongoing, repeating work is operations."
+      },
+      {
+       "type": "mc",
+       "q": "Which of these is operations work rather than a project?",
+       "options": [
+        "Processing payroll every month",
+        "Moving the company email system to the cloud",
+        "Building a new customer web portal",
+        "Installing a new data centre cooling system"
+       ],
+       "answer": 0,
+       "explain": "Monthly payroll repeats with no end date, so it is operations. The others have a set end and a unique result."
+      },
+      {
+       "type": "mc",
+       "q": "Three related projects (new CRM, data migration and staff training) are managed together so the business gets the full benefit. What is this?",
+       "options": [
+        "A program",
+        "A portfolio",
+        "A work package",
+        "A phase gate"
+       ],
+       "answer": 0,
+       "explain": "A program groups related projects so their combined benefits can be managed."
+      },
+      {
+       "type": "mc",
+       "q": "Which term describes all the projects and programs an organisation funds, chosen to support its strategy, even if they are not related?",
+       "options": [
+        "Portfolio",
+        "Program",
+        "Project charter",
+        "Product backlog"
+       ],
+       "answer": 0,
+       "explain": "A portfolio is the full collection of work the organisation invests in, picked to match strategy."
+      },
+      {
+       "type": "mc",
+       "q": "A team must install network cabling to a building plan that has been signed off and cannot change. Which methodology fits best?",
+       "options": [
+        "Waterfall",
+        "Scrum",
+        "Kanban",
+        "Extreme Programming"
+       ],
+       "answer": 0,
+       "explain": "Fixed, well-understood requirements suit Waterfall's plan-first, phase-by-phase approach."
+      },
+      {
+       "type": "mc",
+       "q": "A client wants a mobile app but expects requirements to change as users try early versions. Which approach fits best?",
+       "options": [
+        "Agile",
+        "Waterfall",
+        "Critical chain",
+        "Fixed-price Waterfall"
+       ],
+       "answer": 0,
+       "explain": "Agile delivers in short cycles and expects requirements to change based on feedback."
+      },
+      {
+       "type": "mc",
+       "q": "A project uses a Waterfall plan for the hardware rollout and Scrum sprints for the software built on top. What is this called?",
+       "options": [
+        "Hybrid",
+        "Lean",
+        "PRINCE2",
+        "Kanban"
+       ],
+       "answer": 0,
+       "explain": "Hybrid mixes predictive and Agile methods within one project."
+      },
+      {
+       "type": "mc",
+       "q": "Which project method, developed for UK government work, uses defined stages, a continued business justification and management by exception?",
+       "options": [
+        "PRINCE2",
+        "Scrum",
+        "Kanban",
+        "Six Sigma"
+       ],
+       "answer": 0,
+       "explain": "PRINCE2 is process-based, controls work in stages and checks the business case all the way through."
+      },
+      {
+       "type": "mc",
+       "q": "A service desk team pulls tickets onto a board as capacity frees up, with a limit of three items in the In Progress column. Which framework is this?",
+       "options": [
+        "Kanban",
+        "Scrum",
+        "Waterfall",
+        "PRINCE2"
+       ],
+       "answer": 0,
+       "explain": "Kanban visualises work on a board, limits work in progress and has no fixed sprints."
+      },
+      {
+       "type": "order",
+       "q": "Put the phases of the software development life cycle (SDLC) in order.",
+       "steps": [
+        "Gather requirements",
+        "Design",
+        "Develop (build)",
+        "Test",
+        "Deploy",
+        "Maintain"
+       ],
+       "explain": "Requirements drive design, design drives the build, the build is tested, then deployed and maintained."
+      },
+      {
+       "type": "mc",
+       "q": "Which approach brings development and operations teams together and relies on automation such as continuous integration and continuous delivery?",
+       "options": [
+        "DevOps",
+        "Waterfall",
+        "PRINCE2",
+        "Critical path method"
+       ],
+       "answer": 0,
+       "explain": "DevOps joins dev and ops, using automated build, test and release pipelines."
+      },
+      {
+       "type": "tf",
+       "q": "A project can end because its objectives were met, or because it was terminated when it was no longer needed or could not succeed.",
+       "answer": true,
+       "explain": "Both are valid endings. A cancelled project still goes through closing."
+      },
+      {
+       "type": "mc",
+       "q": "Which methodology focuses mainly on removing waste and anything that does not add value for the customer?",
+       "options": [
+        "Lean",
+        "Waterfall",
+        "PRINCE2",
+        "Spiral"
+       ],
+       "answer": 0,
+       "explain": "Lean comes from manufacturing and targets waste, such as waiting, rework and extra steps."
+      },
+      {
+       "type": "mc",
+       "q": "Which group sets project standards, templates and governance across an organisation?",
+       "options": [
+        "Project management office (PMO)",
+        "Change control board (CCB)",
+        "Scrum team",
+        "Steering committee for one project only"
+       ],
+       "answer": 0,
+       "explain": "The PMO standardises how projects are run and often supports or audits them."
+      },
+      {
+       "type": "match",
+       "q": "Match each methodology to its description.",
+       "pairs": [
+        [
+         "Waterfall",
+         "Sequential phases, each finished before the next"
+        ],
+        [
+         "Scrum",
+         "Fixed-length sprints with set roles and events"
+        ],
+        [
+         "Kanban",
+         "Continuous flow with work-in-progress limits"
+        ],
+        [
+         "Hybrid",
+         "Mix of predictive and Agile methods"
+        ]
+       ],
+       "explain": "Know what makes each one different, since the exam often asks you to pick one for a scenario."
+      },
+      {
+       "type": "order",
+       "q": "Put the CompTIA Project+ project life cycle phases in order.",
+       "steps": [
+        "Discovery (concept)",
+        "Initiating",
+        "Planning",
+        "Executing",
+        "Closing"
+       ],
+       "explain": "Monitoring and controlling runs alongside executing. The rest happen in this order."
+      }
+     ]
+    },
+    {
+     "id": "pc-agile",
+     "title": "Agile and Scrum",
+     "learn": {
+      "idea": "Agile delivers working pieces in short, fixed cycles and uses feedback to decide what comes next. Scrum is the most common Agile framework.",
+      "points": [
+       "Product owner owns and orders the backlog. Scrum master removes blockers and coaches. The developers build the increment.",
+       "Events: sprint planning, daily stand-up, sprint review (demo) and sprint retrospective (process).",
+       "Velocity is the story points finished per sprint. Use the average to forecast.",
+       "User story format: As a role, I want a goal, so that a benefit."
+      ],
+      "memory": "Review shows the product. Retro improves the process."
+     },
+     "cards": [
+      {
+       "front": "Who orders the product backlog?",
+       "back": "The product owner."
+      },
+      {
+       "front": "What does the scrum master do?",
+       "back": "Coaches the team, protects the sprint and removes blockers."
+      },
+      {
+       "front": "Sprint review vs retrospective?",
+       "back": "Review demos the work to stakeholders. Retro looks at how the team worked."
+      },
+      {
+       "front": "What is velocity?",
+       "back": "Story points completed in one sprint, used to forecast."
+      },
+      {
+       "front": "What is planning poker?",
+       "back": "A team estimating game that uses cards to agree on relative story points."
+      },
+      {
+       "front": "What is an MVP?",
+       "back": "Minimum viable product: the smallest version that delivers value and gets feedback."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "In Scrum, who is responsible for ordering and prioritising the product backlog?",
+       "options": [
+        "Product owner",
+        "Scrum master",
+        "Project sponsor",
+        "Lead developer"
+       ],
+       "answer": 0,
+       "explain": "The product owner decides what is most valuable and orders the backlog."
+      },
+      {
+       "type": "mc",
+       "q": "A Scrum team is blocked waiting for firewall access from another department. Whose job is it to help remove that blocker?",
+       "options": [
+        "Scrum master",
+        "Product owner",
+        "Change control board",
+        "Customer"
+       ],
+       "answer": 0,
+       "explain": "The scrum master serves the team by removing impediments."
+      },
+      {
+       "type": "mc",
+       "q": "What is the main purpose of the daily stand-up?",
+       "options": [
+        "A short daily sync on progress, plans and blockers",
+        "A full status report to the sponsor",
+        "A demo of finished work to stakeholders",
+        "A review of how the team can improve its process"
+       ],
+       "answer": 0,
+       "explain": "The stand-up is about 15 minutes and keeps the team in sync. It is not a status meeting for managers."
+      },
+      {
+       "type": "mc",
+       "q": "At the end of a sprint, the team discusses what went well and what to change about how they work. Which event is this?",
+       "options": [
+        "Sprint retrospective",
+        "Sprint review",
+        "Sprint planning",
+        "Backlog refinement"
+       ],
+       "answer": 0,
+       "explain": "The retrospective looks at the process. The review looks at the product."
+      },
+      {
+       "type": "mc",
+       "q": "At the end of a sprint, the team shows the working increment to stakeholders and collects feedback. Which event is this?",
+       "options": [
+        "Sprint review",
+        "Sprint retrospective",
+        "Daily stand-up",
+        "Kickoff meeting"
+       ],
+       "answer": 0,
+       "explain": "The sprint review demos what was built so the backlog can be adjusted."
+      },
+      {
+       "type": "mc",
+       "q": "During which event does the team choose backlog items for the coming sprint and plan how to deliver them?",
+       "options": [
+        "Sprint planning",
+        "Sprint review",
+        "Retrospective",
+        "Lessons learned"
+       ],
+       "answer": 0,
+       "explain": "Sprint planning sets the sprint goal and pulls items from the product backlog into the sprint backlog."
+      },
+      {
+       "type": "mc",
+       "q": "Which is a correctly written user story?",
+       "options": [
+        "As a help desk agent, I want to search tickets by user, so that I can find past issues fast",
+        "Add a search box to the ticket screen",
+        "The system shall support 500 users",
+        "Ticket search must be done by Friday"
+       ],
+       "answer": 0,
+       "explain": "A user story names the role, the goal and the benefit."
+      },
+      {
+       "type": "mc",
+       "q": "What does a team's velocity measure?",
+       "options": [
+        "The amount of work, usually in story points, completed per sprint",
+        "The number of hours each person works per day",
+        "How quickly defects are fixed",
+        "The budget spent per sprint"
+       ],
+       "answer": 0,
+       "explain": "Velocity is completed work per sprint and is used to forecast future sprints."
+      },
+      {
+       "type": "calc",
+       "q": "A team's average velocity is 27 story points per sprint. 108 points remain in the backlog. How many more sprints should it take?",
+       "answer": 4,
+       "unit": "sprints",
+       "tolerance": 0,
+       "explain": "108 / 27 = 4 sprints."
+      },
+      {
+       "type": "mc",
+       "q": "Which chart shows the work remaining in a sprint falling toward zero over time?",
+       "options": [
+        "Burndown chart",
+        "Pareto chart",
+        "Fishbone diagram",
+        "Scatter diagram"
+       ],
+       "answer": 0,
+       "explain": "A burndown chart plots remaining work against time. A burnup chart shows work completed."
+      },
+      {
+       "type": "mc",
+       "q": "The team agrees an item is not finished until it is coded, peer reviewed, tested and documented. What is this agreement called?",
+       "options": [
+        "Definition of done",
+        "Acceptance criteria for one story only",
+        "Sprint goal",
+        "Work breakdown structure"
+       ],
+       "answer": 0,
+       "explain": "The definition of done is a shared checklist that applies to every backlog item."
+      },
+      {
+       "type": "mc",
+       "q": "What is the usual length of a Scrum sprint?",
+       "options": [
+        "One to four weeks, kept the same each sprint",
+        "Three to six months",
+        "Whatever the next deliverable needs",
+        "Exactly one day"
+       ],
+       "answer": 0,
+       "explain": "Sprints are timeboxed, usually one to four weeks, and the length stays fixed."
+      },
+      {
+       "type": "mc",
+       "q": "The product owner and team meet mid-sprint to split large items, add detail and estimate upcoming stories. What is this?",
+       "options": [
+        "Backlog refinement (grooming)",
+        "Sprint retrospective",
+        "Change control board meeting",
+        "Daily stand-up"
+       ],
+       "answer": 0,
+       "explain": "Refinement keeps the top of the backlog ready for the next sprint planning."
+      },
+      {
+       "type": "mc",
+       "q": "A large piece of work, such as 'online payments', is too big for one sprint and will be split into many stories. What is it called?",
+       "options": [
+        "Epic",
+        "Task",
+        "Spike",
+        "Milestone"
+       ],
+       "answer": 0,
+       "explain": "An epic is a big body of work broken down into user stories."
+      },
+      {
+       "type": "tf",
+       "q": "In Scrum, any stakeholder can add new work to the current sprint at any time without discussion.",
+       "answer": false,
+       "explain": "New requests go to the product backlog through the product owner. The sprint scope is protected once it starts."
+      },
+      {
+       "type": "match",
+       "q": "Match each Scrum event to its purpose.",
+       "pairs": [
+        [
+         "Sprint planning",
+         "Choose and plan the sprint's work"
+        ],
+        [
+         "Daily stand-up",
+         "Sync on progress and blockers"
+        ],
+        [
+         "Sprint review",
+         "Demo the increment and get feedback"
+        ],
+        [
+         "Sprint retrospective",
+         "Improve how the team works"
+        ]
+       ],
+       "explain": "Each event has one clear job. Mixing them up is a common exam trap."
+      },
+      {
+       "type": "mc",
+       "q": "Which value is part of the Agile Manifesto?",
+       "options": [
+        "Working software over comprehensive documentation",
+        "Following a plan over responding to change",
+        "Processes and tools over individuals and interactions",
+        "Contract negotiation over customer collaboration"
+       ],
+       "answer": 0,
+       "explain": "The manifesto values working software, people, collaboration and responding to change. The other options reverse it."
+      },
+      {
+       "type": "mc",
+       "q": "A startup wants to release the smallest version of its app that delivers value so it can learn from real users. What is this called?",
+       "options": [
+        "Minimum viable product (MVP)",
+        "Work breakdown structure",
+        "Gold plating",
+        "Baseline"
+       ],
+       "answer": 0,
+       "explain": "An MVP gets early feedback with the least effort."
+      }
+     ]
+    },
+    {
+     "id": "pc-change",
+     "title": "Change Control and Scope",
+     "learn": {
+      "idea": "Changes to an approved plan go through a formal process so their effect on scope, time, cost and risk is understood before anyone says yes.",
+      "points": [
+       "Log the request, assess the impact, get a decision, then update the plan and tell people.",
+       "The change control board (CCB) approves or rejects changes. The PM does not approve them alone unless the plan allows it.",
+       "Scope creep is uncontrolled growth in scope. Gold plating is adding extras nobody asked for.",
+       "Scope, time and cost are linked. Change one and the others usually move."
+      ],
+      "memory": "Log, assess, decide, update, tell."
+     },
+     "cards": [
+      {
+       "front": "First step for a change request?",
+       "back": "Log and document it."
+      },
+      {
+       "front": "Who approves changes?",
+       "back": "The change control board (CCB), or whoever the change plan names."
+      },
+      {
+       "front": "What is scope creep?",
+       "back": "Uncontrolled additions to scope without approval."
+      },
+      {
+       "front": "What is gold plating?",
+       "back": "Adding features the customer did not ask for. Avoid it."
+      },
+      {
+       "front": "What does an impact assessment cover?",
+       "back": "Effect on scope, schedule, cost, quality, resources and risk."
+      },
+      {
+       "front": "Triple constraint?",
+       "back": "Scope, time and cost. Changing one affects the others."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "A stakeholder emails the project manager asking for a new report to be added. What should the PM do first?",
+       "options": [
+        "Record it as a formal change request",
+        "Tell the developers to start on it",
+        "Reject it because scope is fixed",
+        "Add it to the budget"
+       ],
+       "answer": 0,
+       "explain": "Every change starts by being documented, so it can be assessed and decided properly."
+      },
+      {
+       "type": "order",
+       "q": "Put the change control steps in order.",
+       "steps": [
+        "Log and document the change request",
+        "Assess the impact on scope, schedule, cost and risk",
+        "Submit it to the change control board for a decision",
+        "Update the plan and baselines if approved",
+        "Communicate the decision and implement"
+       ],
+       "explain": "A change is never built before it is assessed and approved."
+      },
+      {
+       "type": "mc",
+       "q": "What is the main role of the change control board?",
+       "options": [
+        "Review change requests and approve or reject them",
+        "Write the project charter",
+        "Manage the daily work of the team",
+        "Run sprint retrospectives"
+       ],
+       "answer": 0,
+       "explain": "The CCB is the decision-making group for changes to the baseline."
+      },
+      {
+       "type": "mc",
+       "q": "Over several months, small features were added at users' request without approval, and the project is now late. What happened?",
+       "options": [
+        "Scope creep",
+        "Fast tracking",
+        "Resource leveling",
+        "Crashing"
+       ],
+       "answer": 0,
+       "explain": "Scope creep is scope growing through unapproved changes."
+      },
+      {
+       "type": "mc",
+       "q": "A department head asks a developer directly to add a feature 'since it's small'. What should the developer and PM do?",
+       "options": [
+        "Send the request through the change control process",
+        "Add it quietly since it is small",
+        "Add it and tell the PM later",
+        "Ignore the request"
+       ],
+       "answer": 0,
+       "explain": "Even small changes can affect the schedule, testing and risk, so they go through change control."
+      },
+      {
+       "type": "mc",
+       "q": "Which areas should an impact assessment look at for a change request?",
+       "options": [
+        "Scope, schedule, cost, quality, resources and risk",
+        "Only cost",
+        "Only the requester's priority",
+        "Only the technical difficulty"
+       ],
+       "answer": 0,
+       "explain": "A change can ripple across every constraint, so all of them are checked."
+      },
+      {
+       "type": "mc",
+       "q": "The CCB approves a change. What should the project manager do next?",
+       "options": [
+        "Update the baselines and project documents, then communicate the change",
+        "Close the change request without updating anything",
+        "Ask the CCB to approve it a second time",
+        "Start a new project"
+       ],
+       "answer": 0,
+       "explain": "The plan must match the approved change, and the team and stakeholders must know about it."
+      },
+      {
+       "type": "mc",
+       "q": "The CCB rejects a change request. What should happen?",
+       "options": [
+        "Record the decision and reason in the change log and tell the requester",
+        "Build it anyway if the requester is senior",
+        "Delete the request from the log",
+        "Send it straight to the developers for a second opinion"
+       ],
+       "answer": 0,
+       "explain": "Rejected requests stay in the change log with the reason, and the requester is told."
+      },
+      {
+       "type": "mc",
+       "q": "Which is a product change rather than a project change?",
+       "options": [
+        "Adding a new export button to the application being built",
+        "Moving the go-live date by two weeks",
+        "Increasing the project budget",
+        "Replacing a team member"
+       ],
+       "answer": 0,
+       "explain": "A product change alters what is being delivered. A project change alters how the project runs, such as dates, budget or people."
+      },
+      {
+       "type": "mc",
+       "q": "On a Scrum project, how is a new feature request normally handled?",
+       "options": [
+        "It is added to the product backlog and prioritised by the product owner",
+        "It goes straight into the current sprint",
+        "It needs a new project charter",
+        "It is rejected until the project ends"
+       ],
+       "answer": 0,
+       "explain": "Agile expects change. New requests join the backlog and compete for priority."
+      },
+      {
+       "type": "mc",
+       "q": "Why should project documents use version control?",
+       "options": [
+        "So everyone works from the current approved version and changes can be traced",
+        "So documents can never be changed",
+        "To make documents longer",
+        "To hide old decisions"
+       ],
+       "answer": 0,
+       "explain": "Version control shows what changed, when and by whom, and stops people working from old copies."
+      },
+      {
+       "type": "tf",
+       "q": "Gold plating, where the team adds extra features the customer did not ask for, is good practice because it raises customer satisfaction.",
+       "answer": false,
+       "explain": "Gold plating adds unapproved scope, cost and risk. Deliver what was agreed."
+      },
+      {
+       "type": "mc",
+       "q": "The sponsor cuts the schedule by a month but keeps the same scope. Under the triple constraint, what is most likely?",
+       "options": [
+        "Cost rises or quality is at risk",
+        "Nothing else changes",
+        "Scope automatically grows",
+        "Risk goes down"
+       ],
+       "answer": 0,
+       "explain": "Scope, time and cost are linked. Less time with the same scope usually means more cost or lower quality."
+      },
+      {
+       "type": "mc",
+       "q": "Which details belong in a change log?",
+       "options": [
+        "Request ID, description, requester, date, impact, status and decision",
+        "Team members' home addresses",
+        "Daily stand-up notes",
+        "Only approved changes"
+       ],
+       "answer": 0,
+       "explain": "The change log tracks every request from start to decision, including rejected ones."
+      }
+     ]
+    },
+    {
+     "id": "pc-schedule",
+     "title": "Scheduling and Critical Path",
+     "learn": {
+      "idea": "Break the work down, put tasks in order, estimate them, and find the longest path. That path, the critical path, sets the shortest possible project length.",
+      "points": [
+       "The WBS breaks scope into deliverables. The lowest level is the work package.",
+       "Finish-to-start is the most common dependency: B starts after A finishes.",
+       "The critical path is the longest path through the network and has zero float.",
+       "Crashing adds resources (more cost). Fast tracking overlaps tasks (more risk)."
+      ],
+      "memory": "Crash costs cash. Fast track takes a risk."
+     },
+     "cards": [
+      {
+       "front": "What is the lowest level of a WBS?",
+       "back": "The work package."
+      },
+      {
+       "front": "Critical path?",
+       "back": "The longest path through the schedule. Any delay on it delays the project."
+      },
+      {
+       "front": "What is float (slack)?",
+       "back": "How long a task can slip without delaying the project."
+      },
+      {
+       "front": "Crashing vs fast tracking?",
+       "back": "Crashing adds resources and cost. Fast tracking overlaps tasks and adds risk."
+      },
+      {
+       "front": "PERT formula?",
+       "back": "(Optimistic + 4 x Most likely + Pessimistic) / 6"
+      },
+      {
+       "front": "What is a milestone?",
+       "back": "A key point in the schedule with zero duration."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which document breaks the total project scope down into smaller deliverables and work packages?",
+       "options": [
+        "Work breakdown structure (WBS)",
+        "Gantt chart",
+        "Risk register",
+        "Communication plan"
+       ],
+       "answer": 0,
+       "explain": "The WBS is a hierarchy of deliverables. It shows what, not when."
+      },
+      {
+       "type": "mc",
+       "q": "What is the lowest level of a work breakdown structure called?",
+       "options": [
+        "Work package",
+        "Epic",
+        "Milestone",
+        "Phase gate"
+       ],
+       "answer": 0,
+       "explain": "Work packages are small enough to estimate, assign and track."
+      },
+      {
+       "type": "mc",
+       "q": "Which document explains each WBS element, including its description, owner, acceptance criteria and estimates?",
+       "options": [
+        "WBS dictionary",
+        "Issue log",
+        "Project charter",
+        "Stakeholder register"
+       ],
+       "answer": 0,
+       "explain": "The WBS dictionary gives the details behind each box on the WBS."
+      },
+      {
+       "type": "mc",
+       "q": "Server racking must finish before cabling can start. Which dependency is this?",
+       "options": [
+        "Finish-to-start",
+        "Start-to-start",
+        "Finish-to-finish",
+        "Start-to-finish"
+       ],
+       "answer": 0,
+       "explain": "Finish-to-start means the successor starts only after the predecessor finishes. It is the most common type."
+      },
+      {
+       "type": "mc",
+       "q": "Testing can begin as soon as development begins, and they then run side by side. Which dependency is this?",
+       "options": [
+        "Start-to-start",
+        "Finish-to-start",
+        "Finish-to-finish",
+        "Start-to-finish"
+       ],
+       "answer": 0,
+       "explain": "Start-to-start means the second task can start once the first has started."
+      },
+      {
+       "type": "mc",
+       "q": "A new concrete floor must cure for five days before equipment is installed on it. What are those five days in the schedule?",
+       "options": [
+        "Lag",
+        "Lead",
+        "Float",
+        "Crashing"
+       ],
+       "answer": 0,
+       "explain": "Lag is a forced wait between tasks. Lead lets a task start early."
+      },
+      {
+       "type": "mc",
+       "q": "The vendor must deliver the firewall before the team can configure it, and the vendor is outside the project's control. Which kind of dependency is this?",
+       "options": [
+        "External",
+        "Discretionary",
+        "Internal",
+        "Start-to-start"
+       ],
+       "answer": 0,
+       "explain": "An external dependency relies on someone outside the project, such as a vendor or another team."
+      },
+      {
+       "type": "mc",
+       "q": "What is the critical path?",
+       "options": [
+        "The longest path through the network, which sets the shortest possible project duration",
+        "The path with the most expensive tasks",
+        "The shortest path through the network",
+        "The list of tasks with the most risk"
+       ],
+       "answer": 0,
+       "explain": "Any delay on the critical path delays the whole project, because those tasks have no float."
+      },
+      {
+       "type": "calc",
+       "q": "Task A takes 3 days. B (5 days) and C (2 days) both follow A. D (4 days) follows both B and C. How many days long is the project?",
+       "answer": 12,
+       "unit": "days",
+       "tolerance": 0,
+       "explain": "Paths: A-B-D = 3 + 5 + 4 = 12. A-C-D = 3 + 2 + 4 = 9. The longest path is 12 days."
+      },
+      {
+       "type": "calc",
+       "q": "Using the same network (A 3, B 5, C 2, D 4; B and C follow A; D follows B and C), how many days of float does task C have?",
+       "answer": 3,
+       "unit": "days",
+       "tolerance": 0,
+       "explain": "A-C-D is 9 days and the critical path is 12. 12 minus 9 gives C 3 days of float."
+      },
+      {
+       "type": "mc",
+       "q": "To finish early, the PM adds two extra engineers to tasks on the critical path. Which technique is this?",
+       "options": [
+        "Crashing",
+        "Fast tracking",
+        "Resource leveling",
+        "Gold plating"
+       ],
+       "answer": 0,
+       "explain": "Crashing adds resources to shorten the schedule and usually increases cost."
+      },
+      {
+       "type": "mc",
+       "q": "To save time, the PM lets user training start before testing is fully complete. Which technique is this?",
+       "options": [
+        "Fast tracking",
+        "Crashing",
+        "Resource smoothing",
+        "Decomposition"
+       ],
+       "answer": 0,
+       "explain": "Fast tracking overlaps tasks that would normally run in sequence. It increases risk and possible rework."
+      },
+      {
+       "type": "mc",
+       "q": "'Go-live approved' appears in the schedule with zero duration. What is it?",
+       "options": [
+        "A milestone",
+        "A work package",
+        "A summary task",
+        "Lag"
+       ],
+       "answer": 0,
+       "explain": "Milestones mark key points or decisions and take no time themselves."
+      },
+      {
+       "type": "calc",
+       "q": "Using a three-point PERT estimate, a task has optimistic 4 days, most likely 6 days and pessimistic 14 days. What is the estimate in days?",
+       "answer": 7,
+       "unit": "days",
+       "tolerance": 0,
+       "explain": "(4 + 4 x 6 + 14) / 6 = 42 / 6 = 7 days."
+      },
+      {
+       "type": "mc",
+       "q": "One engineer is booked for 70 hours in a single week. The PM moves some tasks to later weeks so the engineer is not overloaded. What is this?",
+       "options": [
+        "Resource leveling",
+        "Crashing",
+        "Fast tracking",
+        "Scope creep"
+       ],
+       "answer": 0,
+       "explain": "Resource leveling adjusts the schedule to fit available people and can push the end date out."
+      },
+      {
+       "type": "mc",
+       "q": "What is the schedule baseline?",
+       "options": [
+        "The approved version of the schedule used to measure progress",
+        "The first draft written by the PM",
+        "The fastest possible schedule",
+        "The schedule of the previous project"
+       ],
+       "answer": 0,
+       "explain": "Actual progress is compared with the baseline. Changing it needs approved change control."
+      },
+      {
+       "type": "mc",
+       "q": "The PM estimates a firewall upgrade will take 10 days because a very similar upgrade last year took 10 days. Which estimating technique is this?",
+       "options": [
+        "Analogous",
+        "Parametric",
+        "Bottom-up",
+        "Monte Carlo"
+       ],
+       "answer": 0,
+       "explain": "Analogous estimating uses a similar past project. Parametric uses a rate, such as hours per unit."
+      },
+      {
+       "type": "order",
+       "q": "Put the steps of building a schedule in order.",
+       "steps": [
+        "Define the activities from the WBS",
+        "Sequence the activities and dependencies",
+        "Estimate resources and durations",
+        "Develop the schedule and find the critical path",
+        "Get the schedule approved as the baseline"
+       ],
+       "explain": "You cannot sequence tasks you have not defined, or find a critical path without durations."
+      }
+     ]
+    },
+    {
+     "id": "pc-team",
+     "title": "Roles, Teams and Resources",
+     "learn": {
+      "idea": "Every project needs clear roles. Knowing who funds, who decides, who does the work and who just needs updates prevents most people problems.",
+      "points": [
+       "The sponsor funds the project, approves the charter and is the top escalation point.",
+       "The PM leads the project day to day. A coordinator supports with admin and has less authority.",
+       "RACI: Responsible does it, Accountable owns it (only one), Consulted gives input, Informed is told.",
+       "Team stages: forming, storming, norming, performing, adjourning."
+      ],
+      "memory": "Only one A in RACI. Form, storm, norm, perform, adjourn."
+     },
+     "cards": [
+      {
+       "front": "Who funds and champions the project?",
+       "back": "The project sponsor."
+      },
+      {
+       "front": "RACI letters?",
+       "back": "Responsible, Accountable, Consulted, Informed."
+      },
+      {
+       "front": "How many Accountable per task?",
+       "back": "Exactly one."
+      },
+      {
+       "front": "Tuckman stages?",
+       "back": "Forming, storming, norming, performing, adjourning."
+      },
+      {
+       "front": "Best long-term conflict method?",
+       "back": "Collaborating (problem solving), for a win-win."
+      },
+      {
+       "front": "Who has most PM authority?",
+       "back": "A projectized organisation. Least is functional."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Who provides funding for the project, approves the charter and acts as the main escalation point?",
+       "options": [
+        "Project sponsor",
+        "Project coordinator",
+        "Scrum master",
+        "Subject matter expert"
+       ],
+       "answer": 0,
+       "explain": "The sponsor champions the project and has the authority and money behind it."
+      },
+      {
+       "type": "mc",
+       "q": "Who is responsible for leading the project team and making sure the project meets its objectives day to day?",
+       "options": [
+        "Project manager",
+        "Project sponsor",
+        "End user",
+        "Vendor"
+       ],
+       "answer": 0,
+       "explain": "The project manager plans, leads and controls the work."
+      },
+      {
+       "type": "mc",
+       "q": "Which role supports the PM by tracking schedules, updating documents and arranging meetings, but has limited decision authority?",
+       "options": [
+        "Project coordinator",
+        "Project sponsor",
+        "Product owner",
+        "Change control board"
+       ],
+       "answer": 0,
+       "explain": "A coordinator helps with administration and communication."
+      },
+      {
+       "type": "mc",
+       "q": "Which best defines a stakeholder?",
+       "options": [
+        "Anyone who affects or is affected by the project",
+        "Only the people who fund the project",
+        "Only the project team",
+        "Only external customers"
+       ],
+       "answer": 0,
+       "explain": "Stakeholders include sponsors, users, team members, vendors and anyone else with an interest."
+      },
+      {
+       "type": "mc",
+       "q": "The team needs someone with deep knowledge of the payroll system to explain how it works. What is that person called?",
+       "options": [
+        "Subject matter expert (SME)",
+        "Project sponsor",
+        "Scrum master",
+        "Change manager"
+       ],
+       "answer": 0,
+       "explain": "SMEs bring specialist knowledge to the team."
+      },
+      {
+       "type": "order",
+       "q": "Put Tuckman's stages of team development in order.",
+       "steps": [
+        "Forming",
+        "Storming",
+        "Norming",
+        "Performing",
+        "Adjourning"
+       ],
+       "explain": "Teams start polite, then clash, then agree on norms, then work well, then disband."
+      },
+      {
+       "type": "mc",
+       "q": "A new team argues about who decides what and how work should be done. Which stage is the team in?",
+       "options": [
+        "Storming",
+        "Forming",
+        "Norming",
+        "Adjourning"
+       ],
+       "answer": 0,
+       "explain": "Storming is the conflict stage as people work out roles and approaches."
+      },
+      {
+       "type": "mc",
+       "q": "In a RACI matrix, how many people should be Accountable for a single task?",
+       "options": [
+        "Exactly one",
+        "At least two",
+        "Everyone on the team",
+        "None, only Responsible matters"
+       ],
+       "answer": 0,
+       "explain": "One person owns the result. Several people can be Responsible."
+      },
+      {
+       "type": "mc",
+       "q": "A developer reports to a functional manager but also works for a PM on a project, and both give direction. Which structure is this?",
+       "options": [
+        "Matrix",
+        "Projectized",
+        "Functional only",
+        "Virtual"
+       ],
+       "answer": 0,
+       "explain": "In a matrix structure people have two bosses, which can cause resource conflicts."
+      },
+      {
+       "type": "mc",
+       "q": "In which organisational structure does the project manager have the most authority over the team and budget?",
+       "options": [
+        "Projectized",
+        "Functional",
+        "Weak matrix",
+        "Balanced matrix"
+       ],
+       "answer": 0,
+       "explain": "In a projectized structure teams are organised around projects and report to the PM."
+      },
+      {
+       "type": "mc",
+       "q": "In which structure does the project manager usually have the least authority, often acting as a coordinator?",
+       "options": [
+        "Functional",
+        "Projectized",
+        "Strong matrix",
+        "Composite with a PMO"
+       ],
+       "answer": 0,
+       "explain": "In a functional organisation department managers control people and budgets."
+      },
+      {
+       "type": "mc",
+       "q": "Two engineers disagree on a design. The PM gets them to talk through each concern and agree on a solution that meets both needs. Which conflict approach is this?",
+       "options": [
+        "Collaborating (problem solving)",
+        "Forcing",
+        "Smoothing",
+        "Avoiding"
+       ],
+       "answer": 0,
+       "explain": "Collaborating looks for a win-win and gives the most lasting result."
+      },
+      {
+       "type": "match",
+       "q": "Match each conflict approach to its description.",
+       "pairs": [
+        [
+         "Forcing",
+         "One side's view is imposed"
+        ],
+        [
+         "Compromising",
+         "Each side gives something up"
+        ],
+        [
+         "Smoothing",
+         "Play up agreement and play down differences"
+        ],
+        [
+         "Avoiding",
+         "Withdraw from the conflict for now"
+        ]
+       ],
+       "explain": "Collaborating is usually best. Forcing suits emergencies. Avoiding can buy time but rarely fixes anything."
+      },
+      {
+       "type": "mc",
+       "q": "A functional manager pulls a shared DBA off the project for two weeks to work on operations. What should the PM do first?",
+       "options": [
+        "Discuss and negotiate with the functional manager, and assess the schedule impact",
+        "Cancel the project",
+        "Hire a new DBA without telling anyone",
+        "Remove the DBA's tasks from scope"
+       ],
+       "answer": 0,
+       "explain": "In a matrix, shared resources are negotiated. Assess the impact and escalate to the sponsor if you cannot agree."
+      }
+     ]
+    },
+    {
+     "id": "pc-risk",
+     "title": "Risk and Issue Management",
+     "learn": {
+      "idea": "A risk might happen. An issue is happening now. Find risks early, judge them, plan a response, and keep watching them.",
+      "points": [
+       "Negative risk responses: avoid, transfer, mitigate, accept.",
+       "Positive risk responses: exploit, enhance, share, accept.",
+       "Qualitative analysis ranks risks with a probability and impact matrix. Quantitative puts numbers on them, such as EMV.",
+       "EMV = probability x impact."
+      ],
+      "memory": "Threats: Avoid, Transfer, Mitigate, Accept. Opportunities: Exploit, Enhance, Share, Accept."
+     },
+     "cards": [
+      {
+       "front": "Risk vs issue?",
+       "back": "A risk may happen. An issue has happened."
+      },
+      {
+       "front": "Transfer example?",
+       "back": "Buying insurance or outsourcing to a vendor on a fixed price."
+      },
+      {
+       "front": "Mitigate means?",
+       "back": "Reduce the probability or impact of a risk."
+      },
+      {
+       "front": "EMV formula?",
+       "back": "Probability x impact."
+      },
+      {
+       "front": "What is a risk trigger?",
+       "back": "A warning sign that a risk is about to happen."
+      },
+      {
+       "front": "What is a workaround?",
+       "back": "An unplanned response to a problem that has already happened."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "What is the difference between a risk and an issue?",
+       "options": [
+        "A risk is uncertain and in the future. An issue has already happened.",
+        "A risk is always negative. An issue is always positive.",
+        "They mean the same thing.",
+        "A risk affects cost only. An issue affects schedule only."
+       ],
+       "answer": 0,
+       "explain": "Risks go in the risk register. When one happens, it becomes an issue in the issue log."
+      },
+      {
+       "type": "mc",
+       "q": "Where are identified risks, their ratings, owners and planned responses recorded?",
+       "options": [
+        "Risk register",
+        "Issue log",
+        "Change log",
+        "Stakeholder register"
+       ],
+       "answer": 0,
+       "explain": "The risk register is the main tool for tracking risks."
+      },
+      {
+       "type": "mc",
+       "q": "A risky new database version could delay the project, so the team decides to use the proven current version instead. Which response is this?",
+       "options": [
+        "Avoid",
+        "Transfer",
+        "Mitigate",
+        "Accept"
+       ],
+       "answer": 0,
+       "explain": "Avoiding changes the plan so the risk no longer applies."
+      },
+      {
+       "type": "mc",
+       "q": "The company buys insurance against hardware damage during shipping. Which risk response is this?",
+       "options": [
+        "Transfer",
+        "Avoid",
+        "Mitigate",
+        "Exploit"
+       ],
+       "answer": 0,
+       "explain": "Transfer shifts the impact to a third party, such as an insurer or vendor."
+      },
+      {
+       "type": "mc",
+       "q": "The team adds extra testing to reduce the chance that a data migration will fail. Which risk response is this?",
+       "options": [
+        "Mitigate",
+        "Accept",
+        "Avoid",
+        "Share"
+       ],
+       "answer": 0,
+       "explain": "Mitigation lowers the probability or impact of a risk."
+      },
+      {
+       "type": "mc",
+       "q": "A minor risk would cost more to address than its impact, so the team sets aside a small contingency and moves on. Which response is this?",
+       "options": [
+        "Accept",
+        "Transfer",
+        "Avoid",
+        "Enhance"
+       ],
+       "answer": 0,
+       "explain": "Acceptance can be active (with a contingency reserve) or passive (deal with it if it happens)."
+      },
+      {
+       "type": "mc",
+       "q": "A vendor offers a discount if the order is placed this month. The PM makes sure the order goes in on time to secure it. Which positive risk response is this?",
+       "options": [
+        "Exploit",
+        "Accept",
+        "Transfer",
+        "Mitigate"
+       ],
+       "answer": 0,
+       "explain": "Exploit makes sure an opportunity definitely happens."
+      },
+      {
+       "type": "match",
+       "q": "Match each positive risk response to its description.",
+       "pairs": [
+        [
+         "Exploit",
+         "Make sure the opportunity happens"
+        ],
+        [
+         "Enhance",
+         "Raise its chance or benefit"
+        ],
+        [
+         "Share",
+         "Partner with someone better able to capture it"
+        ],
+        [
+         "Accept",
+         "Take the benefit if it comes, with no action"
+        ]
+       ],
+       "explain": "These mirror the negative responses: exploit is the opposite of avoid, share of transfer, enhance of mitigate."
+      },
+      {
+       "type": "mc",
+       "q": "The team rates each risk as high, medium or low for probability and impact, and plots them on a grid. What is this?",
+       "options": [
+        "Qualitative risk analysis",
+        "Quantitative risk analysis",
+        "Earned value analysis",
+        "Root cause analysis"
+       ],
+       "answer": 0,
+       "explain": "Qualitative analysis uses ratings and a probability and impact matrix to rank risks quickly."
+      },
+      {
+       "type": "mc",
+       "q": "Which is a quantitative risk analysis technique?",
+       "options": [
+        "Expected monetary value (EMV)",
+        "Probability and impact matrix",
+        "Brainstorming",
+        "Interviewing"
+       ],
+       "answer": 0,
+       "explain": "Quantitative analysis puts numbers on risk, such as EMV or Monte Carlo simulation."
+      },
+      {
+       "type": "calc",
+       "q": "A risk has a 30% probability and would cost $20,000 if it happens. What is its expected monetary value in dollars?",
+       "answer": 6000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "0.30 x 20,000 = 6,000."
+      },
+      {
+       "type": "mc",
+       "q": "Who should watch a specific risk and carry out its response if it happens?",
+       "options": [
+        "The risk owner named in the risk register",
+        "Whoever notices it first",
+        "The vendor",
+        "Nobody until it becomes an issue"
+       ],
+       "answer": 0,
+       "explain": "Each risk gets an owner who tracks it and acts on the response plan."
+      },
+      {
+       "type": "mc",
+       "q": "A key vendor stops replying to emails, a warning sign that a delivery delay is coming. What is this warning sign called?",
+       "options": [
+        "A trigger",
+        "A milestone",
+        "A constraint",
+        "A baseline"
+       ],
+       "answer": 0,
+       "explain": "Triggers show that a risk is about to happen, so the response can start."
+      },
+      {
+       "type": "mc",
+       "q": "Which reserve is set aside for known risks that were identified and analysed?",
+       "options": [
+        "Contingency reserve",
+        "Management reserve",
+        "Petty cash",
+        "Sunk cost"
+       ],
+       "answer": 0,
+       "explain": "Contingency covers known risks. Management reserve covers unknown risks and is controlled by management."
+      },
+      {
+       "type": "order",
+       "q": "Put the risk management steps in order.",
+       "steps": [
+        "Identify risks",
+        "Analyse probability and impact",
+        "Plan risk responses",
+        "Implement responses and monitor risks"
+       ],
+       "explain": "You must find a risk before you can rate it, plan for it, and then watch it."
+      },
+      {
+       "type": "mc",
+       "q": "A server fails with no plan in place for it, so the team moves the application to a spare server to keep working. What is this?",
+       "options": [
+        "A workaround",
+        "Risk transfer",
+        "A contingency plan",
+        "Fast tracking"
+       ],
+       "answer": 0,
+       "explain": "A workaround is an unplanned fix for a problem that has already happened."
+      }
+     ]
+    },
+    {
+     "id": "pc-comms",
+     "title": "Communication and Stakeholders",
+     "learn": {
+      "idea": "Most project problems are communication problems. Plan who needs what information, how often and in what form.",
+      "points": [
+       "Communication channels = n x (n - 1) / 2, where n is the number of people.",
+       "The communication plan covers who, what, when, how and how often.",
+       "Email and chat are asynchronous. Meetings and calls are synchronous.",
+       "Manage high-power, high-interest stakeholders closely. Keep high-power, low-interest ones satisfied."
+      ],
+      "memory": "Channels: n times n minus one, halved."
+     },
+     "cards": [
+      {
+       "front": "Channels formula?",
+       "back": "n x (n - 1) / 2"
+      },
+      {
+       "front": "What goes in a communication plan?",
+       "back": "Who, what, when, how, how often and who sends it."
+      },
+      {
+       "front": "Synchronous example?",
+       "back": "A meeting or phone call."
+      },
+      {
+       "front": "Asynchronous example?",
+       "back": "Email, chat or a shared document."
+      },
+      {
+       "front": "High power, low interest stakeholder?",
+       "back": "Keep satisfied."
+      },
+      {
+       "front": "Best way to give bad news to a sponsor?",
+       "back": "Directly and early, in person or a call, then follow up in writing."
+      }
+     ],
+     "questions": [
+      {
+       "type": "calc",
+       "q": "A project has 10 people who need to communicate. How many communication channels are there?",
+       "answer": 45,
+       "unit": "channels",
+       "tolerance": 0,
+       "explain": "10 x 9 / 2 = 45."
+      },
+      {
+       "type": "calc",
+       "q": "A team grows from 6 to 9 people. How many communication channels are added?",
+       "answer": 21,
+       "unit": "channels",
+       "tolerance": 0,
+       "explain": "Before: 6 x 5 / 2 = 15. After: 9 x 8 / 2 = 36. 36 minus 15 = 21."
+      },
+      {
+       "type": "mc",
+       "q": "Which document says who needs project information, what they need, how often and by what method?",
+       "options": [
+        "Communication plan",
+        "Risk register",
+        "WBS",
+        "Change log"
+       ],
+       "answer": 0,
+       "explain": "The communication plan sets how information flows to each stakeholder."
+      },
+      {
+       "type": "mc",
+       "q": "Which communication method is asynchronous?",
+       "options": [
+        "Email",
+        "Video call",
+        "Face-to-face meeting",
+        "Phone call"
+       ],
+       "answer": 0,
+       "explain": "With asynchronous methods people read and reply when they can, not at the same time."
+      },
+      {
+       "type": "mc",
+       "q": "A major milestone will be missed. How should the PM tell the sponsor?",
+       "options": [
+        "Directly and early, in a meeting or call, then follow up in writing",
+        "In a group email to the whole company",
+        "Wait until the next monthly report",
+        "Ask a team member to mention it"
+       ],
+       "answer": 0,
+       "explain": "Bad news should reach the sponsor quickly and directly, with a written record afterwards."
+      },
+      {
+       "type": "mc",
+       "q": "On a power and interest grid, how should a stakeholder with high power but low interest be managed?",
+       "options": [
+        "Keep satisfied",
+        "Manage closely",
+        "Keep informed",
+        "Monitor with minimum effort"
+       ],
+       "answer": 0,
+       "explain": "High power and high interest: manage closely. High power and low interest: keep satisfied."
+      },
+      {
+       "type": "mc",
+       "q": "Which form of communication should be used for a change to a vendor contract?",
+       "options": [
+        "Formal written communication",
+        "Informal hallway conversation",
+        "Instant message only",
+        "A verbal promise"
+       ],
+       "answer": 0,
+       "explain": "Contracts and legal matters need formal, written, recorded communication."
+      },
+      {
+       "type": "mc",
+       "q": "The team is spread across Jamaica, the UK and India. What helps communication most?",
+       "options": [
+        "Rotate meeting times and use shared async tools",
+        "Hold every meeting at 9 AM Jamaica time",
+        "Use only phone calls",
+        "Send updates only at the end of the project"
+       ],
+       "answer": 0,
+       "explain": "Rotating times shares the burden, and async tools let people catch up in their own working hours."
+      },
+      {
+       "type": "mc",
+       "q": "What do senior executives usually want from a project status report?",
+       "options": [
+        "A short summary, such as a dashboard of key measures and red flags",
+        "Every task detail from the schedule",
+        "The full code changes",
+        "Daily stand-up notes"
+       ],
+       "answer": 0,
+       "explain": "Tailor the message to the audience. Executives want the big picture and decisions needed."
+      },
+      {
+       "type": "mc",
+       "q": "A key stakeholder ignores repeated requests for sign-off and it is now delaying the project. What should the PM do?",
+       "options": [
+        "Follow the escalation path in the communication plan, such as raising it to the sponsor",
+        "Sign off for them",
+        "Stop the project quietly",
+        "Remove them from the stakeholder register"
+       ],
+       "answer": 0,
+       "explain": "When normal communication fails, escalate through the agreed path."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pp-lifecycle",
+   "title": "Project Life Cycle Phases",
+   "exam": "Project+ · Domain 2 (30%)",
+   "color": "#0F766E",
+   "concepts": [
+    {
+     "id": "lc-discovery",
+     "title": "Discovery and the Business Case",
+     "learn": {
+      "idea": "Before a project starts, someone has to show it is worth doing. The business case compares costs, benefits and options so leaders can pick the best investment.",
+      "points": [
+       "The business case explains why the project is needed, the options, costs, benefits and risks.",
+       "ROI = (gain minus cost) / cost. Payback period = cost / yearly savings.",
+       "Pick the higher NPV or IRR. Pick the shorter payback.",
+       "Sunk costs are already spent and should not drive the decision."
+      ],
+      "memory": "Higher NPV, higher IRR, shorter payback."
+     },
+     "cards": [
+      {
+       "front": "What is a business case?",
+       "back": "The justification for a project: need, options, costs, benefits and risks."
+      },
+      {
+       "front": "ROI formula?",
+       "back": "(Gain minus cost) / cost, as a percentage."
+      },
+      {
+       "front": "Payback period?",
+       "back": "Cost divided by yearly savings: how long until the money comes back."
+      },
+      {
+       "front": "NPV rule?",
+       "back": "Choose the project with the highest positive NPV."
+      },
+      {
+       "front": "Opportunity cost?",
+       "back": "The value of the best option you gave up."
+      },
+      {
+       "front": "Sunk cost?",
+       "back": "Money already spent. It should not decide whether to continue."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which document explains why a project should be done, including the options, expected costs, benefits and risks?",
+       "options": [
+        "Business case",
+        "Project charter",
+        "Scope statement",
+        "Issue log"
+       ],
+       "answer": 0,
+       "explain": "The business case justifies the investment. The charter then authorises the project."
+      },
+      {
+       "type": "calc",
+       "q": "A project costs $50,000 and returns $65,000 in benefits. What is the ROI as a percentage?",
+       "answer": 30,
+       "unit": "%",
+       "tolerance": 0,
+       "explain": "(65,000 minus 50,000) / 50,000 = 0.30, which is 30%."
+      },
+      {
+       "type": "calc",
+       "q": "A new system costs $120,000 and saves $30,000 a year. What is the payback period in years?",
+       "answer": 4,
+       "unit": "years",
+       "tolerance": 0,
+       "explain": "120,000 / 30,000 = 4 years."
+      },
+      {
+       "type": "mc",
+       "q": "Project A has an NPV of $40,000 and Project B has an NPV of $25,000. Both cost the same. Which should be chosen on NPV alone?",
+       "options": [
+        "Project A",
+        "Project B",
+        "Either, NPV does not matter",
+        "Neither, NPV must be negative"
+       ],
+       "answer": 0,
+       "explain": "A higher positive NPV means more value in today's money."
+      },
+      {
+       "type": "mc",
+       "q": "When comparing projects by internal rate of return (IRR), which is preferred?",
+       "options": [
+        "The higher IRR",
+        "The lower IRR",
+        "The IRR closest to zero",
+        "IRR cannot compare projects"
+       ],
+       "answer": 0,
+       "explain": "A higher IRR means a better return on the investment."
+      },
+      {
+       "type": "mc",
+       "q": "Before committing, the organisation checks whether the project is technically, financially and operationally possible. What is this?",
+       "options": [
+        "Feasibility study",
+        "Lessons learned",
+        "Sprint review",
+        "Quality audit"
+       ],
+       "answer": 0,
+       "explain": "A feasibility study tests whether the project can realistically succeed."
+      },
+      {
+       "type": "mc",
+       "q": "The team compares how the help desk works today with how it should work, to find what is missing. What is this?",
+       "options": [
+        "Gap analysis (needs assessment)",
+        "Earned value analysis",
+        "Pareto analysis",
+        "Critical path analysis"
+       ],
+       "answer": 0,
+       "explain": "Gap analysis compares the current state with the desired state."
+      },
+      {
+       "type": "mc",
+       "q": "Which activity belongs in the discovery (concept) phase?",
+       "options": [
+        "Defining the business need and high-level requirements",
+        "Building the deliverables",
+        "Closing vendor contracts",
+        "Running sprint retrospectives"
+       ],
+       "answer": 0,
+       "explain": "Discovery works out the problem, the need and whether a project should go ahead."
+      },
+      {
+       "type": "mc",
+       "q": "A committee ranks candidate projects by scoring each one against criteria such as strategic fit, cost and risk, with each criterion weighted. What is this?",
+       "options": [
+        "Weighted scoring model",
+        "Critical path method",
+        "Monte Carlo simulation",
+        "RACI matrix"
+       ],
+       "answer": 0,
+       "explain": "A weighted scoring model compares options against agreed, weighted criteria."
+      },
+      {
+       "type": "calc",
+       "q": "The company can fund only one project: Project A worth $100,000 or Project B worth $70,000. It picks A. What is the opportunity cost in dollars?",
+       "answer": 70000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "The opportunity cost is the value of the best option given up, which is B at $70,000."
+      },
+      {
+       "type": "tf",
+       "q": "Money already spent on a failing project should be the main reason to keep funding it.",
+       "answer": false,
+       "explain": "That is the sunk cost fallacy. Decide based on future costs and benefits only."
+      },
+      {
+       "type": "mc",
+       "q": "Why is $10,000 today worth more than $10,000 received in five years?",
+       "options": [
+        "Money today can be invested and earn a return (time value of money)",
+        "Future money is always taxed more",
+        "Banks do not accept future money",
+        "It is not worth more"
+       ],
+       "answer": 0,
+       "explain": "The time value of money is the reason NPV discounts future cash flows."
+      },
+      {
+       "type": "mc",
+       "q": "Who typically reviews and approves the business case so the project can move into initiating?",
+       "options": [
+        "The sponsor or a governance committee",
+        "The project coordinator",
+        "The development team",
+        "The end users"
+       ],
+       "answer": 0,
+       "explain": "Funding decisions sit with the sponsor or the organisation's governance group."
+      },
+      {
+       "type": "mc",
+       "q": "A project's benefits will not appear until two years after it ends. Which measure helps compare it fairly with a project that pays back sooner?",
+       "options": [
+        "Net present value (NPV)",
+        "Number of team members",
+        "Story points",
+        "Lines of code"
+       ],
+       "answer": 0,
+       "explain": "NPV discounts future benefits so projects with different timing can be compared."
+      }
+     ]
+    },
+    {
+     "id": "lc-initiate",
+     "title": "Initiating",
+     "learn": {
+      "idea": "Initiating makes the project official. The sponsor signs a charter that names the PM, sets high-level goals and gives the authority to start.",
+      "points": [
+       "The project charter formally authorises the project and gives the PM authority.",
+       "The sponsor signs the charter.",
+       "Assumptions are things believed to be true without proof. Constraints are limits.",
+       "The kickoff meeting aligns everyone on goals, roles and next steps."
+      ],
+      "memory": "No signed charter, no project."
+     },
+     "cards": [
+      {
+       "front": "What does the charter do?",
+       "back": "Formally authorises the project and gives the PM authority."
+      },
+      {
+       "front": "Who signs the charter?",
+       "back": "The project sponsor."
+      },
+      {
+       "front": "Assumption?",
+       "back": "Something believed true without proof, such as 'the vendor ships on time'."
+      },
+      {
+       "front": "Constraint?",
+       "back": "A limit, such as a fixed budget or deadline."
+      },
+      {
+       "front": "SMART?",
+       "back": "Specific, Measurable, Achievable, Relevant, Time-bound."
+      },
+      {
+       "front": "Purpose of a kickoff meeting?",
+       "back": "Align the team and stakeholders on goals, roles and plans."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which document formally authorises a project and gives the project manager authority to use resources?",
+       "options": [
+        "Project charter",
+        "Business case",
+        "Scope statement",
+        "Communication plan"
+       ],
+       "answer": 0,
+       "explain": "The charter is the official start of the project."
+      },
+      {
+       "type": "mc",
+       "q": "Who normally signs the project charter?",
+       "options": [
+        "Project sponsor",
+        "Project coordinator",
+        "Lead developer",
+        "Vendor"
+       ],
+       "answer": 0,
+       "explain": "The sponsor has the authority and funding, so the sponsor signs."
+      },
+      {
+       "type": "mc",
+       "q": "Which item belongs in a project charter?",
+       "options": [
+        "High-level objectives, success criteria and milestones",
+        "Detailed task durations for every work package",
+        "Daily stand-up notes",
+        "The final lessons learned report"
+       ],
+       "answer": 0,
+       "explain": "The charter is high level. Detail comes in planning."
+      },
+      {
+       "type": "mc",
+       "q": "The team plans as if the cloud provider will give them a test environment by March, but this is not confirmed. What is this?",
+       "options": [
+        "An assumption",
+        "A constraint",
+        "A milestone",
+        "An issue"
+       ],
+       "answer": 0,
+       "explain": "An assumption is believed true without proof. It should be logged and checked."
+      },
+      {
+       "type": "mc",
+       "q": "The budget cannot go above $250,000 and go-live must be before the tax year ends. What are these?",
+       "options": [
+        "Constraints",
+        "Assumptions",
+        "Risks",
+        "Deliverables"
+       ],
+       "answer": 0,
+       "explain": "Constraints limit the project's options."
+      },
+      {
+       "type": "mc",
+       "q": "What is the main purpose of a project kickoff meeting?",
+       "options": [
+        "Align the team and stakeholders on objectives, roles and next steps",
+        "Approve a change request",
+        "Close vendor contracts",
+        "Demo the finished product"
+       ],
+       "answer": 0,
+       "explain": "Kickoff gets everyone started with the same understanding."
+      },
+      {
+       "type": "mc",
+       "q": "Which objective is written in SMART form?",
+       "options": [
+        "Move 300 mailboxes to the cloud with no data loss by 30 June",
+        "Improve email",
+        "Make the network faster soon",
+        "Do a good job on the migration"
+       ],
+       "answer": 0,
+       "explain": "It is specific, measurable, achievable, relevant and time-bound."
+      },
+      {
+       "type": "mc",
+       "q": "Which is a measurable success criterion?",
+       "options": [
+        "Help desk calls about password resets drop by 40% within three months",
+        "Users are happier",
+        "The project goes well",
+        "The system looks modern"
+       ],
+       "answer": 0,
+       "explain": "Success criteria must be measurable so the result can be checked."
+      },
+      {
+       "type": "mc",
+       "q": "Which document lists everyone with an interest in the project, along with their role, interest and influence?",
+       "options": [
+        "Stakeholder register",
+        "Risk register",
+        "Change log",
+        "WBS dictionary"
+       ],
+       "answer": 0,
+       "explain": "The stakeholder register is started in initiating and kept up to date."
+      },
+      {
+       "type": "mc",
+       "q": "What does a preliminary (high-level) scope statement do during initiating?",
+       "options": [
+        "Gives a first outline of what the project will and will not deliver",
+        "Lists every task with its duration",
+        "Records all approved change requests",
+        "Replaces the need for a detailed scope statement"
+       ],
+       "answer": 0,
+       "explain": "It gives an early boundary. The detailed scope statement comes in planning."
+      },
+      {
+       "type": "mc",
+       "q": "When are high-level risks first identified and recorded?",
+       "options": [
+        "During initiating, often in the charter",
+        "Only after go-live",
+        "Only in closing",
+        "Never, risks appear on their own"
+       ],
+       "answer": 0,
+       "explain": "High-level risks go in the charter, then the risk register grows in planning."
+      },
+      {
+       "type": "tf",
+       "q": "The detailed work breakdown structure is created during the initiating phase.",
+       "answer": false,
+       "explain": "The WBS is a planning activity. Initiating stays at a high level."
+      },
+      {
+       "type": "order",
+       "q": "Put these early project steps in order.",
+       "steps": [
+        "Business case approved",
+        "Project charter drafted",
+        "Sponsor signs the charter",
+        "Stakeholders identified in the register",
+        "Kickoff meeting held"
+       ],
+       "explain": "The business case leads to the charter. Once it is signed, the PM identifies stakeholders and holds the kickoff."
+      },
+      {
+       "type": "mc",
+       "q": "Where does the project manager's authority to run the project come from?",
+       "options": [
+        "The signed project charter",
+        "The lessons learned register",
+        "The team's vote",
+        "The vendor contract"
+       ],
+       "answer": 0,
+       "explain": "The charter names the PM and states their level of authority."
+      }
+     ]
+    },
+    {
+     "id": "lc-plan",
+     "title": "Planning, Budget and Quality",
+     "learn": {
+      "idea": "Planning turns the charter into a detailed, approved plan: exactly what will be built, how, when, by whom, for how much and to what quality.",
+      "points": [
+       "The scope statement lists deliverables, exclusions and acceptance criteria.",
+       "Cost baseline = cost estimates + contingency reserve. Budget = cost baseline + management reserve.",
+       "Quality assurance improves the process. Quality control inspects the product.",
+       "The project management plan pulls all the subsidiary plans together."
+      ],
+      "memory": "QA checks the process. QC checks the product."
+     },
+     "cards": [
+      {
+       "front": "What does the scope statement include?",
+       "back": "Deliverables, exclusions, acceptance criteria, assumptions and constraints."
+      },
+      {
+       "front": "Budget formula?",
+       "back": "Cost baseline (estimates + contingency) + management reserve."
+      },
+      {
+       "front": "QA vs QC?",
+       "back": "QA prevents defects by improving the process. QC finds defects by inspecting output."
+      },
+      {
+       "front": "Most accurate estimate?",
+       "back": "Bottom-up: estimate each work package and add them up."
+      },
+      {
+       "front": "ROM estimate range?",
+       "back": "About -25% to +75%. Used very early."
+      },
+      {
+       "front": "Rolling wave planning?",
+       "back": "Plan near-term work in detail and later work in less detail."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which document gives a detailed description of the project's deliverables, exclusions and acceptance criteria?",
+       "options": [
+        "Scope statement",
+        "Business case",
+        "Issue log",
+        "Status report"
+       ],
+       "answer": 0,
+       "explain": "The scope statement sets exactly what is and is not in the project."
+      },
+      {
+       "type": "mc",
+       "q": "Why should the scope statement list exclusions (what is out of scope)?",
+       "options": [
+        "To prevent misunderstandings and scope creep",
+        "To make the document longer",
+        "To list risks",
+        "To replace the WBS"
+       ],
+       "answer": 0,
+       "explain": "Writing down what is not included stops people assuming it is."
+      },
+      {
+       "type": "mc",
+       "q": "A business analyst sits with call centre staff for a day to watch how they use the current system. Which requirements technique is this?",
+       "options": [
+        "Observation (job shadowing)",
+        "Survey",
+        "Focus group",
+        "Benchmarking"
+       ],
+       "answer": 0,
+       "explain": "Observation shows how work is really done, including steps people forget to mention."
+      },
+      {
+       "type": "mc",
+       "q": "Which is a non-functional requirement?",
+       "options": [
+        "Pages must load in under two seconds",
+        "Users can reset their own password",
+        "The system can print an invoice",
+        "Managers can approve leave requests"
+       ],
+       "answer": 0,
+       "explain": "Non-functional requirements describe how well the system works, such as speed, security or availability."
+      },
+      {
+       "type": "mc",
+       "q": "What is the cost baseline?",
+       "options": [
+        "The approved, time-phased budget used to measure cost performance",
+        "The first rough estimate",
+        "The final actual cost",
+        "The vendor's price list"
+       ],
+       "answer": 0,
+       "explain": "Actual spending is compared to the cost baseline. It excludes management reserve."
+      },
+      {
+       "type": "mc",
+       "q": "The team estimates every work package and adds them together to get the project total. Which technique is this?",
+       "options": [
+        "Bottom-up estimating",
+        "Analogous estimating",
+        "Top-down estimating",
+        "Expert guess"
+       ],
+       "answer": 0,
+       "explain": "Bottom-up is slow but the most accurate."
+      },
+      {
+       "type": "calc",
+       "q": "Imaging one workstation costs $150. Using parametric estimating, what is the cost to image 200 workstations, in dollars?",
+       "answer": 30000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "200 x 150 = 30,000."
+      },
+      {
+       "type": "calc",
+       "q": "Work package estimates total $80,000. The contingency reserve is $8,000 and the management reserve is $12,000. What is the total project budget in dollars?",
+       "answer": 100000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "Cost baseline = 80,000 + 8,000 = 88,000. Budget = 88,000 + 12,000 = 100,000."
+      },
+      {
+       "type": "mc",
+       "q": "The PM sets up peer code reviews and a standard testing process so fewer defects are created. What is this?",
+       "options": [
+        "Quality assurance",
+        "Quality control",
+        "Scope validation",
+        "Risk transfer"
+       ],
+       "answer": 0,
+       "explain": "QA focuses on the process, to prevent defects."
+      },
+      {
+       "type": "mc",
+       "q": "Testers check each finished report against its specification and log any defects found. What is this?",
+       "options": [
+        "Quality control",
+        "Quality assurance",
+        "Procurement",
+        "Change control"
+       ],
+       "answer": 0,
+       "explain": "QC inspects the deliverables to find defects."
+      },
+      {
+       "type": "mc",
+       "q": "Which is a prevention cost in the cost of quality?",
+       "options": [
+        "Training the team before work starts",
+        "Fixing defects found by customers",
+        "Warranty repairs",
+        "Scrapping faulty hardware"
+       ],
+       "answer": 0,
+       "explain": "Prevention costs are spent up front to avoid defects. Fixing failures is a failure cost."
+      },
+      {
+       "type": "mc",
+       "q": "The team decides whether to build a reporting tool in-house or buy one from a vendor. What is this?",
+       "options": [
+        "A make-or-buy decision",
+        "A risk trigger",
+        "A sprint review",
+        "A gap analysis"
+       ],
+       "answer": 0,
+       "explain": "Make-or-buy analysis is part of procurement planning."
+      },
+      {
+       "type": "mc",
+       "q": "Which tool shows when each team member is available, including holidays and other commitments?",
+       "options": [
+        "Resource calendar",
+        "Risk register",
+        "WBS dictionary",
+        "Change log"
+       ],
+       "answer": 0,
+       "explain": "Resource calendars stop you scheduling work for people who are away."
+      },
+      {
+       "type": "mc",
+       "q": "Which plan describes how the finished system will be handed over to the operations and support teams?",
+       "options": [
+        "Transition plan",
+        "Communication plan only",
+        "Procurement plan",
+        "Risk plan"
+       ],
+       "answer": 0,
+       "explain": "The transition plan covers handover, training, documentation and support."
+      },
+      {
+       "type": "mc",
+       "q": "Which document brings together the scope, schedule, cost, quality, risk, communication and other plans?",
+       "options": [
+        "Project management plan",
+        "Project charter",
+        "Business case",
+        "Issue log"
+       ],
+       "answer": 0,
+       "explain": "The project management plan is the master plan made up of the subsidiary plans."
+      },
+      {
+       "type": "mc",
+       "q": "Very early in discovery, the sponsor asks for a quick estimate knowing it may be well off. What is this called?",
+       "options": [
+        "Rough order of magnitude (ROM) estimate",
+        "Definitive estimate",
+        "Bottom-up estimate",
+        "Earned value"
+       ],
+       "answer": 0,
+       "explain": "A ROM estimate is fast and has a wide range, about -25% to +75%."
+      },
+      {
+       "type": "order",
+       "q": "Put these planning steps in order.",
+       "steps": [
+        "Collect requirements",
+        "Define the scope",
+        "Create the WBS",
+        "Develop the schedule",
+        "Determine the budget"
+       ],
+       "explain": "Requirements shape scope, scope is broken into the WBS, the WBS drives the schedule, and the schedule and resources drive the budget."
+      },
+      {
+       "type": "mc",
+       "q": "The PM plans the next two months in detail and leaves later phases at a high level until more is known. What is this?",
+       "options": [
+        "Rolling wave planning",
+        "Fast tracking",
+        "Crashing",
+        "Gold plating"
+       ],
+       "answer": 0,
+       "explain": "Rolling wave planning adds detail as the work gets closer."
+      }
+     ]
+    },
+    {
+     "id": "lc-execute",
+     "title": "Executing and Procurement",
+     "learn": {
+      "idea": "Executing is where the plan becomes real: the team builds, the PM leads, vendors deliver and quality is managed.",
+      "points": [
+       "RFI gathers information. RFQ asks for a price on a known item. RFP asks for a full proposal.",
+       "Fixed price puts the cost risk on the seller. Cost-plus puts it on the buyer.",
+       "Time and materials pays an hourly rate plus materials and suits unclear scope.",
+       "Choose vendors with weighted criteria, not price alone."
+      ],
+      "memory": "Info, Quote, Proposal: RFI, RFQ, RFP."
+     },
+     "cards": [
+      {
+       "front": "RFI?",
+       "back": "Request for information: learn what vendors can offer."
+      },
+      {
+       "front": "RFQ?",
+       "back": "Request for quote: price for a clearly defined item."
+      },
+      {
+       "front": "RFP?",
+       "back": "Request for proposal: full solution proposals for complex needs."
+      },
+      {
+       "front": "Fixed price risk?",
+       "back": "Mostly on the seller."
+      },
+      {
+       "front": "Cost-plus risk?",
+       "back": "Mostly on the buyer."
+      },
+      {
+       "front": "Time and materials suits?",
+       "back": "Work with unclear scope or short-term staff."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which activity mainly happens during the executing phase?",
+       "options": [
+        "Building the deliverables and managing the team",
+        "Writing the business case",
+        "Approving the charter",
+        "Archiving project records"
+       ],
+       "answer": 0,
+       "explain": "Executing carries out the plan and produces the deliverables."
+      },
+      {
+       "type": "mc",
+       "q": "The PM wants to learn which vendors offer managed backup services and what they can do, before writing detailed requirements. Which document should be sent?",
+       "options": [
+        "Request for information (RFI)",
+        "Request for quote (RFQ)",
+        "Purchase order",
+        "Statement of work only"
+       ],
+       "answer": 0,
+       "explain": "An RFI gathers general information about vendors and options."
+      },
+      {
+       "type": "mc",
+       "q": "The team needs a price for 50 identical laptops with a known specification. Which document fits?",
+       "options": [
+        "Request for quote (RFQ)",
+        "Request for information (RFI)",
+        "Request for proposal (RFP)",
+        "Memorandum of understanding"
+       ],
+       "answer": 0,
+       "explain": "An RFQ asks for prices on clearly defined goods."
+      },
+      {
+       "type": "mc",
+       "q": "The organisation needs vendors to design and propose a full disaster recovery solution. Which document fits?",
+       "options": [
+        "Request for proposal (RFP)",
+        "Request for quote (RFQ)",
+        "Purchase order",
+        "Invoice"
+       ],
+       "answer": 0,
+       "explain": "An RFP asks vendors to propose how they would solve a complex need."
+      },
+      {
+       "type": "order",
+       "q": "Put the procurement steps in order.",
+       "steps": [
+        "Send an RFI to learn the market",
+        "Issue an RFP to shortlisted vendors",
+        "Evaluate the proposals",
+        "Select the vendor and negotiate",
+        "Sign the contract",
+        "Manage vendor performance"
+       ],
+       "explain": "Learn the market, ask for proposals, evaluate, choose, contract, then manage delivery."
+      },
+      {
+       "type": "mc",
+       "q": "In a fixed-price contract, who carries most of the cost risk?",
+       "options": [
+        "The seller (vendor)",
+        "The buyer",
+        "The project sponsor only",
+        "The bank"
+       ],
+       "answer": 0,
+       "explain": "The price is set, so cost overruns hurt the seller."
+      },
+      {
+       "type": "mc",
+       "q": "In a cost-plus (cost-reimbursable) contract, who carries most of the cost risk?",
+       "options": [
+        "The buyer",
+        "The seller",
+        "Neither",
+        "The end users"
+       ],
+       "answer": 0,
+       "explain": "The buyer pays the seller's costs plus a fee, so overruns hurt the buyer."
+      },
+      {
+       "type": "mc",
+       "q": "The scope is unclear, so the company hires a contractor at an hourly rate plus the cost of any parts used. Which contract type is this?",
+       "options": [
+        "Time and materials",
+        "Firm fixed price",
+        "Cost plus incentive fee",
+        "Purchase order only"
+       ],
+       "answer": 0,
+       "explain": "Time and materials suits short or unclear work."
+      },
+      {
+       "type": "mc",
+       "q": "What is the best way to select a vendor from several proposals?",
+       "options": [
+        "Score each against weighted criteria such as price, experience, support and risk",
+        "Always pick the lowest price",
+        "Pick the vendor the sponsor knows",
+        "Pick the first proposal received"
+       ],
+       "answer": 0,
+       "explain": "Weighted criteria give a fair, defensible choice."
+      },
+      {
+       "type": "mc",
+       "q": "All interested vendors attend one meeting to ask questions about the RFP and hear the same answers. What is this?",
+       "options": [
+        "Bidders conference",
+        "Kickoff meeting",
+        "Retrospective",
+        "Change control board"
+       ],
+       "answer": 0,
+       "explain": "A bidders conference keeps the process fair, with every vendor getting the same information."
+      },
+      {
+       "type": "mc",
+       "q": "During executing, the quality team checks whether the project is following its defined testing process. What is this?",
+       "options": [
+        "A quality audit (quality assurance)",
+        "Scope creep",
+        "A make-or-buy decision",
+        "Lessons learned"
+       ],
+       "answer": 0,
+       "explain": "Audits check that processes are followed, which is quality assurance."
+      },
+      {
+       "type": "mc",
+       "q": "The team has hit a tough milestone. Which action best builds team morale and performance?",
+       "options": [
+        "Recognise and reward the achievement",
+        "Cut their training budget",
+        "Add more status meetings",
+        "Keep the success quiet"
+       ],
+       "answer": 0,
+       "explain": "Recognition motivates the team and reinforces good work."
+      },
+      {
+       "type": "mc",
+       "q": "What should meeting minutes include so the meeting leads to results?",
+       "options": [
+        "Decisions made and action items with owners and due dates",
+        "Every word that was spoken",
+        "Only who attended",
+        "Personal opinions about attendees"
+       ],
+       "answer": 0,
+       "explain": "Action items with owners and dates turn talk into work."
+      },
+      {
+       "type": "mc",
+       "q": "A department manager keeps resisting the new system. What should the PM do first?",
+       "options": [
+        "Meet them to understand their concerns and address them",
+        "Report them to HR",
+        "Remove them from all communication",
+        "Ignore them until go-live"
+       ],
+       "answer": 0,
+       "explain": "Understanding the reason for resistance is the first step to gaining support."
+      },
+      {
+       "type": "mc",
+       "q": "A test server crashes and blocks testing. Where should this be recorded, with an owner and due date?",
+       "options": [
+        "Issue log",
+        "Risk register only",
+        "Business case",
+        "Lessons learned only"
+       ],
+       "answer": 0,
+       "explain": "Problems happening now go in the issue log and are tracked to resolution."
+      },
+      {
+       "type": "mc",
+       "q": "Staff must learn new processes to use the new system. Which activity helps them adopt it?",
+       "options": [
+        "Organisational change management, such as training and clear communication",
+        "Fast tracking",
+        "Crashing",
+        "Closing contracts early"
+       ],
+       "answer": 0,
+       "explain": "Change management helps people accept and use what the project delivers."
+      },
+      {
+       "type": "mc",
+       "q": "Contractor staff are about to start working on company systems. What should happen first?",
+       "options": [
+        "They sign any required NDA and get approved access",
+        "They are given the admin password by email",
+        "They start work and paperwork follows later",
+        "They borrow a staff member's login"
+       ],
+       "answer": 0,
+       "explain": "Contractors need legal agreements and proper, approved access before touching systems."
+      }
+     ]
+    },
+    {
+     "id": "lc-monitor",
+     "title": "Monitoring, Controlling and Earned Value",
+     "learn": {
+      "idea": "Monitoring compares actual progress with the plan. Earned value turns that comparison into numbers so you can see if you are over budget or behind schedule.",
+      "points": [
+       "PV = planned value, EV = earned value (work done), AC = actual cost.",
+       "CV = EV - AC. SV = EV - PV. Negative is bad.",
+       "CPI = EV / AC. SPI = EV / PV. Below 1 is bad.",
+       "EAC = BAC / CPI. ETC = EAC - AC. VAC = BAC - EAC."
+      ],
+      "memory": "EV comes first in all four variance and index formulas."
+     },
+     "cards": [
+      {
+       "front": "CV formula?",
+       "back": "EV - AC. Negative means over budget."
+      },
+      {
+       "front": "SV formula?",
+       "back": "EV - PV. Negative means behind schedule."
+      },
+      {
+       "front": "CPI formula?",
+       "back": "EV / AC. Below 1 means over budget."
+      },
+      {
+       "front": "SPI formula?",
+       "back": "EV / PV. Below 1 means behind schedule."
+      },
+      {
+       "front": "EAC (typical)?",
+       "back": "BAC / CPI"
+      },
+      {
+       "front": "Corrective vs preventive action?",
+       "back": "Corrective fixes a variance already found. Preventive stops a likely future one."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "In earned value management, what is planned value (PV)?",
+       "options": [
+        "The budgeted cost of the work scheduled to be done by now",
+        "The actual money spent so far",
+        "The budgeted value of the work actually completed",
+        "The total budget at completion"
+       ],
+       "answer": 0,
+       "explain": "PV is what you planned to have done by this date, in budget terms."
+      },
+      {
+       "type": "mc",
+       "q": "What is earned value (EV)?",
+       "options": [
+        "The budgeted value of the work actually completed",
+        "The money spent so far",
+        "The work planned for this date",
+        "The forecast final cost"
+       ],
+       "answer": 0,
+       "explain": "EV measures progress in budget terms."
+      },
+      {
+       "type": "mc",
+       "q": "What is actual cost (AC)?",
+       "options": [
+        "The money actually spent on the work done so far",
+        "The budget for the whole project",
+        "The value of work completed",
+        "The value of work planned"
+       ],
+       "answer": 0,
+       "explain": "AC is what has really been paid."
+      },
+      {
+       "type": "calc",
+       "q": "EV is $40,000 and AC is $50,000. What is the cost variance (CV) in dollars?",
+       "answer": -10000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "CV = EV - AC = 40,000 - 50,000 = -10,000. Negative means over budget."
+      },
+      {
+       "type": "calc",
+       "q": "EV is $40,000 and PV is $45,000. What is the schedule variance (SV) in dollars?",
+       "answer": -5000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "SV = EV - PV = 40,000 - 45,000 = -5,000. Negative means behind schedule."
+      },
+      {
+       "type": "calc",
+       "q": "EV is $40,000 and AC is $50,000. What is the cost performance index (CPI)?",
+       "answer": 0.8,
+       "unit": "",
+       "tolerance": 0.01,
+       "explain": "CPI = EV / AC = 40,000 / 50,000 = 0.8."
+      },
+      {
+       "type": "calc",
+       "q": "EV is $45,000 and PV is $50,000. What is the schedule performance index (SPI)?",
+       "answer": 0.9,
+       "unit": "",
+       "tolerance": 0.01,
+       "explain": "SPI = EV / PV = 45,000 / 50,000 = 0.9."
+      },
+      {
+       "type": "mc",
+       "q": "A project has a CPI of 1.2 and an SPI of 0.8. What does this mean?",
+       "options": [
+        "Under budget and behind schedule",
+        "Over budget and ahead of schedule",
+        "Over budget and behind schedule",
+        "Under budget and ahead of schedule"
+       ],
+       "answer": 0,
+       "explain": "CPI above 1 is under budget. SPI below 1 is behind schedule."
+      },
+      {
+       "type": "calc",
+       "q": "The budget at completion (BAC) is $200,000 and the CPI is 0.8. What is the estimate at completion (EAC) in dollars?",
+       "answer": 250000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "EAC = BAC / CPI = 200,000 / 0.8 = 250,000."
+      },
+      {
+       "type": "calc",
+       "q": "The EAC is $250,000 and the actual cost so far is $100,000. What is the estimate to complete (ETC) in dollars?",
+       "answer": 150000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "ETC = EAC - AC = 250,000 - 100,000 = 150,000."
+      },
+      {
+       "type": "calc",
+       "q": "The BAC is $200,000 and the EAC is $250,000. What is the variance at completion (VAC) in dollars?",
+       "answer": -50000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "VAC = BAC - EAC = 200,000 - 250,000 = -50,000. The project is expected to finish $50,000 over budget."
+      },
+      {
+       "type": "calc",
+       "q": "A project has a BAC of $100,000 and is 40% complete. What is its earned value in dollars?",
+       "answer": 40000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "EV = percent complete x BAC = 0.40 x 100,000 = 40,000."
+      },
+      {
+       "type": "mc",
+       "q": "Which is a key performance indicator (KPI) for a help desk migration project?",
+       "options": [
+        "Percentage of tickets resolved within the SLA",
+        "The colour of the dashboard",
+        "The number of meetings held",
+        "The PM's job title"
+       ],
+       "answer": 0,
+       "explain": "A KPI is a measurable value that shows whether goals are being met."
+      },
+      {
+       "type": "mc",
+       "q": "The project's CPI drops below the 0.9 tolerance set in the plan. What should the PM do?",
+       "options": [
+        "Analyse the cause and take corrective action, escalating if needed",
+        "Wait until the project ends",
+        "Change the CPI formula",
+        "Hide the figure from the report"
+       ],
+       "answer": 0,
+       "explain": "Crossing a set threshold triggers analysis and corrective action."
+      },
+      {
+       "type": "mc",
+       "q": "Testers compare a finished deliverable against its acceptance criteria before it goes to the customer. Which process is this?",
+       "options": [
+        "Quality control",
+        "Quality planning",
+        "Procurement",
+        "Initiating"
+       ],
+       "answer": 0,
+       "explain": "QC inspects and tests deliverables to find defects."
+      },
+      {
+       "type": "match",
+       "q": "Match each action to its description.",
+       "pairs": [
+        [
+         "Corrective action",
+         "Fixes a variance that has already happened"
+        ],
+        [
+         "Preventive action",
+         "Reduces the chance of a future variance"
+        ],
+        [
+         "Defect repair",
+         "Fixes a faulty deliverable"
+        ],
+        [
+         "Change request",
+         "Formal ask to change the baseline"
+        ]
+       ],
+       "explain": "All four can come out of monitoring and controlling."
+      },
+      {
+       "type": "mc",
+       "q": "The customer formally reviews and accepts completed deliverables. What is this process?",
+       "options": [
+        "Validate scope",
+        "Control quality",
+        "Define scope",
+        "Plan scope"
+       ],
+       "answer": 0,
+       "explain": "Validate scope is the customer's formal acceptance. Quality control happens before it."
+      },
+      {
+       "type": "mc",
+       "q": "An independent team checks whether the project followed data protection rules. What is this?",
+       "options": [
+        "A compliance audit",
+        "A sprint review",
+        "A kickoff meeting",
+        "Resource leveling"
+       ],
+       "answer": 0,
+       "explain": "Audits check that the project meets required standards and rules."
+      },
+      {
+       "type": "mc",
+       "q": "On a red, amber and green (RAG) status dashboard, what does red usually mean?",
+       "options": [
+        "Serious problems that need action or escalation",
+        "On track",
+        "Complete",
+        "Not started yet"
+       ],
+       "answer": 0,
+       "explain": "Red signals trouble, amber means at risk, and green means on track."
+      },
+      {
+       "type": "tf",
+       "q": "Monitoring and controlling happens only at the end of the project.",
+       "answer": false,
+       "explain": "It runs through the whole project, alongside executing, so problems are caught early."
+      }
+     ]
+    },
+    {
+     "id": "lc-close",
+     "title": "Closing",
+     "learn": {
+      "idea": "Closing makes the end official: the customer accepts, the work is handed over, contracts and budgets are closed, lessons are captured and people are released.",
+      "points": [
+       "Get formal sign-off that the deliverables are accepted.",
+       "Hand over to operations with documentation, training and support.",
+       "Close contracts and financial codes so nothing more is charged.",
+       "Capture lessons learned, release resources and archive records."
+      ],
+      "memory": "Accept, hand over, learn, release, archive."
+     },
+     "cards": [
+      {
+       "front": "First closing step?",
+       "back": "Get formal acceptance and sign-off."
+      },
+      {
+       "front": "Purpose of lessons learned?",
+       "back": "Record what worked and what did not, so future projects benefit."
+      },
+      {
+       "front": "What is hypercare?",
+       "back": "Extra support just after go-live while users settle in."
+      },
+      {
+       "front": "Does a cancelled project still close?",
+       "back": "Yes. Document why, capture lessons and close it properly."
+      },
+      {
+       "front": "Contract closure?",
+       "back": "Confirm all deliverables received, settle invoices, close the agreement."
+      },
+      {
+       "front": "When to gather lessons learned?",
+       "back": "All through the project, not just at the end."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "What is the first thing that should happen when the project's deliverables are complete?",
+       "options": [
+        "Get formal acceptance and sign-off from the customer or sponsor",
+        "Release the team",
+        "Delete the project files",
+        "Start the next project"
+       ],
+       "answer": 0,
+       "explain": "Formal acceptance confirms the work meets the agreed criteria."
+      },
+      {
+       "type": "mc",
+       "q": "What is the main purpose of a lessons learned session?",
+       "options": [
+        "Record what went well and what to improve for future projects",
+        "Assign blame for problems",
+        "Approve new change requests",
+        "Plan the next sprint"
+       ],
+       "answer": 0,
+       "explain": "Lessons learned help the organisation get better at projects."
+      },
+      {
+       "type": "order",
+       "q": "Put these closing activities in order.",
+       "steps": [
+        "Obtain formal acceptance of the deliverables",
+        "Transition the solution to operations",
+        "Hold the lessons learned session with the team",
+        "Release resources and archive project records"
+       ],
+       "explain": "Accept first, hand over, capture lessons while the team is still there, then release people and archive."
+      },
+      {
+       "type": "mc",
+       "q": "What does closing a vendor contract involve?",
+       "options": [
+        "Confirming all deliverables were received and settling final invoices",
+        "Starting a new RFP",
+        "Extending the contract automatically",
+        "Deleting the contract"
+       ],
+       "answer": 0,
+       "explain": "Contract closure confirms obligations are met on both sides."
+      },
+      {
+       "type": "mc",
+       "q": "What makes a good handover to operations?",
+       "options": [
+        "Documentation, training and agreed support arrangements",
+        "An email with the server password",
+        "Leaving the team to support it forever",
+        "Nothing, operations will work it out"
+       ],
+       "answer": 0,
+       "explain": "Operations needs the knowledge and tools to run the solution."
+      },
+      {
+       "type": "mc",
+       "q": "The sponsor cancels the project halfway through. What should the PM do?",
+       "options": [
+        "Run a proper closure: document the reason, capture lessons learned and archive records",
+        "Stop work and leave everything as it is",
+        "Keep working until the original end date",
+        "Delete the project documents"
+       ],
+       "answer": 0,
+       "explain": "Terminated projects are closed formally too, and their lessons can be valuable."
+      },
+      {
+       "type": "mc",
+       "q": "How should project records be handled at closing?",
+       "options": [
+        "Archived according to the organisation's retention policy",
+        "Deleted to save space",
+        "Kept on the PM's laptop",
+        "Emailed to every stakeholder"
+       ],
+       "answer": 0,
+       "explain": "Records may be needed for audits, legal reasons or future projects."
+      },
+      {
+       "type": "mc",
+       "q": "When releasing team members at the end of the project, what should the PM do?",
+       "options": [
+        "Tell their functional managers and give feedback on their performance",
+        "Release them without notice",
+        "Keep them on the project code indefinitely",
+        "Ask them to find new work themselves"
+       ],
+       "answer": 0,
+       "explain": "Proper release helps people move on and gives managers useful feedback."
+      },
+      {
+       "type": "mc",
+       "q": "What does a final project report usually include?",
+       "options": [
+        "Performance against scope, schedule, cost and quality, plus key lessons",
+        "Only the team's names",
+        "The original business case only",
+        "Draft code"
+       ],
+       "answer": 0,
+       "explain": "The final report summarises how the project did against its goals."
+      },
+      {
+       "type": "mc",
+       "q": "Why should the PM celebrate and recognise the team at the end of the project?",
+       "options": [
+        "It rewards effort and builds goodwill for future work",
+        "It is required by law",
+        "It replaces lessons learned",
+        "It closes the contracts"
+       ],
+       "answer": 0,
+       "explain": "Recognition helps morale and makes people keen to work together again."
+      },
+      {
+       "type": "mc",
+       "q": "After go-live, the project team gives extra support for two weeks while users settle in, before full handover to the help desk. What is this?",
+       "options": [
+        "Hypercare (warranty) period",
+        "Fast tracking",
+        "Sprint planning",
+        "Gap analysis"
+       ],
+       "answer": 0,
+       "explain": "Hypercare catches early problems before normal support takes over."
+      },
+      {
+       "type": "tf",
+       "q": "Lessons learned should be collected only at the very end of the project.",
+       "answer": false,
+       "explain": "Capture them throughout, while details are fresh. Closing gathers them together."
+      },
+      {
+       "type": "mc",
+       "q": "The customer refuses to sign off, saying the system 'is not what they wanted'. What should the PM refer to?",
+       "options": [
+        "The acceptance criteria agreed in the scope statement",
+        "The PM's own opinion",
+        "The vendor's marketing material",
+        "The first draft of the business case"
+       ],
+       "answer": 0,
+       "explain": "Agreed acceptance criteria are the objective test of whether the deliverable is done."
+      },
+      {
+       "type": "mc",
+       "q": "Why should the project's budget codes be closed at the end?",
+       "options": [
+        "So no further costs can be charged to the project",
+        "So the team gets paid faster",
+        "To restart the project later",
+        "It is not needed"
+       ],
+       "answer": 0,
+       "explain": "Closing financial accounts stops stray charges and gives a final cost figure."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pp-tools",
+   "title": "Tools and Documentation",
+   "exam": "Project+ · Domain 3 (19%)",
+   "color": "#6D28D9",
+   "concepts": [
+    {
+     "id": "td-tools",
+     "title": "Project Management Tools",
+     "learn": {
+      "idea": "The right tool makes the plan visible. Gantt charts show time, Kanban boards show flow, ticketing systems track requests, and dashboards sum it all up.",
+      "points": [
+       "Gantt charts show tasks as bars over time, with dependencies and progress.",
+       "Kanban boards show work moving through columns such as To do, In progress and Done.",
+       "Ticketing systems track tasks, requests and defects with owners and status.",
+       "Shared repositories with version control keep one source of truth for documents and code."
+      ],
+      "memory": "Gantt for time, Kanban for flow, dashboard for the boss."
+     },
+     "cards": [
+      {
+       "front": "Gantt chart shows?",
+       "back": "Tasks as bars over time, with dependencies and progress."
+      },
+      {
+       "front": "Kanban board shows?",
+       "back": "Work moving through stages, with WIP limits."
+      },
+      {
+       "front": "What is a dashboard for?",
+       "back": "An at-a-glance view of key measures and status."
+      },
+      {
+       "front": "Why a shared repository?",
+       "back": "One current version of every document, with history."
+      },
+      {
+       "front": "What feeds actual cost (AC)?",
+       "back": "Timesheets and invoices."
+      },
+      {
+       "front": "Tool for sensitive project data?",
+       "back": "A secure, company-approved tool, not personal apps."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which tool shows project tasks as horizontal bars along a timeline, often with dependencies and percent complete?",
+       "options": [
+        "Gantt chart",
+        "Pareto chart",
+        "Fishbone diagram",
+        "RACI matrix"
+       ],
+       "answer": 0,
+       "explain": "A Gantt chart is the classic schedule view."
+      },
+      {
+       "type": "mc",
+       "q": "A team tracks work on a board with columns for Backlog, In progress, Testing and Done. What is this tool?",
+       "options": [
+        "Kanban board",
+        "Gantt chart",
+        "Histogram",
+        "Network diagram"
+       ],
+       "answer": 0,
+       "explain": "A Kanban board makes the flow of work and any bottlenecks easy to see."
+      },
+      {
+       "type": "mc",
+       "q": "Which feature of project scheduling software helps the PM most when tasks slip?",
+       "options": [
+        "It recalculates dates and the critical path from task dependencies",
+        "It writes the business case",
+        "It signs contracts",
+        "It approves change requests"
+       ],
+       "answer": 0,
+       "explain": "Linked tasks let the software show the knock-on effect of a delay."
+      },
+      {
+       "type": "mc",
+       "q": "The team needs to log bugs and requests, assign them to people and track their status. Which tool fits?",
+       "options": [
+        "Ticketing (issue tracking) system",
+        "Spreadsheet emailed weekly",
+        "Gantt chart",
+        "Org chart"
+       ],
+       "answer": 0,
+       "explain": "Ticketing systems give each item an ID, owner, priority and status history."
+      },
+      {
+       "type": "mc",
+       "q": "Team members keep editing different copies of the requirements document. What fixes this?",
+       "options": [
+        "A shared repository with version control",
+        "Emailing the file more often",
+        "Printing the document",
+        "Saving copies on each laptop"
+       ],
+       "answer": 0,
+       "explain": "A shared repository keeps one current version and a record of changes."
+      },
+      {
+       "type": "mc",
+       "q": "A developer has a quick question for a colleague in the same team. Which tool fits best?",
+       "options": [
+        "Instant messaging (team chat)",
+        "A formal letter",
+        "A change request",
+        "The project charter"
+       ],
+       "answer": 0,
+       "explain": "Chat suits quick, informal questions. Decisions should still be recorded properly."
+      },
+      {
+       "type": "mc",
+       "q": "The sponsor wants an at-a-glance view of schedule, budget and risk status. Which tool fits?",
+       "options": [
+        "A project dashboard",
+        "The full WBS dictionary",
+        "The raw task list",
+        "The issue log export"
+       ],
+       "answer": 0,
+       "explain": "Dashboards summarise key measures visually, often with red, amber and green."
+      },
+      {
+       "type": "mc",
+       "q": "The team is spread across time zones. Which tool helps most with booking meetings?",
+       "options": [
+        "A shared calendar that shows each person's free time and time zone",
+        "A fishbone diagram",
+        "A risk register",
+        "A purchase order"
+       ],
+       "answer": 0,
+       "explain": "Shared calendars avoid booking people outside their working hours."
+      },
+      {
+       "type": "mc",
+       "q": "Which tool tracks changes to source code, lets developers work on branches and allows rollback?",
+       "options": [
+        "A version control system such as Git",
+        "A Gantt chart",
+        "A dashboard",
+        "A burndown chart"
+       ],
+       "answer": 0,
+       "explain": "Version control keeps the full history of code changes."
+      },
+      {
+       "type": "mc",
+       "q": "The PM needs input from 400 staff about how they use the current intranet. Which tool is most efficient?",
+       "options": [
+        "An online survey",
+        "One-to-one interviews with each person",
+        "A fishbone diagram",
+        "A bidders conference"
+       ],
+       "answer": 0,
+       "explain": "Surveys gather answers from many people quickly."
+      },
+      {
+       "type": "mc",
+       "q": "During a brainstorming session, the team maps out ideas and how they connect. Which tool fits?",
+       "options": [
+        "A mind map or digital whiteboard",
+        "A purchase order",
+        "An SLA",
+        "A control chart"
+       ],
+       "answer": 0,
+       "explain": "Mind maps and whiteboards help capture and group ideas visually."
+      },
+      {
+       "type": "mc",
+       "q": "Which tool supplies the hours worked that feed into the project's actual cost?",
+       "options": [
+        "Time tracking (timesheets)",
+        "The risk register",
+        "The communication plan",
+        "The org chart"
+       ],
+       "answer": 0,
+       "explain": "Timesheets show real effort, which drives actual cost and future estimates."
+      },
+      {
+       "type": "mc",
+       "q": "The team needs to share customer data files during the project. Which choice is best?",
+       "options": [
+        "A secure, company-approved file sharing tool with access controls",
+        "A personal cloud storage account",
+        "A USB stick passed around",
+        "A public link anyone can open"
+       ],
+       "answer": 0,
+       "explain": "Sensitive data should stay in approved, controlled tools."
+      },
+      {
+       "type": "tf",
+       "q": "A Gantt chart can show task durations, dependencies and progress against the timeline.",
+       "answer": true,
+       "explain": "Most scheduling tools draw dependencies as arrows and shade bars to show progress."
+      },
+      {
+       "type": "match",
+       "q": "Match each tool to its main use.",
+       "pairs": [
+        [
+         "Gantt chart",
+         "Schedule on a timeline"
+        ],
+        [
+         "Kanban board",
+         "Flow of work through stages"
+        ],
+        [
+         "Dashboard",
+         "Summary of key measures"
+        ],
+        [
+         "Ticketing system",
+         "Tracking requests and defects"
+        ]
+       ],
+       "explain": "Pick the tool that answers the question being asked."
+      }
+     ]
+    },
+    {
+     "id": "td-docs",
+     "title": "Project Documents and Agreements",
+     "learn": {
+      "idea": "Projects run on documents. Agreements set the legal terms with vendors, and logs and reports keep track of what is happening.",
+      "points": [
+       "SOW describes the work and deliverables. MSA sets general terms for future work. SLA sets service levels.",
+       "NDA protects confidential information. MOU states shared intent and is usually not legally binding.",
+       "A purchase order (PO) authorises a purchase. An invoice asks for payment.",
+       "Logs: issue log (problems now), risk register (may happen), change log (requests), decision log (decisions)."
+      ],
+      "memory": "MSA is the umbrella. SOW is the job. SLA is the promise."
+     },
+     "cards": [
+      {
+       "front": "SOW?",
+       "back": "Statement of work: the work, deliverables and timeline a vendor will provide."
+      },
+      {
+       "front": "MSA?",
+       "back": "Master services agreement: general terms that cover future SOWs."
+      },
+      {
+       "front": "SLA?",
+       "back": "Service level agreement: measurable service targets such as uptime."
+      },
+      {
+       "front": "NDA?",
+       "back": "Non-disclosure agreement: protects confidential information."
+      },
+      {
+       "front": "MOU?",
+       "back": "Memorandum of understanding: shared intent, usually not legally binding."
+      },
+      {
+       "front": "Traceability matrix?",
+       "back": "Links each requirement to its deliverable and test."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which document describes the specific work, deliverables and timeline a vendor will provide?",
+       "options": [
+        "Statement of work (SOW)",
+        "Non-disclosure agreement (NDA)",
+        "Memorandum of understanding (MOU)",
+        "Invoice"
+       ],
+       "answer": 0,
+       "explain": "The SOW defines exactly what the vendor will do."
+      },
+      {
+       "type": "mc",
+       "q": "A company signs one agreement with a vendor that sets payment terms, liability and confidentiality for all future work, then adds separate SOWs for each job. What is the main agreement?",
+       "options": [
+        "Master services agreement (MSA)",
+        "Purchase order",
+        "Service level agreement",
+        "Bill of materials"
+       ],
+       "answer": 0,
+       "explain": "The MSA sets the general terms so each new job only needs a SOW."
+      },
+      {
+       "type": "mc",
+       "q": "A hosting provider promises 99.9% uptime and a four-hour response to critical incidents. Which document sets these targets?",
+       "options": [
+        "Service level agreement (SLA)",
+        "Statement of work",
+        "Business case",
+        "Project charter"
+       ],
+       "answer": 0,
+       "explain": "An SLA defines measurable service levels."
+      },
+      {
+       "type": "mc",
+       "q": "Before sharing network diagrams with a possible vendor, what should the vendor sign?",
+       "options": [
+        "Non-disclosure agreement (NDA)",
+        "Purchase order",
+        "Memorandum of understanding",
+        "Lessons learned register"
+       ],
+       "answer": 0,
+       "explain": "An NDA legally protects confidential information."
+      },
+      {
+       "type": "mc",
+       "q": "Two government agencies agree in writing to work together on a shared portal, but neither is legally bound yet. Which document is this?",
+       "options": [
+        "Memorandum of understanding (MOU)",
+        "Fixed-price contract",
+        "Purchase order",
+        "SLA"
+       ],
+       "answer": 0,
+       "explain": "An MOU records shared intent and is usually not legally binding."
+      },
+      {
+       "type": "mc",
+       "q": "Which document from the buyer authorises a purchase and states the items, quantities and agreed prices?",
+       "options": [
+        "Purchase order (PO)",
+        "Invoice",
+        "Request for information",
+        "Warranty"
+       ],
+       "answer": 0,
+       "explain": "The PO is the buyer's formal commitment to buy."
+      },
+      {
+       "type": "mc",
+       "q": "Which document does a vendor send to request payment for delivered goods or services?",
+       "options": [
+        "Invoice",
+        "Purchase order",
+        "RFP",
+        "SOW"
+       ],
+       "answer": 0,
+       "explain": "The invoice is checked against the PO and what was actually received."
+      },
+      {
+       "type": "mc",
+       "q": "A new switch fails after three months. Which document says whether the vendor must replace it for free?",
+       "options": [
+        "Warranty",
+        "Project charter",
+        "Communication plan",
+        "Issue log"
+       ],
+       "answer": 0,
+       "explain": "A warranty covers repair or replacement for a set period."
+      },
+      {
+       "type": "mc",
+       "q": "Which of these is a legally binding agreement between buyer and seller?",
+       "options": [
+        "A signed contract",
+        "A memorandum of understanding",
+        "A request for information",
+        "A meeting agenda"
+       ],
+       "answer": 0,
+       "explain": "Contracts are enforceable. MOUs and RFIs are not."
+      },
+      {
+       "type": "match",
+       "q": "Match each log to what it records.",
+       "pairs": [
+        [
+         "Issue log",
+         "Problems happening now"
+        ],
+        [
+         "Risk register",
+         "Uncertain events that may happen"
+        ],
+        [
+         "Change log",
+         "Change requests and their status"
+        ],
+        [
+         "Decision log",
+         "Key decisions, who made them and why"
+        ]
+       ],
+       "explain": "Each log has one job. Exam questions often swap them to test you."
+      },
+      {
+       "type": "mc",
+       "q": "Which document shows who is Responsible, Accountable, Consulted and Informed for each deliverable?",
+       "options": [
+        "Responsibility assignment matrix (RACI chart)",
+        "Bill of materials",
+        "Gantt chart",
+        "Purchase order"
+       ],
+       "answer": 0,
+       "explain": "The RACI chart makes ownership clear."
+      },
+      {
+       "type": "mc",
+       "q": "What should be sent to attendees before a meeting so they can prepare?",
+       "options": [
+        "An agenda with topics, timings and the meeting goal",
+        "The minutes",
+        "The final report",
+        "An invoice"
+       ],
+       "answer": 0,
+       "explain": "Agendas keep meetings focused. Minutes come afterwards."
+      },
+      {
+       "type": "mc",
+       "q": "What does a typical weekly status report include?",
+       "options": [
+        "Progress since last report, next steps, key issues and risks",
+        "Every email sent that week",
+        "Team members' personal details",
+        "The full requirements document"
+       ],
+       "answer": 0,
+       "explain": "Status reports summarise where the project stands and what needs attention."
+      },
+      {
+       "type": "mc",
+       "q": "Which document lists every task with its start and finish dates, dependencies and assigned resources?",
+       "options": [
+        "Project schedule",
+        "Business case",
+        "MOU",
+        "NDA"
+       ],
+       "answer": 0,
+       "explain": "The schedule shows when work happens and who does it."
+      },
+      {
+       "type": "mc",
+       "q": "Which document links each requirement to the deliverable that meets it and the test that proves it?",
+       "options": [
+        "Requirements traceability matrix",
+        "Issue log",
+        "Stakeholder register",
+        "Bill of materials"
+       ],
+       "answer": 0,
+       "explain": "The traceability matrix makes sure nothing is missed or built without a requirement."
+      },
+      {
+       "type": "mc",
+       "q": "Where are lessons captured during the project so they are not forgotten by the end?",
+       "options": [
+        "Lessons learned register",
+        "Purchase order",
+        "Change log only",
+        "Invoice"
+       ],
+       "answer": 0,
+       "explain": "A running register stops lessons being lost before closing."
+      },
+      {
+       "type": "mc",
+       "q": "How long should project records be kept after closing?",
+       "options": [
+        "As long as the organisation's records retention policy requires",
+        "One week",
+        "Forever, in every case",
+        "Until the PM leaves the company"
+       ],
+       "answer": 0,
+       "explain": "Retention periods come from policy, law and contracts."
+      },
+      {
+       "type": "mc",
+       "q": "The steering committee chooses Vendor B over Vendor A. Where should the choice, the reason and who made it be recorded?",
+       "options": [
+        "Decision log",
+        "Risk register",
+        "Bill of materials",
+        "Agenda"
+       ],
+       "answer": 0,
+       "explain": "The decision log stops the same decision being reopened and shows who agreed it."
+      },
+      {
+       "type": "mc",
+       "q": "Which document describes how the solution will be tested, including scope, approach, environments and pass criteria?",
+       "options": [
+        "Test plan",
+        "Purchase order",
+        "MOU",
+        "Org chart"
+       ],
+       "answer": 0,
+       "explain": "The test plan guides testing and shows what counts as a pass."
+      },
+      {
+       "type": "calc",
+       "q": "An SLA promises 99.9% uptime over a 30-day month. How many minutes of downtime are allowed?",
+       "answer": 43.2,
+       "unit": "minutes",
+       "tolerance": 0.1,
+       "explain": "30 x 24 x 60 = 43,200 minutes. 0.1% of that is 43.2 minutes."
+      },
+      {
+       "type": "mc",
+       "q": "A vendor misses the SLA uptime target. What does the SLA usually give the customer?",
+       "options": [
+        "Service credits or penalties as set out in the agreement",
+        "Nothing at all",
+        "Automatic ownership of the vendor",
+        "A free new contract"
+       ],
+       "answer": 0,
+       "explain": "SLAs often include service credits when targets are missed."
+      },
+      {
+       "type": "mc",
+       "q": "For a server room build, which document lists every hardware part and its quantity?",
+       "options": [
+        "Bill of materials (BOM)",
+        "Business case",
+        "Communication plan",
+        "Lessons learned register"
+       ],
+       "answer": 0,
+       "explain": "A BOM is the parts list used for ordering and checking deliveries."
+      },
+      {
+       "type": "order",
+       "q": "Put these vendor documents in the order they are usually used.",
+       "steps": [
+        "NDA signed so information can be shared",
+        "RFP sent to vendors",
+        "Proposal selected and contract (MSA and SOW) signed",
+        "Purchase order issued",
+        "Invoice received and paid"
+       ],
+       "explain": "Protect information, ask for proposals, contract the winner, authorise the purchase, then pay."
+      },
+      {
+       "type": "tf",
+       "q": "A memorandum of understanding is normally a legally binding contract that can be enforced in court.",
+       "answer": false,
+       "explain": "An MOU usually shows shared intent only. A contract is what binds the parties."
+      }
+     ]
+    },
+    {
+     "id": "td-charts",
+     "title": "Charts and Quality Tools",
+     "learn": {
+      "idea": "Charts turn data into decisions. Each one answers a different question: what causes most problems, what caused this one, is the process stable, how are we progressing.",
+      "points": [
+       "Pareto: biggest causes first. About 80% of problems come from 20% of causes.",
+       "Fishbone (Ishikawa): possible causes of one problem, grouped by category.",
+       "Control chart: is a process stable within its limits over time?",
+       "Scatter diagram: is there a relationship between two variables?"
+      ],
+      "memory": "Pareto picks the problem. Fishbone finds the cause."
+     },
+     "cards": [
+      {
+       "front": "Pareto chart?",
+       "back": "Bars in descending order with a cumulative line, to find the vital few causes."
+      },
+      {
+       "front": "Fishbone diagram?",
+       "back": "Cause and effect diagram that groups possible causes of one problem."
+      },
+      {
+       "front": "Control chart rule of seven?",
+       "back": "Seven points in a row on one side of the mean means investigate."
+      },
+      {
+       "front": "Histogram?",
+       "back": "Shows how often values fall into ranges (frequency)."
+      },
+      {
+       "front": "Scatter diagram?",
+       "back": "Shows whether two variables are related."
+      },
+      {
+       "front": "Burnup chart?",
+       "back": "Shows work completed rising toward total scope."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which chart shows causes in descending order of frequency, with a cumulative percentage line, to find the vital few?",
+       "options": [
+        "Pareto chart",
+        "Scatter diagram",
+        "Gantt chart",
+        "Run chart"
+       ],
+       "answer": 0,
+       "explain": "Pareto charts help you fix the biggest causes first."
+      },
+      {
+       "type": "mc",
+       "q": "The team wants to brainstorm all possible causes of slow network performance, grouped into people, process, equipment and environment. Which tool fits?",
+       "options": [
+        "Fishbone (Ishikawa) diagram",
+        "Burndown chart",
+        "Histogram",
+        "Gantt chart"
+       ],
+       "answer": 0,
+       "explain": "The fishbone diagram organises possible causes of one effect."
+      },
+      {
+       "type": "mc",
+       "q": "Which chart shows how often values fall into ranges, such as how many tickets took 0 to 1 hours, 1 to 2 hours and so on?",
+       "options": [
+        "Histogram",
+        "Fishbone diagram",
+        "Network diagram",
+        "RACI chart"
+       ],
+       "answer": 0,
+       "explain": "A histogram shows the distribution of data."
+      },
+      {
+       "type": "mc",
+       "q": "The PM wants to know whether more overtime is linked to more defects. Which chart fits?",
+       "options": [
+        "Scatter diagram",
+        "Pareto chart",
+        "Milestone chart",
+        "Org chart"
+       ],
+       "answer": 0,
+       "explain": "A scatter diagram plots two variables to show any relationship."
+      },
+      {
+       "type": "mc",
+       "q": "Which chart shows whether a process stays within upper and lower limits over time?",
+       "options": [
+        "Control chart",
+        "Histogram",
+        "Fishbone diagram",
+        "Pareto chart"
+       ],
+       "answer": 0,
+       "explain": "Control charts show whether a process is stable or needs attention."
+      },
+      {
+       "type": "mc",
+       "q": "On a control chart, seven data points in a row fall above the mean but inside the control limits. What does this mean?",
+       "options": [
+        "The process may be out of control and should be investigated",
+        "The process is perfect",
+        "The chart is wrong",
+        "Nothing, all points are inside the limits"
+       ],
+       "answer": 0,
+       "explain": "The rule of seven flags a pattern that is unlikely to be random."
+      },
+      {
+       "type": "mc",
+       "q": "Which chart shows a measure over time to spot trends, but has no control limits?",
+       "options": [
+        "Run chart",
+        "Control chart",
+        "Pareto chart",
+        "Fishbone diagram"
+       ],
+       "answer": 0,
+       "explain": "A run chart is a simple line over time."
+      },
+      {
+       "type": "mc",
+       "q": "Which diagram maps the steps and decision points of a process, such as how a password reset request is handled?",
+       "options": [
+        "Flowchart",
+        "Histogram",
+        "Scatter diagram",
+        "Pareto chart"
+       ],
+       "answer": 0,
+       "explain": "Flowcharts show each step and branch in a process."
+      },
+      {
+       "type": "mc",
+       "q": "Which chart shows completed work rising over time along with a separate line for total scope, so scope changes are visible?",
+       "options": [
+        "Burnup chart",
+        "Burndown chart",
+        "Fishbone diagram",
+        "Histogram"
+       ],
+       "answer": 0,
+       "explain": "A burnup chart shows both progress and any growth in scope."
+      },
+      {
+       "type": "mc",
+       "q": "A sprint burndown line has stayed flat for three days. What does this suggest?",
+       "options": [
+        "Little or no work is being completed, so the team may be blocked",
+        "The sprint is ahead of schedule",
+        "Scope has been removed",
+        "The chart is complete"
+       ],
+       "answer": 0,
+       "explain": "A flat burndown means remaining work is not dropping. Check for blockers."
+      },
+      {
+       "type": "mc",
+       "q": "Which diagram shows the order of activities and their dependencies as boxes connected by arrows, used to find the critical path?",
+       "options": [
+        "Network diagram",
+        "Histogram",
+        "Pareto chart",
+        "Org chart"
+       ],
+       "answer": 0,
+       "explain": "A network (precedence) diagram shows task logic."
+      },
+      {
+       "type": "mc",
+       "q": "Which chart compares the story points a team completed in each of its recent sprints?",
+       "options": [
+        "Velocity chart",
+        "Fishbone diagram",
+        "Scatter diagram",
+        "Bill of materials"
+       ],
+       "answer": 0,
+       "explain": "A velocity chart helps forecast how much work fits in future sprints."
+      },
+      {
+       "type": "mc",
+       "q": "On a cumulative flow diagram, the 'In testing' band keeps getting wider. What does this mean?",
+       "options": [
+        "Work is piling up in testing, which is a bottleneck",
+        "Testing is finished",
+        "The team is ahead",
+        "Nothing is in testing"
+       ],
+       "answer": 0,
+       "explain": "A widening band means items enter that stage faster than they leave."
+      },
+      {
+       "type": "mc",
+       "q": "Which chart shows the reporting lines of people in the project or organisation?",
+       "options": [
+        "Organisational chart",
+        "Run chart",
+        "Control chart",
+        "Histogram"
+       ],
+       "answer": 0,
+       "explain": "The org chart shows who reports to whom."
+      },
+      {
+       "type": "mc",
+       "q": "The team keeps asking 'why?' about a failed backup until it reaches the underlying cause. Which technique is this?",
+       "options": [
+        "Five whys (root cause analysis)",
+        "Fast tracking",
+        "Planning poker",
+        "Earned value"
+       ],
+       "answer": 0,
+       "explain": "Asking why repeatedly moves past symptoms to the root cause."
+      },
+      {
+       "type": "mc",
+       "q": "A technician makes a tally mark each time a certain defect type is found during inspection. Which tool is this?",
+       "options": [
+        "Check sheet (tally sheet)",
+        "Gantt chart",
+        "Burnup chart",
+        "Network diagram"
+       ],
+       "answer": 0,
+       "explain": "Check sheets collect data quickly, often to feed a Pareto chart."
+      },
+      {
+       "type": "mc",
+       "q": "Which tool plots risks on a grid by probability and impact, often coloured red, amber and green?",
+       "options": [
+        "Probability and impact matrix (heat map)",
+        "Histogram",
+        "Flowchart",
+        "Gantt chart"
+       ],
+       "answer": 0,
+       "explain": "It shows which risks need attention first."
+      },
+      {
+       "type": "calc",
+       "q": "Defects by cause: Configuration 50, Training 25, Hardware 15, Other 10. What percentage of defects come from the top two causes?",
+       "answer": 75,
+       "unit": "%",
+       "tolerance": 0,
+       "explain": "Total = 100. Configuration + Training = 75, which is 75%."
+      },
+      {
+       "type": "mc",
+       "q": "Which tool maps out choices and their possible outcomes, with probabilities and values, to work out the best option?",
+       "options": [
+        "Decision tree",
+        "Org chart",
+        "Run chart",
+        "Check sheet"
+       ],
+       "answer": 0,
+       "explain": "Decision trees use expected monetary value to compare options."
+      },
+      {
+       "type": "calc",
+       "q": "An option has a 60% chance of a $10,000 gain and a 40% chance of a $5,000 loss. What is its expected monetary value in dollars?",
+       "answer": 4000,
+       "unit": "$",
+       "tolerance": 0,
+       "explain": "(0.6 x 10,000) + (0.4 x -5,000) = 6,000 - 2,000 = 4,000."
+      },
+      {
+       "type": "mc",
+       "q": "Executives want a simple view showing only the key dates, such as design sign-off and go-live. Which chart fits?",
+       "options": [
+        "Milestone chart",
+        "Detailed Gantt chart with every task",
+        "Fishbone diagram",
+        "Histogram"
+       ],
+       "answer": 0,
+       "explain": "A milestone chart shows key points without task-level detail."
+      },
+      {
+       "type": "match",
+       "q": "Match each chart to the question it answers.",
+       "pairs": [
+        [
+         "Pareto chart",
+         "Which causes create most of the problems?"
+        ],
+        [
+         "Fishbone diagram",
+         "What could be causing this problem?"
+        ],
+        [
+         "Control chart",
+         "Is the process stable?"
+        ],
+        [
+         "Scatter diagram",
+         "Are these two things related?"
+        ]
+       ],
+       "explain": "Pick the chart by the question you need answered."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pp-itgov",
+   "title": "Basics of IT and Governance",
+   "exam": "Project+ · Domain 4 (18%)",
+   "color": "#B91C1C",
+   "concepts": [
+    {
+     "id": "it-infra",
+     "title": "IT Infrastructure and Cloud",
+     "learn": {
+      "idea": "An IT project manager does not need to configure servers, but must understand what the team is building, what it depends on and what can go wrong.",
+      "points": [
+       "IaaS gives you servers and storage. PaaS gives you a platform to deploy code. SaaS gives you a finished application.",
+       "Cloud shifts spending from CapEx (buy up front) to OpEx (pay as you go).",
+       "RPO is how much data you can afford to lose. RTO is how long you can afford to be down.",
+       "Hot sites are ready to run at once. Warm sites need some setup. Cold sites are space and power only."
+      ],
+      "memory": "IaaS you manage the OS. PaaS you manage the code. SaaS you just use it."
+     },
+     "cards": [
+      {
+       "front": "IaaS?",
+       "back": "Rented servers, storage and networks. You manage the OS and up."
+      },
+      {
+       "front": "PaaS?",
+       "back": "A platform to run your code. The provider manages the OS."
+      },
+      {
+       "front": "SaaS?",
+       "back": "A complete application delivered over the internet, such as Microsoft 365."
+      },
+      {
+       "front": "RPO?",
+       "back": "Recovery point objective: the most data loss that is acceptable."
+      },
+      {
+       "front": "RTO?",
+       "back": "Recovery time objective: the most downtime that is acceptable."
+      },
+      {
+       "front": "Hot vs cold site?",
+       "back": "Hot is ready to take over at once. Cold has space and power but no equipment ready."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "A company rents virtual servers, storage and networking from a cloud provider, and its own team manages the operating systems. Which service model is this?",
+       "options": [
+        "Infrastructure as a service (IaaS)",
+        "Software as a service (SaaS)",
+        "Platform as a service (PaaS)",
+        "On-premises hosting"
+       ],
+       "answer": 0,
+       "explain": "With IaaS the provider runs the hardware and you manage everything from the OS up."
+      },
+      {
+       "type": "mc",
+       "q": "Developers upload their code to a cloud platform that handles the servers, operating system and runtime for them. Which model is this?",
+       "options": [
+        "Platform as a service (PaaS)",
+        "Infrastructure as a service (IaaS)",
+        "Software as a service (SaaS)",
+        "Colocation"
+       ],
+       "answer": 0,
+       "explain": "PaaS lets developers focus on code while the provider runs the platform."
+      },
+      {
+       "type": "mc",
+       "q": "Staff use a web-based email and office suite that the vendor fully runs and updates. Which model is this?",
+       "options": [
+        "Software as a service (SaaS)",
+        "Platform as a service (PaaS)",
+        "Infrastructure as a service (IaaS)",
+        "Private cloud"
+       ],
+       "answer": 0,
+       "explain": "SaaS delivers a complete application. You just use it."
+      },
+      {
+       "type": "mc",
+       "q": "An organisation keeps sensitive systems in its own data centre but bursts extra workloads to a public cloud. What is this?",
+       "options": [
+        "Hybrid cloud",
+        "Public cloud only",
+        "Private cloud only",
+        "Community cloud"
+       ],
+       "answer": 0,
+       "explain": "Hybrid cloud combines private or on-premises resources with public cloud."
+      },
+      {
+       "type": "mc",
+       "q": "How does moving from on-premises servers to the cloud usually change project spending?",
+       "options": [
+        "From capital expenses (CapEx) to operating expenses (OpEx)",
+        "From operating expenses to capital expenses",
+        "It removes all costs",
+        "It has no effect on costs"
+       ],
+       "answer": 0,
+       "explain": "Cloud is usually paid monthly as used, instead of buying hardware up front."
+      },
+      {
+       "type": "mc",
+       "q": "Which technology lets one physical server run many separate virtual machines?",
+       "options": [
+        "Virtualisation (a hypervisor)",
+        "A load balancer",
+        "A VPN",
+        "A firewall"
+       ],
+       "answer": 0,
+       "explain": "Hypervisors such as VMware ESXi or KVM share one host's hardware among many VMs."
+      },
+      {
+       "type": "mc",
+       "q": "Which device spreads incoming web traffic across several servers so no single one is overloaded?",
+       "options": [
+        "Load balancer",
+        "Switch",
+        "Modem",
+        "Hypervisor"
+       ],
+       "answer": 0,
+       "explain": "Load balancers improve performance and availability."
+      },
+      {
+       "type": "mc",
+       "q": "Which component stores and organises application data such as customer records so it can be queried?",
+       "options": [
+        "Database",
+        "Load balancer",
+        "Router",
+        "Firewall"
+       ],
+       "answer": 0,
+       "explain": "Applications usually keep their data in a database server."
+      },
+      {
+       "type": "mc",
+       "q": "Remote staff need secure access to internal systems over the internet. Which technology is commonly used?",
+       "options": [
+        "Virtual private network (VPN)",
+        "Local area network only",
+        "A public file share",
+        "A print server"
+       ],
+       "answer": 0,
+       "explain": "A VPN creates an encrypted tunnel over the internet."
+      },
+      {
+       "type": "mc",
+       "q": "Users at a branch office say the new app is slow because each request takes a long time to reach the data centre. Which term describes this delay?",
+       "options": [
+        "Latency",
+        "Bandwidth",
+        "Redundancy",
+        "Elasticity"
+       ],
+       "answer": 0,
+       "explain": "Latency is delay. Bandwidth is how much data can move at once."
+      },
+      {
+       "type": "mc",
+       "q": "The project design adds a second power supply and a second network link to a critical server so one failure does not stop it. What is this?",
+       "options": [
+        "Redundancy for high availability",
+        "Scope creep",
+        "Gold plating",
+        "Fast tracking"
+       ],
+       "answer": 0,
+       "explain": "Redundancy removes single points of failure."
+      },
+      {
+       "type": "mc",
+       "q": "The business says it can lose no more than one hour of data if the system fails. Which value is this?",
+       "options": [
+        "Recovery point objective (RPO)",
+        "Recovery time objective (RTO)",
+        "Mean time between failures",
+        "Service level indicator"
+       ],
+       "answer": 0,
+       "explain": "RPO is about data loss and drives how often backups run."
+      },
+      {
+       "type": "mc",
+       "q": "A disaster recovery site has equipment, current data and network links ready to take over almost at once. What type of site is this?",
+       "options": [
+        "Hot site",
+        "Cold site",
+        "Warm site",
+        "Test site"
+       ],
+       "answer": 0,
+       "explain": "Hot sites cost the most but recover fastest."
+      },
+      {
+       "type": "mc",
+       "q": "In the cloud shared responsibility model for IaaS, who is usually responsible for patching the guest operating system?",
+       "options": [
+        "The customer",
+        "The cloud provider",
+        "Nobody",
+        "The internet service provider"
+       ],
+       "answer": 0,
+       "explain": "With IaaS the provider secures the physical layer and hypervisor. The customer manages the OS."
+      },
+      {
+       "type": "mc",
+       "q": "An online shop's cloud servers add capacity during a holiday sale and remove it after. What is this called?",
+       "options": [
+        "Elasticity",
+        "Latency",
+        "Redundancy",
+        "Virtual private network"
+       ],
+       "answer": 0,
+       "explain": "Elasticity scales resources up and down with demand."
+      },
+      {
+       "type": "mc",
+       "q": "New storage arrays for the project have a ten-week delivery time. What should the PM do?",
+       "options": [
+        "Order them early and treat the lead time as a schedule dependency and risk",
+        "Wait until the build phase to order",
+        "Ignore it, vendors always deliver early",
+        "Remove storage from scope"
+       ],
+       "answer": 0,
+       "explain": "Long hardware lead times are a common cause of IT project delays."
+      }
+     ]
+    },
+    {
+     "id": "it-dev",
+     "title": "Environments, Releases and Operational Change",
+     "learn": {
+      "idea": "Code moves from development through testing to production. In live IT systems, changes are controlled so a project cannot break what the business depends on.",
+      "points": [
+       "Environments: development, test (QA), staging, production.",
+       "UAT is done by real users to confirm the solution meets their needs.",
+       "Every production change needs a rollback (backout) plan and usually a maintenance window.",
+       "ITIL change types: standard (pre-approved), normal (CAB review), emergency (urgent fix)."
+      ],
+      "memory": "Dev, Test, Stage, Prod. Never test in prod."
+     },
+     "cards": [
+      {
+       "front": "Environment order?",
+       "back": "Development, test, staging, production."
+      },
+      {
+       "front": "UAT?",
+       "back": "User acceptance testing: end users confirm it meets their needs."
+      },
+      {
+       "front": "Regression testing?",
+       "back": "Re-testing to make sure old features still work after a change."
+      },
+      {
+       "front": "Rollback plan?",
+       "back": "Steps to undo a change and restore the previous state."
+      },
+      {
+       "front": "Standard change?",
+       "back": "Low-risk, pre-approved, done often, such as a routine password reset."
+      },
+      {
+       "front": "Pilot rollout?",
+       "back": "Release to a small group first, then everyone."
+      }
+     ],
+     "questions": [
+      {
+       "type": "order",
+       "q": "Put the environments in the order code normally moves through them.",
+       "steps": [
+        "Development",
+        "Test (QA)",
+        "Staging (pre-production)",
+        "Production"
+       ],
+       "explain": "Each step is closer to the real system, so problems are caught before users see them."
+      },
+      {
+       "type": "mc",
+       "q": "Before go-live, accounts staff test the new finance system with real tasks to confirm it meets their needs. Which testing is this?",
+       "options": [
+        "User acceptance testing (UAT)",
+        "Unit testing",
+        "Load testing",
+        "Penetration testing"
+       ],
+       "answer": 0,
+       "explain": "UAT is done by the business users, not the developers."
+      },
+      {
+       "type": "mc",
+       "q": "After a bug fix, the team re-runs earlier tests to make sure existing features still work. Which testing is this?",
+       "options": [
+        "Regression testing",
+        "Unit testing",
+        "Smoke testing",
+        "User acceptance testing"
+       ],
+       "answer": 0,
+       "explain": "Regression testing catches new changes breaking old features."
+      },
+      {
+       "type": "match",
+       "q": "Match each test type to what it checks.",
+       "pairs": [
+        [
+         "Unit testing",
+         "One small piece of code on its own"
+        ],
+        [
+         "Integration testing",
+         "Parts working together"
+        ],
+        [
+         "Load testing",
+         "Performance under heavy use"
+        ],
+        [
+         "Smoke testing",
+         "Basic functions work after a deployment"
+        ]
+       ],
+       "explain": "Testing builds up from small pieces to the whole system."
+      },
+      {
+       "type": "mc",
+       "q": "The server upgrade will take the email system offline. When should it be scheduled?",
+       "options": [
+        "During an approved maintenance window with users notified",
+        "In the middle of the business day without notice",
+        "Whenever the engineer is free",
+        "During month-end processing"
+       ],
+       "answer": 0,
+       "explain": "Maintenance windows are agreed low-impact times for planned changes."
+      },
+      {
+       "type": "mc",
+       "q": "What must be prepared before a production change, in case it goes wrong?",
+       "options": [
+        "A rollback (backout) plan",
+        "A new business case",
+        "A lessons learned report",
+        "A bidders conference"
+       ],
+       "answer": 0,
+       "explain": "A rollback plan restores the previous working state if the change fails."
+      },
+      {
+       "type": "match",
+       "q": "Match each ITIL change type to its description.",
+       "pairs": [
+        [
+         "Standard change",
+         "Low risk, pre-approved and routine"
+        ],
+        [
+         "Normal change",
+         "Assessed and approved by the CAB"
+        ],
+        [
+         "Emergency change",
+         "Urgent fix with a fast-track approval"
+        ]
+       ],
+       "explain": "The change type decides how much review is needed."
+      },
+      {
+       "type": "mc",
+       "q": "In IT operations, which group reviews and approves normal changes to production systems?",
+       "options": [
+        "Change advisory board (CAB)",
+        "Project sponsor alone",
+        "Scrum team",
+        "Help desk"
+       ],
+       "answer": 0,
+       "explain": "The CAB checks risk, timing and impact before production changes."
+      },
+      {
+       "type": "mc",
+       "q": "A new desktop image is deployed to one department first, then to the whole company once it works well. What is this approach?",
+       "options": [
+        "Pilot (phased) rollout",
+        "Big bang cutover",
+        "Fast tracking",
+        "Crashing"
+       ],
+       "answer": 0,
+       "explain": "A pilot limits the impact of any problems."
+      },
+      {
+       "type": "mc",
+       "q": "The old and new payroll systems run side by side for one month so results can be compared before the old one is switched off. What is this?",
+       "options": [
+        "Parallel cutover",
+        "Big bang cutover",
+        "Pilot",
+        "Rollback"
+       ],
+       "answer": 0,
+       "explain": "Parallel running is safest but costs more effort."
+      },
+      {
+       "type": "mc",
+       "q": "Code changes are automatically built, tested and prepared for release each time a developer commits. What is this practice?",
+       "options": [
+        "Continuous integration and continuous delivery (CI/CD)",
+        "Waterfall",
+        "Gold plating",
+        "Resource leveling"
+       ],
+       "answer": 0,
+       "explain": "CI/CD catches problems early and makes releases routine."
+      },
+      {
+       "type": "mc",
+       "q": "Two weeks before go-live, the team stops adding new features and only fixes bugs. What is this called?",
+       "options": [
+        "Code freeze",
+        "Scope creep",
+        "Fast tracking",
+        "Sprint zero"
+       ],
+       "answer": 0,
+       "explain": "A code freeze keeps the release stable for final testing."
+      },
+      {
+       "type": "tf",
+       "q": "If a project engineer is sure a production change is safe, it can skip the operational change control process.",
+       "answer": false,
+       "explain": "Production changes follow the organisation's change process, however safe they seem. Unapproved changes are a common cause of outages."
+      },
+      {
+       "type": "mc",
+       "q": "Right after deployment, the team quickly checks that users can log in and the main pages load. What is this?",
+       "options": [
+        "Smoke testing",
+        "User acceptance testing",
+        "Regression testing of every feature",
+        "Load testing"
+       ],
+       "answer": 0,
+       "explain": "Smoke tests are fast checks that the release basically works."
+      }
+     ]
+    },
+    {
+     "id": "it-gov",
+     "title": "Governance, Compliance and Privacy",
+     "learn": {
+      "idea": "IT projects must follow laws, regulations and company policies. Knowing which rules apply to the data you handle shapes the design, the vendors and the schedule.",
+      "points": [
+       "PII is any data that can identify a person.",
+       "GDPR protects personal data of people in the EU. HIPAA protects US health data. PCI DSS protects card data. SOX covers US public company financial controls.",
+       "Data retention policies say how long records are kept and when they are destroyed.",
+       "Some laws require data to stay in certain countries (data sovereignty)."
+      ],
+      "memory": "GDPR people, HIPAA patients, PCI cards, SOX books."
+     },
+     "cards": [
+      {
+       "front": "PII?",
+       "back": "Personally identifiable information: data that can identify someone."
+      },
+      {
+       "front": "GDPR covers?",
+       "back": "Personal data of people in the EU."
+      },
+      {
+       "front": "HIPAA covers?",
+       "back": "US protected health information."
+      },
+      {
+       "front": "PCI DSS covers?",
+       "back": "Payment card data."
+      },
+      {
+       "front": "SOX covers?",
+       "back": "Financial reporting controls at US public companies."
+      },
+      {
+       "front": "Data sovereignty?",
+       "back": "Data is subject to the laws of the country where it is stored."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "Which is personally identifiable information (PII)?",
+       "options": [
+        "A customer's full name with their national ID number",
+        "The number of servers in a rack",
+        "The average CPU use of a cluster",
+        "The colour of a company logo"
+       ],
+       "answer": 0,
+       "explain": "PII can identify a specific person, alone or combined with other data."
+      },
+      {
+       "type": "mc",
+       "q": "A Jamaican company's new web app collects personal data from customers living in France. Which regulation is most likely to apply?",
+       "options": [
+        "GDPR",
+        "HIPAA",
+        "SOX",
+        "PCI DSS only"
+       ],
+       "answer": 0,
+       "explain": "GDPR protects people in the EU, wherever the company is based."
+      },
+      {
+       "type": "mc",
+       "q": "A project builds a patient records system for a US hospital. Which regulation applies to the health data?",
+       "options": [
+        "HIPAA",
+        "GDPR only",
+        "PCI DSS",
+        "SOX"
+       ],
+       "answer": 0,
+       "explain": "HIPAA protects US health information."
+      },
+      {
+       "type": "mc",
+       "q": "An online store will accept credit card payments. Which standard applies to the card data?",
+       "options": [
+        "PCI DSS",
+        "HIPAA",
+        "FERPA",
+        "SOX"
+       ],
+       "answer": 0,
+       "explain": "PCI DSS sets security rules for anyone that stores, processes or sends card data."
+      },
+      {
+       "type": "mc",
+       "q": "A US public company is changing its financial reporting system. Which law requires strong controls and audit trails over financial reporting?",
+       "options": [
+        "Sarbanes-Oxley (SOX)",
+        "HIPAA",
+        "GDPR",
+        "PCI DSS"
+       ],
+       "answer": 0,
+       "explain": "SOX requires accurate financial reporting and controls."
+      },
+      {
+       "type": "mc",
+       "q": "Which policy says how long the organisation must keep records and when they must be destroyed?",
+       "options": [
+        "Data retention policy",
+        "Acceptable use policy",
+        "Password policy",
+        "Change management policy"
+       ],
+       "answer": 0,
+       "explain": "Retention policies balance legal needs, cost and privacy."
+      },
+      {
+       "type": "mc",
+       "q": "Which data classification usually needs the strongest protection?",
+       "options": [
+        "Restricted (or top secret)",
+        "Public",
+        "Internal",
+        "General"
+       ],
+       "answer": 0,
+       "explain": "Classification levels decide how data must be handled and protected."
+      },
+      {
+       "type": "mc",
+       "q": "A government agency requires its citizen data to stay on servers inside its own country. What concept is this?",
+       "options": [
+        "Data sovereignty (data residency)",
+        "Elasticity",
+        "Load balancing",
+        "Fast tracking"
+       ],
+       "answer": 0,
+       "explain": "Data is subject to the laws of where it is stored, so location can be mandated."
+      },
+      {
+       "type": "mc",
+       "q": "The design team collects only the customer fields the new app really needs. Which privacy principle is this?",
+       "options": [
+        "Data minimisation",
+        "Gold plating",
+        "Redundancy",
+        "Crashing"
+       ],
+       "answer": 0,
+       "explain": "Collecting less data reduces privacy risk and compliance work."
+      },
+      {
+       "type": "mc",
+       "q": "Which group provides oversight, approves major decisions and resolves escalations across a large project?",
+       "options": [
+        "Steering committee (governance board)",
+        "Help desk",
+        "Daily stand-up",
+        "Vendor's sales team"
+       ],
+       "answer": 0,
+       "explain": "Governance bodies keep projects aligned with the organisation's goals."
+      },
+      {
+       "type": "mc",
+       "q": "Auditors need to see who changed which records and when. What must the system keep?",
+       "options": [
+        "An audit trail (logs)",
+        "A fishbone diagram",
+        "A Gantt chart",
+        "A lessons learned register"
+       ],
+       "answer": 0,
+       "explain": "Audit trails provide accountability and are required by many regulations."
+      },
+      {
+       "type": "mc",
+       "q": "A public sector website must be usable by people with disabilities, such as those using screen readers. What should the project follow?",
+       "options": [
+        "Accessibility standards such as WCAG",
+        "PCI DSS",
+        "SOX",
+        "ITIL change types"
+       ],
+       "answer": 0,
+       "explain": "Accessibility is often a legal and policy requirement for public services."
+      },
+      {
+       "type": "mc",
+       "q": "The team wants to install a tool on 200 PCs. What should be checked first?",
+       "options": [
+        "That the organisation has enough valid licences",
+        "That it has a nice logo",
+        "That the vendor has an MOU",
+        "Nothing, software is free to copy"
+       ],
+       "answer": 0,
+       "explain": "Using software beyond its licence terms is a legal and financial risk."
+      },
+      {
+       "type": "mc",
+       "q": "Under GDPR, a customer asks the company to delete their personal data. Which right is this?",
+       "options": [
+        "Right to erasure (right to be forgotten)",
+        "Right to bear arms",
+        "Right of first refusal",
+        "Right to a warranty"
+       ],
+       "answer": 0,
+       "explain": "GDPR gives people the right to have their data erased in many cases."
+      },
+      {
+       "type": "mc",
+       "q": "A new data protection regulation takes effect halfway through the project and affects the design. What should the PM do?",
+       "options": [
+        "Assess the impact and raise a change request",
+        "Ignore it until the next project",
+        "Delay the law",
+        "Tell the team to keep going as planned"
+       ],
+       "answer": 0,
+       "explain": "Compliance changes go through change control like any other change."
+      },
+      {
+       "type": "tf",
+       "q": "Compliance requirements should be identified early in the project, since they can affect design, vendors, cost and schedule.",
+       "answer": true,
+       "explain": "Finding a compliance need late often means expensive rework."
+      }
+     ]
+    },
+    {
+     "id": "it-sec",
+     "title": "Security and Data Protection",
+     "learn": {
+      "idea": "Security is part of the project from day one, not a check at the end. Protect access, protect data, and plan for incidents.",
+      "points": [
+       "Least privilege: give people only the access they need.",
+       "MFA adds a second factor beyond the password.",
+       "Encrypt data at rest (stored) and in transit (moving).",
+       "CIA triad: confidentiality, integrity, availability."
+      ],
+      "memory": "C-I-A: keep it secret, keep it correct, keep it running."
+     },
+     "cards": [
+      {
+       "front": "Least privilege?",
+       "back": "Only the minimum access needed to do the job."
+      },
+      {
+       "front": "MFA?",
+       "back": "Two or more factors: something you know, have or are."
+      },
+      {
+       "front": "Encryption at rest vs in transit?",
+       "back": "At rest protects stored data. In transit protects data moving over a network."
+      },
+      {
+       "front": "CIA triad?",
+       "back": "Confidentiality, integrity, availability."
+      },
+      {
+       "front": "Separation of duties?",
+       "back": "Split critical tasks so no one person can misuse them alone."
+      },
+      {
+       "front": "Old drives at project end?",
+       "back": "Securely wipe or destroy them and keep a record."
+      }
+     ],
+     "questions": [
+      {
+       "type": "mc",
+       "q": "A contractor needs to update one web application. What access should they get?",
+       "options": [
+        "Only the access needed for that application, for the time needed",
+        "Full domain admin rights",
+        "The same access as the CIO",
+        "Shared admin credentials"
+       ],
+       "answer": 0,
+       "explain": "Least privilege limits the damage if an account is misused."
+      },
+      {
+       "type": "mc",
+       "q": "Users must enter a password and then approve a prompt on their phone to log in. What is this?",
+       "options": [
+        "Multifactor authentication (MFA)",
+        "Single sign-on only",
+        "Data masking",
+        "Load balancing"
+       ],
+       "answer": 0,
+       "explain": "MFA combines something you know with something you have or are."
+      },
+      {
+       "type": "mc",
+       "q": "The new system stores customer files on disk and sends them over the internet. How should they be protected?",
+       "options": [
+        "Encrypt them at rest and in transit",
+        "Encrypt them only when printed",
+        "Compress them",
+        "Rename them"
+       ],
+       "answer": 0,
+       "explain": "Encryption protects data whether it is stored or moving."
+      },
+      {
+       "type": "mc",
+       "q": "Which is a physical security control for a new server room?",
+       "options": [
+        "Badge access with entry logging",
+        "A strong password policy",
+        "Antivirus software",
+        "Encryption"
+       ],
+       "answer": 0,
+       "explain": "Physical controls stop people reaching the hardware."
+      },
+      {
+       "type": "mc",
+       "q": "Staff keep clicking fake emails that ask for their passwords. What helps most?",
+       "options": [
+        "Security awareness training on phishing",
+        "A faster network",
+        "More storage",
+        "A new Gantt chart"
+       ],
+       "answer": 0,
+       "explain": "Phishing is social engineering, and training is a key defence."
+      },
+      {
+       "type": "mc",
+       "q": "Before the new web portal goes live, what security step should be planned?",
+       "options": [
+        "A vulnerability scan or security test, with findings fixed",
+        "Nothing, security is checked after launch",
+        "Disabling the firewall for speed",
+        "Sharing the admin password with the team"
+       ],
+       "answer": 0,
+       "explain": "Security testing before go-live finds problems while they are cheap to fix."
+      },
+      {
+       "type": "mc",
+       "q": "One person can both create a new supplier and approve payments to it. What control is missing?",
+       "options": [
+        "Separation of duties",
+        "Load balancing",
+        "Elasticity",
+        "Version control"
+       ],
+       "answer": 0,
+       "explain": "Splitting critical tasks stops one person committing and hiding fraud."
+      },
+      {
+       "type": "mc",
+       "q": "Testers want a copy of production customer data in the test environment. What should be done?",
+       "options": [
+        "Mask or anonymise the personal data first",
+        "Copy it as is",
+        "Email it to the testers",
+        "Post it on the shared drive"
+       ],
+       "answer": 0,
+       "explain": "Test environments are less protected, so real personal data should be masked."
+      },
+      {
+       "type": "mc",
+       "q": "At the end of a hardware refresh project, what should happen to the old hard drives?",
+       "options": [
+        "Securely wipe or destroy them and keep a record",
+        "Sell them as they are",
+        "Put them in the normal bin",
+        "Give them to staff"
+       ],
+       "answer": 0,
+       "explain": "Drives can hold sensitive data. Sanitise or destroy them and keep proof."
+      },
+      {
+       "type": "mc",
+       "q": "During the project, the team finds signs that a test server was broken into. What should they do first?",
+       "options": [
+        "Follow the incident response plan and report it right away",
+        "Delete the logs",
+        "Keep working and mention it at the next status meeting",
+        "Rebuild the server quietly"
+       ],
+       "answer": 0,
+       "explain": "Incident response contains the damage and preserves evidence."
+      },
+      {
+       "type": "mc",
+       "q": "A contractor finishes their work on the project. What should happen to their access?",
+       "options": [
+        "Remove it promptly as part of offboarding",
+        "Leave it in case they come back",
+        "Give it to another contractor",
+        "Change only their desktop wallpaper"
+       ],
+       "answer": 0,
+       "explain": "Old accounts are a common way in for attackers."
+      },
+      {
+       "type": "match",
+       "q": "Match each part of the CIA triad to its meaning.",
+       "pairs": [
+        [
+         "Confidentiality",
+         "Only authorised people can see the data"
+        ],
+        [
+         "Integrity",
+         "Data is accurate and not changed without permission"
+        ],
+        [
+         "Availability",
+         "Systems and data are there when needed"
+        ]
+       ],
+       "explain": "Every security control supports one or more of these three goals."
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

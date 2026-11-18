@@ -30,7 +30,7 @@ Get a question wrong and it comes back once before the round ends. The Weak spot
 
 Make your own course
 
-Studying for something else, like Network+ or a class at school? Settings has a Copy AI prompt button. Paste it into any AI chat with your PDF or notes, then load what it gives back. Your courses sit in a library next to the built-in A+ course, each with its own progress.
+Network+, Security+, Linux+ and Project+ are built in too, each with 322 questions, and Network+ and Security+ include hands-on terminal labs. Studying for something else, like a class at school? Settings has a Copy AI prompt button. Paste it into any AI chat with your PDF or notes, then load what it gives back. Your courses sit in a library next to the built-in A+ course, each with its own progress.
 
 Make it yours
 

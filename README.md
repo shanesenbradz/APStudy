@@ -1,6 +1,6 @@
 # A+ Study Lab
 
-A free study app for the CompTIA A+ Core 1 (220-1201) and Core 2 (220-1202) exams, with Linux+ (XK0-006) and Project+ (PK0-005) built in as extra courses.
+A free study app for the CompTIA A+ Core 1 (220-1201) and Core 2 (220-1202) exams, with Network+ (N10-009), Security+ (SY0-701), Linux+ (XK0-006) and Project+ (PK0-005) built in as extra courses.
 
 ## Download
 
@@ -18,9 +18,13 @@ Older versions and release notes: [all releases](https://github.com/shanesenbrad
 - A+: 9 modules, 46 concepts, 322 practice questions, 215 flashcards
 - Linux+: 5 modules, 26 concepts, 322 practice questions, 208 flashcards
 - Project+: 4 modules, 25 concepts, 322 practice questions, 120 flashcards
+- Network+: 5 modules, 23 concepts, 322 practice questions, 138 flashcards, 6 terminal labs
+- Security+: 5 modules, 27 concepts, 322 practice questions, 162 flashcards, 5 terminal labs
 - Switch courses in Settings, Course Library. Each course keeps its own progress
 - Learn, Flashcards and Quiz modes for every concept
-- Multiple choice, true/false, matching, ordering and calculation questions
+- Multiple choice, true/false, matching, ordering, calculation and terminal lab questions
+- Put in order questions work by dragging or tapping
+- Checks GitHub about once a week for new and fixed questions (can be turned off)
 - Wrong answers come back once in the same round
 - Weak spots quiz and progress per concept, module and overall
 - Make your own courses from any PDF with an AI chat, and switch between them in a course library
@@ -44,17 +48,33 @@ Older versions and release notes: [all releases](https://github.com/shanesenbrad
 
 ## Your progress
 
-Progress is saved in your browser on your device. Nothing is sent anywhere. Clearing your browser data clears your progress.
+Progress is saved in your browser on your device. Nothing about you is sent anywhere. The only network request the app makes on its own is the weekly content check, which downloads files from this repo. Clearing your browser data clears your progress.
 
 ## Change the content
 
-The A+ content sits in one block in `index.html`, between `COURSE DATA` and `END OF COURSE DATA`. Linux+ and Project+ follow it in `window.BUILTIN_COURSES`, each as `{ id, color, data }` in the same course format. You can also add your own course inside the app:
+The A+ content sits in one block in `index.html`, between `COURSE DATA` and `END OF COURSE DATA`. Linux+, Project+, Network+ and Security+ follow it in `window.BUILTIN_COURSES`, each as `{ id, color, data }` in the same course format. A copy of each of those courses also lives in `content/`.
+
+### Ship new questions without a new APK
+
+The app reads `content/manifest.json` from this repo about once a week. When a course there has a higher `version` than the one in the app, it downloads that course file, checks it, and uses it from then on.
+
+1. Edit the course file in `content/` and raise its `"version"` by 1.
+2. Run `python3 tools/content.py export --keep` to rebuild the manifest.
+3. Commit and push to `main`.
+
+Before the next APK build, run `python3 tools/content.py bake` so the new questions are inside the app too. A new course added to `content/` and the manifest also shows up in the apps as a built-in course.
+
+### Lab questions
+
+A `lab` question shows a simulated terminal. `commands` lists what the learner can type and what it prints. `when`, `unless` and `set` let output change after an earlier command, for example `arp -a` shows the printer only after `ping`. `tasks` are the questions underneath, with `kind` set to `mac`, `ip`, `number` or `text`, and optional `options` for a drop-down.
+
+### Add your own course in the app
 
 1. Go to **Settings**, then **Add your own course**, and tap **Copy AI prompt**.
 2. Paste the prompt into any AI chat and attach your PDF or notes.
 3. Paste the JSON it gives back into the box (or open it as a `.json` file) and tap **Load course**.
 
-Every course you load goes into the **Course library** in Settings. Tap one to switch to it. Each course keeps its own progress, and the built-in A+, Linux+ and Project+ courses are always there.
+Every course you load goes into the **Course library** in Settings. Tap one to switch to it. Each course keeps its own progress, and the built-in courses are always there.
 
 ## Privacy
 
@@ -62,4 +82,4 @@ No accounts, ads or tracking. Read the [privacy policy](https://shanesenbradz.gi
 
 ## Disclaimer
 
-This is original practice content written for beginners. It is not affiliated with or endorsed by CompTIA. CompTIA, A+, Linux+ and Project+ are trademarks of CompTIA, Inc. Check the official exam objectives before you book your exam.
+This is original practice content written for beginners. It is not affiliated with or endorsed by CompTIA. CompTIA, A+, Network+, Security+, Linux+ and Project+ are trademarks of CompTIA, Inc. Check the official exam objectives before you book your exam.
