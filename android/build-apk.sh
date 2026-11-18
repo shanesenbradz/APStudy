@@ -12,6 +12,8 @@
 #
 # Signing key: put apstudy-release.jks in android/ (never commit it) and run
 #   KS_PASS=yourpassword ./android/build-apk.sh
+# The script stops if the APK is not signed with the original key (SHA-256 7C:34:2B...BC:C0),
+# because Android only installs an update over the old app when the key is the same.
 #
 # Version: versionCode and versionName in apktool.yml, and the APStudyApp/ version in smali/.../MainActivity.smali
 set -euo pipefail
@@ -33,6 +35,14 @@ java -jar $T/apktool.jar b build/app -o build/unsigned.apk
 java -jar $T/uber-apk-signer.jar -a build/unsigned.apk \
   --ks apstudy-release.jks --ksAlias apstudy --ksPass "$KS_PASS" --ksKeyPass "$KS_PASS" -o build/signed
 mv build/signed/*-signed.apk ../APStudy.apk
+# Same key every release, or Android refuses to install the update over the old version
+PINNED_SHA256="7C:34:2B:A1:1A:2A:0D:36:D2:AF:98:54:B9:26:75:50:90:2B:2A:ED:A0:6F:2C:9E:5F:79:04:EB:E9:C4:BC:C0"
+GOT_SHA256=$(keytool -printcert -jarfile ../APStudy.apk | grep -m1 "SHA256:" | awk '{print $2}')
+if [ "$GOT_SHA256" != "$PINNED_SHA256" ]; then
+  echo "ERROR: APStudy.apk is signed with a different key ($GOT_SHA256)."
+  echo "Phones with 3.6.0 or later would refuse it as an update. Use the original apstudy-release.jks."
+  exit 1
+fi
 # Android 11+ refuses APKs whose resources.arsc is compressed ("App not installed")
 if unzip -v ../APStudy.apk resources.arsc | grep -q "Defl"; then
   echo "ERROR: resources.arsc is compressed in APStudy.apk"; exit 1

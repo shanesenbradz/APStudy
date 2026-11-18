@@ -2,7 +2,7 @@
    Pages load from the network first so updates show up straight away,
    and fall back to the saved copy when you are offline.
    Change VERSION whenever you change icons or other cached files. */
-const VERSION = "v2";
+const VERSION = "v3";
 const CACHE = "aplus-study-lab-" + VERSION;
 const FILES = [
   "./",
