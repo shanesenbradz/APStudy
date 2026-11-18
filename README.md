@@ -16,7 +16,7 @@ Older versions and release notes: [all releases](https://github.com/shanesenbrad
 ## What's inside
 
 - A+: 9 modules, 46 concepts, 322 practice questions, 215 flashcards
-- Linux+: 5 modules, 26 concepts, 322 practice questions, 156 flashcards
+- Linux+: 5 modules, 26 concepts, 322 practice questions, 208 flashcards
 - Project+: 4 modules, 25 concepts, 322 practice questions, 120 flashcards
 - Switch courses in Settings, Course Library. Each course keeps its own progress
 - Learn, Flashcards and Quiz modes for every concept

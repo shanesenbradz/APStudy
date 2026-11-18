@@ -2624,28 +2624,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which of the following filesystems contains non-persistent or volatile data?",
-         "back": "/proc"
+         "front": "Linux boot order?",
+         "back": "Firmware (UEFI/BIOS), GRUB2, kernel + initramfs, systemd (PID 1), default target."
         },
         {
-         "front": "Which command displays only the running kernel release?",
-         "back": "uname -r"
+         "front": "modprobe vs insmod?",
+         "back": "modprobe loads a module plus its dependencies. insmod loads one file and ignores dependencies."
         },
         {
-         "front": "Which directory holds the kernel images, initramfs files and GRUB files?",
-         "back": "/boot"
+         "front": "List loaded kernel modules?",
+         "back": "lsmod"
         },
         {
-         "front": "After editing /etc/default/grub on a RHEL system, which command applies the change to the boot menu?",
+         "front": "Stop a module loading at boot?",
+         "back": "Add a blacklist line in a file under /etc/modprobe.d/."
+        },
+        {
+         "front": "Make a sysctl setting survive reboot?",
+         "back": "Put it in a file in /etc/sysctl.d/, then run sysctl --system."
+        },
+        {
+         "front": "Rebuild the initramfs on RHEL? On Debian?",
+         "back": "RHEL: dracut -f. Debian/Ubuntu: update-initramfs -u."
+        },
+        {
+         "front": "Apply changes from /etc/default/grub on RHEL?",
          "back": "grub2-mkconfig -o /boot/grub2/grub.cfg"
         },
         {
-         "front": "An administrator needs to load a kernel module and any modules it depends on. Which command should be used?",
-         "back": "modprobe"
-        },
-        {
-         "front": "Which command shows a kernel module's description, licence, author and accepted parameters?",
-         "back": "modinfo"
+         "front": "What are /proc and /sys?",
+         "back": "Virtual filesystems built in memory by the kernel. Rebuilt every boot."
         }
        ]
       },
@@ -2888,28 +2896,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "An administrator needs to extend the logical volume lv_data in volume group vg0 by 5 GiB and resize its ext4 filesystem in one step. Which command does this?",
-         "back": "lvextend -r -L +5G /dev/vg0/lv_data"
+         "front": "LVM build order?",
+         "back": "pvcreate, vgcreate, lvcreate, then mkfs and mount."
         },
         {
-         "front": "Which is the correct field order for an entry in /etc/fstab?",
-         "back": "device, mount point, filesystem type, options, dump, pass"
+         "front": "Grow an LV and its filesystem in one step?",
+         "back": "lvextend -r -L +5G /dev/vg/lv"
         },
         {
-         "front": "After adding a new swap partition and its /etc/fstab entry, which command activates all swap entries from fstab?",
-         "back": "swapon -a"
+         "front": "Grow XFS? Grow ext4?",
+         "back": "XFS: xfs_growfs /mountpoint. ext4: resize2fs /dev/vg/lv."
         },
         {
-         "front": "Which command creates a 10 GiB logical volume named lv_app in volume group vg_data?",
-         "back": "lvcreate -L 10G -n lv_app vg_data"
+         "front": "Can XFS shrink?",
+         "back": "No. Back up, recreate smaller, restore."
         },
         {
-         "front": "Which command lists block devices as a tree and shows each filesystem type and UUID?",
-         "back": "lsblk -f"
+         "front": "Add a new disk to an existing VG?",
+         "back": "vgextend vg0 /dev/sdd (after pvcreate)."
         },
         {
-         "front": "An XFS logical volume was extended with lvextend, but df still shows the old size. Which command grows the filesystem?",
-         "back": "xfs_growfs /mountpoint"
+         "front": "/etc/fstab field order?",
+         "back": "Device, mount point, type, options, dump, fsck pass."
+        },
+        {
+         "front": "Test /etc/fstab before reboot?",
+         "back": "mount -a"
+        },
+        {
+         "front": "Where is software RAID status?",
+         "back": "/proc/mdstat (arrays built with mdadm)."
         }
        ]
       },
@@ -3097,28 +3113,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Using NetworkManager, which command sets the static IPv4 address 192.168.10.50/24 with gateway 192.168.10.1 on the connection eth0?",
-         "back": "nmcli con mod eth0 ipv4.method manual ipv4.addresses 192.168.10.50/24 ipv4.gateway 192.168.10.1"
+         "front": "Show IP addresses? Routes? Links?",
+         "back": "ip addr, ip route, ip link."
         },
         {
-         "front": "Which command shows the IP addresses assigned to every interface?",
-         "back": "ip addr show"
+         "front": "Change applied by the ip command lasts how long?",
+         "back": "Until reboot. Save it with nmcli or netplan."
         },
         {
-         "front": "A server has no default route. Which command adds one through 192.168.1.1 until the next reboot?",
-         "back": "ip route add default via 192.168.1.1"
+         "front": "Set a permanent static IP with NetworkManager?",
+         "back": "nmcli con mod eth0 ipv4.method manual ipv4.addresses ... ipv4.gateway ..., then nmcli con up eth0."
         },
         {
-         "front": "Which command sets the hostname to web01 so it survives a reboot?",
+         "front": "Netplan command that rolls back if you don't confirm?",
+         "back": "netplan try"
+        },
+        {
+         "front": "Where does netplan read config?",
+         "back": "/etc/netplan/*.yaml"
+        },
+        {
+         "front": "Set a permanent hostname?",
          "back": "hostnamectl set-hostname web01"
         },
         {
-         "front": "Which file maps host names to IP addresses locally on one machine?",
-         "back": "/etc/hosts"
+         "front": "File that sets hosts-file vs DNS lookup order?",
+         "back": "/etc/nsswitch.conf (hosts: files dns)."
         },
         {
-         "front": "A server must check /etc/hosts before asking DNS. Which file controls that lookup order?",
-         "back": "/etc/nsswitch.conf"
+         "front": "Bonding mode with one active link and one standby?",
+         "back": "active-backup (mode 1)."
         }
        ]
       },
@@ -3307,28 +3331,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "/home/dev/web.bkp is a gzip-compressed tar archive. Which command extracts it into /var/www/html/?",
-         "back": "cd /var/www/html/ && gzip -dc /home/dev/web.bkp | tar xf -"
+         "front": "tar flags to create, extract, list?",
+         "back": "-c create, -x extract, -t list. Add -f for the file name."
         },
         {
-         "front": "Which command creates a gzip-compressed archive of /etc named etc.tar.gz?",
-         "back": "tar -czvf etc.tar.gz /etc"
+         "front": "tar compression flags?",
+         "back": "-z gzip, -j bzip2, -J xz."
         },
         {
-         "front": "Which tar flag compresses the archive with xz?",
-         "back": "-J"
+         "front": "Extract a tar into a different folder?",
+         "back": "tar -xvf file.tar -C /target"
         },
         {
-         "front": "/srv/web/ must be mirrored to /backup/web/, and files deleted from the source must also be deleted from the copy. Which command does this?",
-         "back": "rsync -av --delete /srv/web/ /backup/web/"
+         "front": "Make rsync mirror deletions too?",
+         "back": "rsync -av --delete src/ dest/"
         },
         {
-         "front": "Which command creates a full image of /dev/sda in /backup/sda.img?",
-         "back": "dd if=/dev/sda of=/backup/sda.img bs=4M status=progress"
+         "front": "In dd, which is input and which is output?",
+         "back": "if= is input, of= is output. Swapping them overwrites the source."
         },
         {
-         "front": "Which command lists files under /var/www changed in the last 7 days?",
-         "back": "find /var/www -mtime -7"
+         "front": "find files changed in the last 7 days?",
+         "back": "find /path -mtime -7"
+        },
+        {
+         "front": "Why sort before uniq?",
+         "back": "uniq only removes duplicates that sit next to each other."
+        },
+        {
+         "front": "Hard link vs symbolic link?",
+         "back": "Hard link: same inode, same filesystem only. Symlink: stores a path, breaks if the target is deleted."
         }
        ]
       },
@@ -3459,28 +3491,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "An administrator on a RHEL-family system must install the htop utility. Which command should be used?",
-         "back": "dnf install htop"
+         "front": "Low-level vs high-level package tools?",
+         "back": "Low: rpm, dpkg (single files). High: dnf, apt (repos and dependencies)."
         },
         {
-         "front": "Which command installs the local package file tool.deb on Ubuntu?",
-         "back": "dpkg -i tool.deb"
+         "front": "Install a local .deb?",
+         "back": "dpkg -i file.deb, or apt install ./file.deb to pull dependencies."
         },
         {
-         "front": "Which command shows which installed RPM package owns /usr/bin/ssh?",
-         "back": "rpm -qf /usr/bin/ssh"
+         "front": "Which RPM owns a file?",
+         "back": "rpm -qf /path/to/file"
         },
         {
-         "front": "Which command lists every file installed by the Debian package nginx?",
-         "back": "dpkg -L nginx"
+         "front": "List files in a Debian package?",
+         "back": "dpkg -L package"
         },
         {
-         "front": "Where should a new repository definition file be placed on a RHEL system?",
+         "front": "Verify installed RPM files against the database?",
+         "back": "rpm -Va"
+        },
+        {
+         "front": "Where do RHEL repo files go?",
          "back": "/etc/yum.repos.d/"
         },
         {
-         "front": "On Ubuntu, apt install says the package cannot be found, but it exists in the repo. What should be run first?",
-         "back": "apt update"
+         "front": "apt update vs apt upgrade?",
+         "back": "update refreshes package lists. upgrade installs newer versions."
+        },
+        {
+         "front": "Build from source steps?",
+         "back": "./configure, make, sudo make install."
         }
        ]
       },
@@ -3590,28 +3630,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which command lists every libvirt virtual machine, including those that are shut off?",
+         "front": "Tool to manage KVM from the shell? GUI?",
+         "back": "virsh. virt-manager."
+        },
+        {
+         "front": "List all VMs, including stopped ones?",
          "back": "virsh list --all"
         },
         {
-         "front": "The VM web01 must start automatically whenever the KVM host boots. Which command sets this?",
-         "back": "virsh autostart web01"
+         "front": "Start a VM with the host?",
+         "back": "virsh autostart vmname"
         },
         {
-         "front": "Which KVM disk image format supports thin provisioning and internal snapshots?",
+         "front": "Disk format with thin provisioning and snapshots?",
          "back": "qcow2"
         },
         {
-         "front": "VMs must get IP addresses from the office DHCP server and appear as normal hosts on the LAN. Which network mode fits?",
-         "back": "Bridged"
+         "front": "Network mode that puts VMs on the real LAN?",
+         "back": "Bridged. NAT hides them behind the host."
         },
         {
-         "front": "Which command checks whether the CPU supports hardware virtualization?",
-         "back": "grep -E 'vmx|svm' /proc/cpuinfo"
+         "front": "CPU flags for hardware virtualization?",
+         "back": "vmx (Intel VT-x) and svm (AMD-V) in /proc/cpuinfo."
         },
         {
-         "front": "Which graphical tool manages KVM virtual machines through libvirt?",
-         "back": "virt-manager"
+         "front": "What must match for live migration?",
+         "back": "CPU architecture and the shared disk storage path."
+        },
+        {
+         "front": "What does libvirt do?",
+         "back": "Manages KVM/QEMU VMs. virsh and virt-manager both talk to it."
         }
        ]
       }
@@ -3788,28 +3836,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which command enables the sshd service to start at boot and also starts it right now?",
-         "back": "systemctl enable --now sshd"
+         "front": "Enable and start a service in one command?",
+         "back": "systemctl enable --now name"
         },
         {
-         "front": "Which command checks whether the nginx service is set to start at boot?",
-         "back": "systemctl is-enabled nginx"
-        },
-        {
-         "front": "An administrator edited /etc/systemd/system/app.service. What must be run before restarting the service?",
+         "front": "Run after editing a unit file?",
          "back": "systemctl daemon-reload"
         },
         {
-         "front": "What is the best way to change one setting in a unit file shipped by a package so updates do not overwrite it?",
-         "back": "systemctl edit nginx"
+         "front": "Override a packaged unit safely?",
+         "back": "systemctl edit name (makes a drop-in in /etc/systemd/system/name.service.d/)."
         },
         {
-         "front": "A service must not be started by anyone, including other services that depend on it. Which command does this?",
-         "back": "systemctl mask cups"
+         "front": "disable vs mask?",
+         "back": "disable stops boot start. mask blocks the unit from starting at all."
         },
         {
-         "front": "A server should boot to a text console with networking instead of a desktop. Which command sets this?",
+         "front": "Boot to text mode by default?",
          "back": "systemctl set-default multi-user.target"
+        },
+        {
+         "front": "is-enabled vs is-active?",
+         "back": "is-enabled: starts at boot? is-active: running now?"
+        },
+        {
+         "front": "List failed units?",
+         "back": "systemctl --failed"
+        },
+        {
+         "front": "systemd's replacement for cron jobs?",
+         "back": ".timer units, with OnCalendar= for the schedule."
         }
        ]
       },
@@ -4020,28 +4076,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "An administrator needs to check the user ID, home directory and shell of the user accounting. Which command should be used?",
-         "back": "getent passwd accounting"
+         "front": "Add a user to a group without dropping others?",
+         "back": "usermod -aG group user"
         },
         {
-         "front": "A Linux administrator wants to add a user to the docker group without changing their primary group. Which command should be used?",
-         "back": "sudo usermod -aG docker user"
+         "front": "Create a user with a home folder and bash?",
+         "back": "useradd -m -s /bin/bash name"
         },
         {
-         "front": "Which command locks the account contractor by putting an exclamation mark in front of its password hash?",
-         "back": "passwd -l contractor"
+         "front": "Where are password hashes?",
+         "back": "/etc/shadow (root only)."
         },
         {
-         "front": "Which command forces the user dbadmin to change password every 90 days?",
-         "back": "chage -M 90 dbadmin"
+         "front": "/etc/passwd fields?",
+         "back": "Name, x, UID, GID, comment, home, shell."
         },
         {
-         "front": "Which command creates the user alice with a home directory and bash as her shell?",
-         "back": "useradd -m -s /bin/bash alice"
+         "front": "Files copied into every new home folder?",
+         "back": "/etc/skel"
         },
         {
-         "front": "Which file stores user password hashes?",
-         "back": "/etc/shadow"
+         "front": "Set max password age? Account expiry?",
+         "back": "chage -M 90 user. chage -E 2026-12-31 user."
+        },
+        {
+         "front": "Lock and remove a user?",
+         "back": "Lock: passwd -l user. Remove with home: userdel -r user."
+        },
+        {
+         "front": "Look up a user from every source, LDAP included?",
+         "back": "getent passwd user"
         }
        ]
       },
@@ -4201,28 +4265,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which crontab line runs /opt/backup.sh at 2:00 AM every Sunday?",
-         "back": "0 2 * * 0 /opt/backup.sh"
+         "front": "Default kill signal? Force signal?",
+         "back": "15 (SIGTERM). 9 (SIGKILL), which cannot be caught."
         },
         {
-         "front": "A process with PID 4321 ignores a normal kill. Which command forces it to stop?",
-         "back": "kill -9 4321"
+         "front": "Nice range and which is lowest priority?",
+         "back": "-20 to 19. 19 is lowest priority."
         },
         {
-         "front": "A long report job should run with the lowest CPU priority. Which command starts it that way?",
-         "back": "nice -n 19 ./report.sh"
+         "front": "nice vs renice?",
+         "back": "nice sets priority when starting. renice changes a running process."
         },
         {
-         "front": "Which command lowers the priority of the running process 1234?",
-         "back": "renice -n 10 -p 1234"
+         "front": "Crontab field order?",
+         "back": "Minute, hour, day of month, month, day of week."
         },
         {
-         "front": "A command must run once tonight at 11 PM. Which tool fits best?",
-         "back": "at 23:00"
+         "front": "cron vs at?",
+         "back": "cron repeats on a schedule. at runs once."
         },
         {
-         "front": "A long copy must keep running after the administrator logs out of SSH. Which command fits?",
-         "back": "nohup cp -r /data /backup &"
+         "front": "Keep a job running after logout?",
+         "back": "nohup command &"
+        },
+        {
+         "front": "Bring job 1 to the foreground? Resume in background?",
+         "back": "fg %1. bg %1."
+        },
+        {
+         "front": "Find PIDs by name? Signal by name?",
+         "back": "pgrep name. pkill name (or killall name)."
         }
        ]
       },
@@ -4375,28 +4447,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which of the following best describes journald?",
-         "back": "A system service that collects and stores logging data"
+         "front": "Follow a unit's logs live?",
+         "back": "journalctl -u name -f"
         },
         {
-         "front": "Which command follows new log entries for the nginx service in real time?",
-         "back": "journalctl -u nginx -f"
-        },
-        {
-         "front": "Which chrony command shows the configured NTP sources and their state?",
-         "back": "chronyc sources"
-        },
-        {
-         "front": "Which command shows only error-level messages and worse since the current boot?",
+         "front": "Errors and worse since this boot?",
          "back": "journalctl -b -p err"
         },
         {
-         "front": "Journal logs disappear after each reboot. What makes them persistent?",
-         "back": "Set Storage=persistent in /etc/systemd/journald.conf (or create /var/log/journal) and restart journald"
+         "front": "Logs from the previous boot?",
+         "back": "journalctl -b -1 (needs persistent journal)."
         },
         {
-         "front": "Where should a custom rotation policy for an app's logs be placed?",
+         "front": "Make the journal persistent?",
+         "back": "Storage=persistent in journald.conf, or create /var/log/journal."
+        },
+        {
+         "front": "rsyslog forward over TCP vs UDP?",
+         "back": "@@host:514 is TCP. @host:514 is UDP."
+        },
+        {
+         "front": "Where do custom logrotate rules go?",
          "back": "/etc/logrotate.d/"
+        },
+        {
+         "front": "Check NTP sources? Clock offset?",
+         "back": "chronyc sources. chronyc tracking."
+        },
+        {
+         "front": "Set the time zone?",
+         "back": "timedatectl set-timezone America/Jamaica"
         }
        ]
       },
@@ -4597,28 +4677,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "A Linux user needs to download the latest Debian image from a Docker registry. Which command does this?",
-         "back": "docker image pull debian"
+         "front": "Download an image?",
+         "back": "docker pull debian (names are lowercase)."
         },
         {
-         "front": "A Linux administrator needs to create and then connect to a container from app-01-image. Which command does this?",
-         "back": "docker run -it app-01-image"
+         "front": "Create and start a new container?",
+         "back": "docker run. -d background, -p host:container ports, -v storage, --name."
         },
         {
-         "front": "Which command lists all containers on a Docker host, including stopped ones?",
+         "front": "Open a shell in a running container?",
+         "back": "docker exec -it name /bin/bash"
+        },
+        {
+         "front": "List all containers, stopped too?",
          "back": "docker ps -a"
         },
         {
-         "front": "Which command starts an nginx container in the background, maps host port 8080 to container port 80, and names it web?",
-         "back": "docker run -d --name web -p 8080:80 nginx"
+         "front": "Why did a container exit?",
+         "back": "docker logs name"
         },
         {
-         "front": "Which command builds an image tagged myapp:1.0 from the Dockerfile in the current directory?",
-         "back": "docker build -t myapp:1.0 ."
+         "front": "Build an image from a Dockerfile?",
+         "back": "docker build -t name:tag ."
         },
         {
-         "front": "Which command opens a bash shell inside the running container web?",
-         "back": "docker exec -it web /bin/bash"
+         "front": "Daemonless, rootless Docker alternative?",
+         "back": "Podman."
+        },
+        {
+         "front": "Start every service in compose.yaml?",
+         "back": "docker compose up -d"
         }
        ]
       }
@@ -4800,28 +4888,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which command finds all files with the SUID bit set under /usr?",
-         "back": "find /usr -perm -4000"
+         "front": "Values of r, w, x?",
+         "back": "r = 4, w = 2, x = 1."
         },
         {
-         "front": "Which chmod command sets SUID on a script and gives rwxr-xr-x to everyone else?",
-         "back": "chmod 4755 script.sh"
+         "front": "Special bit values?",
+         "back": "SUID = 4, SGID = 2, sticky = 1 (the leading digit)."
         },
         {
-         "front": "The user bob needs read access to report.txt without changing its owner or group. Which command does this?",
-         "back": "setfacl -m u:bob:r report.txt"
+         "front": "umask 022 gives files and folders what?",
+         "back": "Files 644, folders 755 (from 666 and 777)."
         },
         {
-         "front": "Which command shows the ACL entries on a file?",
-         "back": "getfacl report.txt"
+         "front": "Sticky bit on a folder does what?",
+         "back": "Only the file owner (or root) can delete files. /tmp uses it."
         },
         {
-         "front": "In the shared folder /shared, users must only be able to delete their own files. What should be set?",
-         "back": "The sticky bit, with chmod +t /shared"
+         "front": "SGID on a folder does what?",
+         "back": "New files inherit the folder's group."
         },
         {
-         "front": "What does the SGID bit do when it is set on a directory?",
-         "back": "New files inside inherit the directory's group"
+         "front": "Give one user access without changing owner?",
+         "back": "setfacl -m u:bob:r file. Check with getfacl."
+        },
+        {
+         "front": "Make a file unchangeable, even by root?",
+         "back": "chattr +i file. Undo with chattr -i."
+        },
+        {
+         "front": "Find all SUID files?",
+         "back": "find / -perm -4000"
         }
        ]
       },
@@ -5022,28 +5118,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which sshd_config directive stops direct root logins over SSH?",
-         "back": "PermitRootLogin no"
+         "front": "Block root SSH logins?",
+         "back": "PermitRootLogin no in sshd_config."
         },
         {
-         "front": "Which command generates a modern Ed25519 SSH key pair?",
-         "back": "ssh-keygen -t ed25519"
+         "front": "Key-only SSH logins?",
+         "back": "PasswordAuthentication no, after you test a key login."
         },
         {
-         "front": "Which command must be used to edit the sudoers file safely with a syntax check?",
-         "back": "visudo"
+         "front": "Make and install an SSH key?",
+         "back": "ssh-keygen -t ed25519, then ssh-copy-id user@host."
         },
         {
-         "front": "Which tool reads logs such as /var/log/auth.log and bans IP addresses with repeated failed logins through firewall rules?",
-         "back": "fail2ban"
+         "front": "Required permissions for SSH keys?",
+         "back": "~/.ssh 700, authorized_keys 600."
         },
         {
-         "front": "Which command installs your public key in the authorized_keys file on server01?",
-         "back": "ssh-copy-id admin@server01"
+         "front": "Edit sudoers safely?",
+         "back": "visudo. Use drop-in files in /etc/sudoers.d/."
         },
         {
-         "front": "Key logins work for every admin. Which sshd_config setting now turns off password logins?",
-         "back": "PasswordAuthentication no"
+         "front": "PAM module for password strength? Lockouts?",
+         "back": "pam_pwquality. pam_faillock."
+        },
+        {
+         "front": "Local port forward through SSH?",
+         "back": "ssh -L 8080:localhost:80 user@server"
+        },
+        {
+         "front": "Show failed logins?",
+         "back": "lastb (reads /var/log/btmp)."
         }
        ]
       },
@@ -5175,28 +5279,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "An administrator must set SELinux to permissive mode for debugging without rebooting. Which command does this?",
-         "back": "setenforce 0"
+         "front": "Show SELinux mode?",
+         "back": "getenforce or sestatus."
         },
         {
-         "front": "Files copied into /var/www/html have the wrong SELinux context and the web server gets 403 errors. Which command fixes the contexts?",
-         "back": "restorecon -Rv /var/www/html"
+         "front": "Switch to permissive until reboot?",
+         "back": "setenforce 0 (setenforce 1 for enforcing)."
         },
         {
-         "front": "Web content lives in a custom folder /web. Which commands make the correct context stick, even after a relabel?",
-         "back": "semanage fcontext -a -t httpd_sys_content_t \"/web(/.*)?\" then restorecon -Rv /web"
+         "front": "Show file contexts?",
+         "back": "ls -Z"
         },
         {
-         "front": "The web server must connect to a remote database under SELinux, and the change must survive reboots. Which command does this?",
-         "back": "setsebool -P httpd_can_network_connect on"
+         "front": "Reset contexts to policy?",
+         "back": "restorecon -Rv /path"
         },
         {
-         "front": "nginx must listen on TCP 8443 on an SELinux enforcing system. Which command allows it?",
+         "front": "Make a custom path's context permanent?",
+         "back": "semanage fcontext -a -t type \"/path(/.*)?\", then restorecon."
+        },
+        {
+         "front": "Make a boolean permanent?",
+         "back": "setsebool -P name on"
+        },
+        {
+         "front": "Allow a web server on a new port?",
          "back": "semanage port -a -t http_port_t -p tcp 8443"
         },
         {
-         "front": "Which command shows the SELinux context of files?",
-         "back": "ls -Z"
+         "front": "AppArmor log-only mode?",
+         "back": "aa-complain profile. aa-enforce turns blocking back on."
         }
        ]
       },
@@ -5342,28 +5454,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which ufw commands build a firewall that blocks unsolicited inbound traffic but allows outbound traffic and inbound SSH?",
-         "back": "ufw default deny incoming; ufw allow 22/tcp; ufw enable"
+         "front": "Make a firewalld rule permanent?",
+         "back": "Add --permanent, then firewall-cmd --reload."
         },
         {
-         "front": "Which commands allow HTTPS permanently with firewalld and apply it now?",
-         "back": "firewall-cmd --permanent --add-service=https && firewall-cmd --reload"
-        },
-        {
-         "front": "Which command shows every setting in the active firewalld zone?",
+         "front": "Show everything in the active zone?",
          "back": "firewall-cmd --list-all"
         },
         {
-         "front": "Which command prints the complete nftables configuration that is running?",
+         "front": "ufw baseline?",
+         "back": "ufw default deny incoming, ufw allow 22/tcp, ufw enable."
+        },
+        {
+         "front": "Show the nftables rules?",
          "back": "nft list ruleset"
         },
         {
-         "front": "Which iptables command drops all traffic from 203.0.113.5?",
+         "front": "How are firewall rules matched?",
+         "back": "Top down. The first match wins."
+        },
+        {
+         "front": "iptables append vs insert?",
+         "back": "-A adds to the end. -I adds at the top (or a position)."
+        },
+        {
+         "front": "Drop traffic from one IP with iptables?",
          "back": "iptables -A INPUT -s 203.0.113.5 -j DROP"
         },
         {
-         "front": "True or false: A port opened with firewall-cmd --add-port=8080/tcp, without --permanent, is lost after the firewall reloads or the server reboots.",
-         "back": "True. Without --permanent only the runtime config changes."
+         "front": "Move an interface to a firewalld zone?",
+         "back": "firewall-cmd --permanent --zone=internal --change-interface=eth1"
         }
        ]
       },
@@ -5516,28 +5636,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which auditctl command watches /etc/passwd for writes and attribute changes and tags events with the key userdb?",
-         "back": "auditctl -w /etc/passwd -p wa -k userdb"
-        },
-        {
-         "front": "Which command shows the TLS certificate presented by the web server at www.example.com?",
-         "back": "openssl s_client -connect www.example.com:443"
-        },
-        {
-         "front": "Which command sets up LUKS encryption on /dev/sdb1? (All data on it will be lost.)",
+         "front": "Encrypt a partition?",
          "back": "cryptsetup luksFormat /dev/sdb1"
         },
         {
-         "front": "Which command unlocks the LUKS partition /dev/sdb1 as /dev/mapper/securedata?",
-         "back": "cryptsetup open /dev/sdb1 securedata"
+         "front": "Unlock a LUKS partition?",
+         "back": "cryptsetup open /dev/sdb1 name (appears in /dev/mapper/)."
         },
         {
-         "front": "Which command creates a SHA-256 checksum of an ISO file to compare with the vendor's value?",
-         "back": "sha256sum rocky.iso"
+         "front": "Encrypt a file for one person?",
+         "back": "gpg --encrypt --recipient them@example.com file"
         },
         {
-         "front": "Which command encrypts report.pdf so only alice@example.com can open it with her private key?",
-         "back": "gpg --encrypt --recipient alice@example.com report.pdf"
+         "front": "Check a download's integrity?",
+         "back": "sha256sum file, compare with the vendor's hash."
+        },
+        {
+         "front": "Tool that reports changed system files?",
+         "back": "AIDE (aide --init, then aide --check)."
+        },
+        {
+         "front": "Watch a file with auditd?",
+         "back": "auditctl -w /etc/passwd -p wa -k key. Search with ausearch -k key."
+        },
+        {
+         "front": "See a server's TLS certificate?",
+         "back": "openssl s_client -connect host:443"
+        },
+        {
+         "front": "Symmetric vs asymmetric examples?",
+         "back": "Symmetric: AES. Asymmetric: RSA, ECDSA, Ed25519."
         }
        ]
       }
@@ -5801,28 +5929,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "In a script, the line echo \"profile-$num-$name\" does not expand $num as expected. Which notation makes sure the value is expanded?",
-         "back": "echo \"profile-${num}-$name\""
-        },
-        {
-         "front": "Which line must begin an executable script so it always runs with Bash?",
+         "front": "First line of a Bash script?",
          "back": "#!/bin/bash"
         },
         {
-         "front": "In Bash, which special variable holds the number of arguments passed to a script?",
-         "back": "$#"
+         "front": "$#, $@, $0, $??",
+         "back": "Arg count, all args, script name, last exit code."
         },
         {
-         "front": "Which Bash test is true when /etc/hosts exists and is a regular file?",
-         "back": "if [[ -f /etc/hosts ]]; then"
+         "front": "When do you need ${var}?",
+         "back": "When text follows the name, like \"${num}-file\"."
         },
         {
-         "front": "Which Bash loop prints the numbers 1 to 5, one per line?",
-         "back": "for i in {1..5}; do echo $i; done"
+         "front": "Capture a command's output?",
+         "back": "var=$(command), with no spaces around =."
         },
         {
-         "front": "Which variable holds the exit status of the last command?",
-         "back": "$?"
+         "front": "Send stdout and stderr to one file?",
+         "back": "cmd > file 2>&1"
+        },
+        {
+         "front": "Integer greater-than test?",
+         "back": "[ \"$n\" -gt 10 ] (-lt, -eq, -ne, -ge, -le)."
+        },
+        {
+         "front": "File test operators?",
+         "back": "-f regular file, -d folder, -e exists, -r readable."
+        },
+        {
+         "front": "set -e, set -u, set -x?",
+         "back": "Stop on error, error on unset vars, print each command."
         }
        ]
       },
@@ -5962,28 +6098,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which command replaces every \"http://\" with \"https://\" in site.conf, saving the change in the file?",
-         "back": "sed -i 's|http://|https://|g' site.conf"
+         "front": "Replace text in a file in place?",
+         "back": "sed -i 's/old/new/g' file"
         },
         {
-         "front": "Which command prints the UID column (field 3) of /etc/passwd?",
-         "back": "awk -F: '{print $3}' /etc/passwd"
+         "front": "Print field 3 of a colon file?",
+         "back": "awk -F: '{print $3}' file, or cut -d: -f1 for field 1."
         },
         {
-         "front": "Which command searches every file under /var/log for \"error\" in any letter case?",
-         "back": "grep -ri \"error\" /var/log"
+         "front": "grep -i, -r, -v, -E?",
+         "back": "Ignore case, recursive, invert, extended regex."
         },
         {
-         "front": "Which command shows a config file without comment lines that start with #?",
-         "back": "grep -v '^#' /etc/ssh/sshd_config"
+         "front": "Regex anchors?",
+         "back": "^ start of line, $ end of line."
         },
         {
-         "front": "Which lines does the regular expression ^root match?",
-         "back": "Lines that begin with root"
+         "front": "Match one word or another?",
+         "back": "grep -E 'WARN|ERROR' file"
         },
         {
-         "front": "Which command prints only the usernames from /etc/passwd?",
-         "back": "cut -d: -f1 /etc/passwd"
+         "front": "Uppercase text?",
+         "back": "tr 'a-z' 'A-Z' < file"
+        },
+        {
+         "front": "Count repeated lines?",
+         "back": "sort file | uniq -c"
+        },
+        {
+         "front": "Hide comment lines?",
+         "back": "grep -v '^#' file"
         }
        ]
       },
@@ -6160,28 +6304,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which Ansible component contains a list of hosts and host groups?",
-         "back": "Inventory"
+         "front": "Inventory vs playbook vs module?",
+         "back": "Inventory: which hosts. Playbook: what to do. Module: how."
         },
         {
-         "front": "Which Ansible ad-hoc command tests connectivity to every managed host with the ping module?",
+         "front": "How does Ansible connect?",
+         "back": "SSH, no agent on the nodes."
+        },
+        {
+         "front": "Test every host?",
          "back": "ansible all -m ping"
         },
         {
-         "front": "Which ansible-playbook option does a dry run and reports what would change without changing anything?",
-         "back": "--check"
+         "front": "Dry run a playbook?",
+         "back": "ansible-playbook site.yml --check (add --diff)."
         },
         {
-         "front": "In a playbook, which task correctly makes sure the nginx package is installed?",
-         "back": "- name: Install nginx / apt: / name: nginx / state: present (each part on its own indented line)"
+         "front": "Run on one group only?",
+         "back": "ansible-playbook -i inv site.yml --limit web"
         },
         {
-         "front": "Which command runs site.yml only against hosts in the web group, using inventory.ini?",
-         "back": "ansible-playbook -i inventory.ini site.yml --limit web"
+         "front": "Idempotent means?",
+         "back": "Running again changes nothing once the system is right."
         },
         {
-         "front": "What does it mean that most Ansible modules are idempotent?",
-         "back": "Running the same task again makes no further change once the system is in the right state"
+         "front": "Encrypt secrets? Get roles?",
+         "back": "ansible-vault. ansible-galaxy."
+        },
+        {
+         "front": "Run a task only when something changed?",
+         "back": "A handler, triggered with notify."
         }
        ]
       },
@@ -6299,28 +6451,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "A developer cloned a repo, edited files and wants to save a snapshot with the message fix typo. Which sequence is correct?",
-         "back": "git add . && git commit -m 'fix typo'"
+         "front": "Save changes as a commit?",
+         "back": "git add, then git commit -m \"message\"."
         },
         {
-         "front": "Which command creates a new branch named feature and switches to it?",
-         "back": "git checkout -b feature"
+         "front": "Create and switch to a branch?",
+         "back": "git checkout -b name (or git switch -c name)."
         },
         {
-         "front": "Which command downloads new commits from the remote and merges them into the current branch?",
-         "back": "git pull"
+         "front": "fetch vs pull?",
+         "back": "fetch downloads. pull is fetch plus merge."
         },
         {
-         "front": "Which file stops Git from tracking .env files and the build/ folder?",
+         "front": "Undo a pushed commit safely?",
+         "back": "git revert <hash>. Never force-push over shared history."
+        },
+        {
+         "front": "Keep files out of the repo?",
          "back": ".gitignore"
         },
         {
-         "front": "A bad commit was already pushed to the shared main branch. Which command undoes it safely for everyone?",
-         "back": "git revert <commit-hash>"
+         "front": "See changed and staged files?",
+         "back": "git status"
         },
         {
-         "front": "In a CI/CD pipeline, which part automatically builds and tests code each time a change is pushed?",
-         "back": "Continuous integration"
+         "front": "CI vs CD?",
+         "back": "CI builds and tests every change. CD releases changes that pass."
+        },
+        {
+         "front": "Share a branch for review?",
+         "back": "git push origin branch, then open a pull request."
         }
        ]
       },
@@ -6413,28 +6573,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which of the following is a characteristic of Python 3?",
-         "back": "It is extensible through modules."
+         "front": "Create a Python virtual environment?",
+         "back": "python3 -m venv .venv, then source .venv/bin/activate."
         },
         {
-         "front": "Which command creates an isolated Python environment in the folder .venv?",
-         "back": "python3 -m venv .venv"
-        },
-        {
-         "front": "Which command installs every dependency listed by a Python project?",
+         "front": "Install a project's dependencies?",
          "back": "pip install -r requirements.txt"
         },
         {
-         "front": "Which pip command installs the requests package inside the active virtual environment?",
-         "back": "pip install requests"
+         "front": "Save the installed package list?",
+         "back": "pip freeze > requirements.txt"
         },
         {
-         "front": "An AI assistant wrote a Bash script that deletes old files. What should the administrator do before running it on production servers?",
-         "back": "Read it line by line and test it on a non-production system"
+         "front": "How does Python 3 extend itself?",
+         "back": "Modules and packages."
         },
         {
-         "front": "An admin wants help fixing a config file from a public AI chatbot. What must be removed first?",
-         "back": "Passwords, API keys and other secrets in the file"
+         "front": "Before running an AI-written script?",
+         "back": "Read it and test it on a non-production system."
+        },
+        {
+         "front": "What never goes into a public AI tool?",
+         "back": "Passwords, keys, customer data and other secrets."
+        },
+        {
+         "front": "AI hallucination?",
+         "back": "A confident answer that is wrong or made up."
+        },
+        {
+         "front": "Rule for AI output?",
+         "back": "AI drafts, you verify."
         }
        ]
       }
@@ -6613,28 +6781,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "A system booted with a read-only root filesystem after a power loss. Which command remounts / read-write for repairs?",
+         "front": "emergency.target vs rescue.target?",
+         "back": "emergency: root shell, root fs read-only, almost nothing else. rescue: local filesystems and basic services."
+        },
+        {
+         "front": "Remount root read-write?",
          "back": "mount -o remount,rw /"
         },
         {
-         "front": "Which command shows kernel ring buffer messages, including hardware found during boot?",
-         "back": "dmesg"
+         "front": "Reset the RHEL root password?",
+         "back": "rd.break at GRUB, remount /sysroot rw, chroot, passwd, touch /.autorelabel."
         },
         {
-         "front": "A system fails to boot normally. Which systemd target gives a root shell with no services and only the root filesystem mounted read-only?",
-         "back": "emergency.target"
+         "front": "Most common cause of emergency mode?",
+         "back": "A bad or missing device in /etc/fstab. Use nofail for optional disks."
         },
         {
-         "front": "Which kernel parameter, added at the GRUB menu on RHEL, stops boot inside the initramfs so the root password can be reset?",
-         "back": "rd.break"
+         "front": "Find slow boot units?",
+         "back": "systemd-analyze blame"
         },
         {
-         "front": "After a kernel update the server panics with \"VFS: Unable to mount root fs\". What is the quickest way to get it running?",
-         "back": "Boot the previous kernel from the GRUB menu, then rebuild the initramfs for the new one"
+         "front": "Boot into rescue once from GRUB?",
+         "back": "Add systemd.unit=rescue.target to the linux line."
         },
         {
-         "front": "A server drops to emergency mode after a USB disk listed in /etc/fstab was removed. What is the right long-term fix?",
-         "back": "Remove the line or add the nofail option to that fstab entry"
+         "front": "New kernel won't boot?",
+         "back": "Pick the old kernel in GRUB, then rebuild initramfs with dracut -f."
+        },
+        {
+         "front": "Set the default kernel on RHEL?",
+         "back": "grubby --set-default /boot/vmlinuz-..."
         }
        ]
       },
@@ -6864,28 +7040,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which of the following describes collecting system events from many sources into a single location?",
-         "back": "Log aggregation"
+         "front": "When is load average too high?",
+         "back": "When it stays above the CPU count from nproc."
         },
         {
-         "front": "Which tool reports per-disk I/O use and helps identify a storage bottleneck?",
-         "back": "iostat -x 1"
+         "front": "High wa in top means?",
+         "back": "CPUs waiting on disk I/O. Check iostat -x and iotop."
         },
         {
-         "front": "Which command shows the top 10 processes by CPU use in one snapshot?",
-         "back": "ps aux --sort=-%cpu | head -11"
+         "front": "Signs of memory pressure?",
+         "back": "Low available memory and high si/so in vmstat."
         },
         {
-         "front": "Which command gives a readable summary of RAM and swap use?",
-         "back": "free -h"
+         "front": "Was a process OOM-killed?",
+         "back": "journalctl -k | grep -i \"out of memory\" (or dmesg)."
         },
         {
-         "front": "A database process vanished overnight. Which command best confirms the kernel killed it for lack of memory?",
-         "back": "journalctl -k | grep -i \"out of memory\""
+         "front": "Per-core CPU use?",
+         "back": "mpstat -P ALL 1"
         },
         {
-         "front": "top shows 45.0 wa in the CPU line. What does this point to?",
-         "back": "CPUs are waiting on disk I/O"
+         "front": "Past performance data?",
+         "back": "sar (sysstat)."
+        },
+        {
+         "front": "Zombie process?",
+         "back": "State Z. Already exited. The parent must reap it."
+        },
+        {
+         "front": "Sort processes by CPU? Memory?",
+         "back": "ps aux --sort=-%cpu, ps aux --sort=-%mem."
         }
        ]
       },
@@ -7110,28 +7294,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Which tcpdump command captures only SSH traffic on eth0 and writes it to ssh.pcap?",
-         "back": "tcpdump -i eth0 -w ssh.pcap port 22"
+         "front": "Bottom-up network check order?",
+         "back": "Link, IP address, gateway, remote IP, DNS, service port."
         },
         {
-         "front": "Which command lists all TCP listening sockets with the process that owns each one?",
+         "front": "IP works but names fail?",
+         "back": "DNS. Check resolv.conf or resolvectl status, test with dig."
+        },
+        {
+         "front": "What is listening, and which process?",
          "back": "ss -tlnp"
         },
         {
-         "front": "Which command queries DNS for www.example.com and shows the answer and the server that replied?",
-         "back": "dig www.example.com"
+         "front": "Service on 127.0.0.1 only means?",
+         "back": "It accepts local connections only. Bind it to 0.0.0.0 or the server IP."
         },
         {
-         "front": "Which command shows each hop to 8.8.8.8 and keeps measuring loss and latency per hop?",
-         "back": "mtr 8.8.8.8"
+         "front": "Test a TCP port?",
+         "back": "nc -zv host 443"
         },
         {
-         "front": "Users report a server is unreachable. What is the best first network test from the server itself?",
-         "back": "Ping the default gateway"
+         "front": "Capture traffic to a file?",
+         "back": "tcpdump -i eth0 -w file.pcap port 22"
         },
         {
-         "front": "Which command checks whether TCP port 443 on 10.0.0.5 accepts connections?",
-         "back": "nc -zv 10.0.0.5 443"
+         "front": "Hop-by-hop loss and latency?",
+         "back": "mtr host"
+        },
+        {
+         "front": "NIC speed and duplex?",
+         "back": "ethtool eth0"
         }
        ]
       },
@@ -7307,28 +7499,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "Before running fsck on /dev/sdb1, which step is required?",
-         "back": "Unmount the filesystem"
+         "front": "No space left but df -h shows space?",
+         "back": "Out of inodes. Check df -i."
         },
         {
-         "front": "Which command reads the SMART data of /dev/sda to look for signs of drive failure?",
-         "back": "smartctl -a /dev/sda"
+         "front": "Deleted file still uses space?",
+         "back": "A process holds it open. Find it with lsof +L1, restart that process."
         },
         {
-         "front": "A 20 GB log was deleted, but df still shows the space as used. Which command finds the process holding it?",
-         "back": "lsof +L1"
+         "front": "Rule before running fsck?",
+         "back": "Unmount the filesystem first."
         },
         {
-         "front": "Which command shows which folders under /var use the most space, sorted by size?",
-         "back": "du -sh /var/* | sort -h"
+         "front": "Repair XFS? Repair ext4?",
+         "back": "xfs_repair. e2fsck."
         },
         {
-         "front": "An XFS filesystem reports corruption. It has been unmounted. Which command repairs it?",
-         "back": "xfs_repair /dev/vg0/lv_data"
+         "front": "umount says target is busy?",
+         "back": "fuser -vm /mount or lsof +D /mount."
         },
         {
-         "front": "dmesg shows \"EXT4-fs error ... Remounting filesystem read-only\". What should be done?",
-         "back": "Stop writes, unmount the filesystem and run e2fsck, then check the disk health"
+         "front": "Check drive health?",
+         "back": "smartctl -a /dev/sda. A rising reallocated sector count means replace it."
+        },
+        {
+         "front": "Biggest folders first?",
+         "back": "du -sh /path/* | sort -h"
+        },
+        {
+         "front": "Add a disk to a degraded RAID?",
+         "back": "mdadm --manage /dev/md0 --add /dev/sdd"
         }
        ]
       },
@@ -7493,28 +7693,36 @@ window.BUILTIN_COURSES = [
        ],
        "cards": [
         {
-         "front": "An administrator wants to watch an Apache error.log in real time and also save what appears to another file for later. Which command does this?",
-         "back": "tail -f /var/log/apache2/error.log | tee logfile.txt"
+         "front": "Why did a service fail?",
+         "back": "systemctl status name, then journalctl -u name."
         },
         {
-         "front": "On a RHEL 9 server that keeps logs only in the systemd journal, which command shows new log entries live?",
-         "back": "journalctl -f"
+         "front": "Address already in use?",
+         "back": "Another process has the port. Find it with ss -tlnp."
         },
         {
-         "front": "A web page returns 403 Forbidden. File permissions are 644 and the owner is correct. SELinux is enforcing. What is the most likely fix?",
-         "back": "restorecon -Rv /var/www/html"
+         "front": "Script gives Permission denied?",
+         "back": "No execute bit. chmod +x script."
         },
         {
-         "front": "A user gets \"is not in the sudoers file. This incident will be reported.\" on RHEL. How should admin rights be granted?",
-         "back": "Add the user to the wheel group with usermod -aG wheel username"
+         "front": "403 with correct file permissions under SELinux?",
+         "back": "Wrong context. restorecon -Rv /var/www/html."
         },
         {
-         "front": "A service will not start after a config change. What should the administrator check first?",
-         "back": "systemctl status app and journalctl -u app"
+         "front": "bad interpreter: /bin/bash^M?",
+         "back": "Windows line endings. Run dos2unix."
         },
         {
-         "front": "A script copied from a Windows PC fails with \"/bin/bash^M: bad interpreter\". What fixes it?",
-         "back": "Convert the line endings with dos2unix script.sh"
+         "front": "Script works by hand but not in cron?",
+         "back": "cron's short PATH. Use full command paths."
+        },
+        {
+         "front": "Too many open files in a service?",
+         "back": "Raise LimitNOFILE in the unit and restart."
+        },
+        {
+         "front": "Clear a pam_faillock lockout?",
+         "back": "faillock --user name --reset"
         }
        ]
       }
